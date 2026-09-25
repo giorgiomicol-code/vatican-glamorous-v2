@@ -1,0 +1,95 @@
+.elegance .cv-button {
+  border-color: #c99520;
+  background: linear-gradient(135deg, #f4d67f 0%, #e7b832 48%, #bd7d08 100%);
+  color: #243a46;
+  box-shadow: 0 12px 26px rgba(157, 105, 9, .24);
+}
+
+.elegance .cv-button:hover {
+  background: linear-gradient(135deg, #f8df93 0%, #efc64b 48%, #c88a16 100%);
+  box-shadow: 0 15px 31px rgba(157, 105, 9, .3);
+}
+
+.elegance .cv-booking .cv-button {
+  border-color: #c99520;
+  background: linear-gradient(135deg, #f4d67f 0%, #e7b832 48%, #bd7d08 100%);
+  color: #243a46;
+  box-shadow: 0 10px 20px rgba(157, 105, 9, .2);
+}
+
+.elegance .cv-card {
+  position: relative;
+}
+
+.elegance .cv-card::after {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  left: 14px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #d6ad54, transparent);
+  content: '';
+}
+
+.elegance .cv-play {
+  width: 74px;
+  height: 74px;
+  border: 1px solid rgba(255, 255, 255, .7);
+  border-radius: 50%;
+  background: rgba(8, 12, 15, .88);
+  color: #fff;
+  font-size: 1.05rem;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .32);
+}
+
+.elegance .cv-about-copy .cv-script {
+  color: var(--cv-navy);
+}
+
+.elegance .cv-mobile-bar a:last-child {
+  background: linear-gradient(135deg, #f4d67f 0%, #e7b832 48%, #bd7d08 100%);
+  color: #243a46;
+}
+
+/* Stable reference codes make future photo replacements unambiguous. */
+.elegance .cv-card-media.cv-coded-photo,
+.elegance .cv-feature-video.cv-coded-photo,
+.elegance .cv-destination-image.cv-coded-photo,
+.elegance .cv-editorial-media.cv-coded-photo,
+.elegance .cv-room-media.cv-coded-photo,
+.elegance .cv-page-hero.cv-coded-photo {
+  position: relative;
+}
+
+.elegance .cv-photo-code {
+  position: absolute;
+  z-index: 4;
+  right: 8px;
+  bottom: 8px;
+  display: inline-flex;
+  min-width: 28px;
+  height: 18px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
+  border: 1px solid rgba(255, 255, 255, .52);
+  border-radius: 999px;
+  background: rgba(9, 28, 38, .66);
+  color: #fff;
+  font: 600 9px/1 var(--cv-sans, Arial, sans-serif);
+  letter-spacing: .09em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .18);
+  pointer-events: none;
+  backdrop-filter: blur(4px);
+}
+
+@media (max-width: 640px) {
+  .elegance .cv-photo-code {
+    right: 6px;
+    bottom: 6px;
+    min-width: 25px;
+    height: 16px;
+    padding: 0 5px;
+    font-size: 8px;
+  }
+}

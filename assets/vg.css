@@ -1,0 +1,34 @@
+/* Vatican Glamorous — integrazioni al tema Elegance di Villa Brando (marchio testuale, segnaposto foto) */
+.vg-brand{display:flex;align-items:center;gap:10px;color:var(--cv-navy);text-decoration:none;line-height:1}
+.vg-brand img{display:block;width:46px;height:auto}
+.vg-brand-text{display:flex;flex-direction:column;align-items:flex-start}
+.vg-brand-text strong{font-family:var(--cv-serif);font-size:1.42rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.vg-brand-text small{margin-top:4px;color:#a8801f;font-family:var(--cv-sans);font-size:.56rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap}
+@media(max-width:1180px){.vg-brand-text strong{font-size:1.2rem}.vg-brand img{width:40px}}
+@media(max-width:760px){.vg-brand{gap:8px}.vg-brand img{width:34px}.vg-brand-text strong{font-size:1.02rem;letter-spacing:.05em}.vg-brand-text small{font-size:.5rem;letter-spacing:.14em}}
+
+/* Marchio grande nella sezione di presentazione della Home */
+.vg-brand-large{display:flex;flex-direction:column;align-items:center;margin:0 auto 14px;color:var(--cv-navy);text-align:center}
+.vg-brand-large img{width:min(150px,40vw);height:auto;margin-bottom:10px}
+.vg-brand-large strong{font-family:var(--cv-serif);font-size:clamp(1.9rem,4.4vw,3rem);font-weight:600;letter-spacing:.09em;text-transform:uppercase;line-height:1}
+.vg-brand-large small{margin-top:8px;color:#a8801f;font-family:var(--cv-sans);font-size:.72rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase}
+
+/* Marchio nel piè di pagina */
+.vg-footer-brand{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.vg-footer-brand img{width:52px;height:auto}
+.vg-footer-brand strong{display:block;font-family:var(--cv-serif);font-size:1.45rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;line-height:1}
+.vg-footer-brand small{display:block;margin-top:5px;font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;opacity:.85}
+
+/* Segnaposto per le foto non ancora disponibili */
+.vg-placeholder{display:flex;width:100%;height:100%;min-height:220px;align-items:center;justify-content:center;padding:18px;background:linear-gradient(135deg,#123e5b,#0e5c85);color:#f3e2b3;font-family:var(--cv-script);font-size:1.7rem;line-height:1.05;text-align:center}
+.cv-editorial-media .vg-placeholder{min-height:380px}
+
+/* Recensioni nella fascia premi */
+.vg-scores{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:10px}
+.vg-scores span{font-family:var(--cv-serif);font-size:1.35rem;font-weight:600}
+
+/* Tempi a piedi */
+.vg-walk{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:6px}
+.vg-walk li{display:flex;justify-content:space-between;gap:12px;padding:8px 12px;border:1px solid var(--cv-line);background:#fff;font-size:.86rem}
+.vg-walk li b{color:var(--cv-navy);white-space:nowrap}
+.vg-note{margin-top:14px;font-size:.8rem;font-style:italic;opacity:.8}
