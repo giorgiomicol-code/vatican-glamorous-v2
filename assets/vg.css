@@ -32,3 +32,4 @@
 .vg-walk li{display:flex;justify-content:space-between;gap:12px;padding:8px 12px;border:1px solid var(--cv-line);background:#fff;font-size:.86rem}
 .vg-walk li b{color:var(--cv-navy);white-space:nowrap}
 .vg-note{margin-top:14px;font-size:.8rem;font-style:italic;opacity:.8}
+@media(max-width:480px){.vg-brand{gap:6px;min-width:0}.vg-brand img{width:26px}.vg-brand-text strong{font-size:.84rem;letter-spacing:.03em}.vg-brand-text small{font-size:.42rem;letter-spacing:.06em}}
