@@ -16,7 +16,7 @@ GUIDE = 'https://guide.vaticanglamorous.com'
 MAPS = 'https://maps.google.com/?q=Via+San+Telesforo+Roma'
 CIN = 'IT058091C2ZV2HSZ96'
 YT = 'azY0RWKun1g'
-V = '2'  # versione cache CSS/JS
+V = '3'  # versione cache CSS/JS
 
 LANG = 'it'
 def T(it, en): return it if LANG == 'it' else en
@@ -389,6 +389,7 @@ def info():
 <article class="cv-info-card"><h3>{T('Informazioni essenziali', 'Essentials')}</h3><ul><li>{T('Soggiorno minimo: 2 notti', 'Minimum stay: 2 nights')}</li><li>{T('Fino a 4 ospiti', 'Up to 4 guests')}</li><li>{T('Indica il numero esatto di adulti e bambini al momento della prenotazione', 'Please state the exact number of adults and children when booking')}</li><li>{T('Animali di piccola taglia ammessi', 'Small pets welcome')}</li><li>{T('Vietato fumare all’interno', 'No smoking indoors')}</li><li>{T('Orari di check-in e check-out: [da completare]', 'Check-in and check-out times: [to be completed]')}</li></ul></article>
 <article class="cv-info-card"><h3>{T('Servizi e soggiorno', 'Services')}</h3><ul><li>{T('Biancheria, asciugamani e kit bagno inclusi', 'Bed linen, towels and toiletries included')}</li><li>{T('Posto auto gratuito', 'Free parking')}</li><li>Wi‑Fi</li><li>{T('Smart Monitor e app streaming', 'Smart monitors and streaming apps')}</li><li>{T('Aria condizionata', 'Air conditioning')}</li><li>{T('Lavastoviglie e lavasciuga', 'Dishwasher and washer-dryer')}</li></ul></article>
 <article class="cv-info-card"><h3>{T('Servizi fotografici', 'Photo shoots')}</h3><p>{T('Per set fotografici, riprese e soggiorni di lavoro contattaci per un’offerta personalizzata.', 'For photo shoots, filming and business stays, contact us for a tailored offer.')}</p><a href="{WA}" target="_blank" rel="noopener">WhatsApp</a></article>
+<article class="cv-info-card"><h3>Privacy</h3><p>{T('I dati degli ospiti sono usati solo per la registrazione obbligatoria presso la Polizia di Stato (AlloggiatiWEB) e per l’invio dei codici di accesso. Non sono diffusi né usati per altri scopi.', 'Guest data is used only for the mandatory registration with the Police (AlloggiatiWEB) and for sending access codes. It is not disclosed or used for any other purpose.')}</p><a href="{link('privacy')}">{T('Leggi l’informativa completa', 'Read the full policy')}</a></article>
 <article class="cv-info-card"><h3>{T('Prenotazione diretta', 'Direct booking')}</h3><p>{T('La ricerca di date e ospiti è incorporata nel sito; disponibilità, condizioni e pagamento proseguono nel motore ufficiale Direct-book.', 'Date and guest search is built into the site; availability, terms and payment continue in the official Direct-book engine.')}</p><a class="cv-button" href="{link('book')}">{T('Apri il motore', 'Open the engine')}</a></article>
 </div></div></section>
   </main>
@@ -405,59 +406,53 @@ def book():
 ''' + footer()
 
 def privacy():
-    title = T('Informativa privacy | Vatican Glamorous · Passeggiata del Gelsomino', 'Privacy policy | Vatican Glamorous · Passeggiata del Gelsomino')
-    desc = T('Informativa sul trattamento dei dati personali del sito Vatican Glamorous – Passeggiata del Gelsomino.', 'How Vatican Glamorous – Passeggiata del Gelsomino handles personal data.')
+    title = T('Privacy e cookie policy | Vatican Glamorous · Passeggiata del Gelsomino', 'Privacy and cookie policy | Vatican Glamorous · Passeggiata del Gelsomino')
+    desc = T('Privacy e cookie policy della Casa Vacanze Vatican Glamorous – Passeggiata del Gelsomino.', 'Privacy and cookie policy of the Vatican Glamorous – Passeggiata del Gelsomino Holiday Home.')
+    PM = 'passeggiatadelgelsomino.italy@gmail.com'
     if LANG == 'it':
-        body = f'''<p class="cv-legal-updated">Ultimo aggiornamento: settembre 2026</p>
-<p>Questa informativa è resa ai sensi degli articoli 13 e 14 del Regolamento (UE) 2016/679 (GDPR) a chi visita il sito www.vaticanglamorous.com e a chi contatta Vatican Glamorous tramite il sito.</p>
-<h2>1. Titolare del trattamento</h2>
-<p>Il titolare del trattamento è il gestore della casa vacanze Vatican Glamorous – Passeggiata del Gelsomino, Via S. Telesforo, Roma, Italia. CIN {CIN}. Per qualsiasi richiesta sulla privacy: <a href="mailto:{EMAIL}">{EMAIL}</a>, telefono <a href="tel:{PHONE}">{PHONE_TXT}</a>.</p>
-<h2>2. Quali dati trattiamo</h2>
-<ul><li><strong>Dati di navigazione.</strong> Il sito è ospitato su GitHub Pages (GitHub Inc.). Come per qualsiasi sito, il server registra dati tecnici come indirizzo IP, data e ora della richiesta e tipo di browser, per garantire il funzionamento e la sicurezza del servizio.</li><li><strong>Dati che ci invii tu.</strong> Se ci scrivi via email, telefono o WhatsApp, trattiamo i dati che ci fornisci (nome, recapiti, date del soggiorno, numero di ospiti, contenuto del messaggio) per risponderti.</li><li><strong>Dati di prenotazione.</strong> Il modulo "Trova la data perfetta" non conserva nulla sul nostro sito: le date e il numero di ospiti che inserisci vengono passati al motore di prenotazione ufficiale Direct-Book (direct-book.com), dove si completa la prenotazione. Le prenotazioni tramite Airbnb o Booking.com avvengono sui rispettivi siti.</li></ul>
-<h2>3. Perché li trattiamo e su quale base</h2>
-<ul><li>Rispondere alle tue richieste e fornirti informazioni sul soggiorno: misure precontrattuali richieste da te (art. 6.1.b GDPR).</li><li>Gestire la prenotazione e il soggiorno: esecuzione del contratto (art. 6.1.b) e obblighi di legge, per esempio la comunicazione degli ospiti all’autorità di pubblica sicurezza e gli adempimenti fiscali e sul contributo di soggiorno (art. 6.1.c).</li><li>Garantire il funzionamento e la sicurezza del sito: legittimo interesse (art. 6.1.f).</li></ul>
-<h2>4. Cookie e contenuti di terze parti</h2>
-<p>Il sito non utilizza cookie di profilazione né strumenti di statistica o pubblicità. Alcune pagine caricano contenuti di terze parti:</p>
-<ul><li><strong>Google Fonts</strong> (Google), per i caratteri tipografici: il browser si collega ai server di Google, che ricevono il tuo indirizzo IP.</li><li><strong>Video YouTube</strong>, incorporati in modalità a privacy avanzata (youtube-nocookie.com): YouTube può memorizzare informazioni sul tuo dispositivo solo quando avvii la riproduzione.</li></ul>
-<p>I link verso siti esterni (Direct-Book, Airbnb, Booking.com, WhatsApp, Google Maps) portano a servizi con proprie informative privacy, che ti invitiamo a consultare.</p>
-<h2>5. Destinatari e trasferimenti fuori dall’UE</h2>
-<p>I dati possono essere trattati dai fornitori dei servizi sopra indicati (hosting, posta elettronica, messaggistica, piattaforme di prenotazione), dal commercialista per gli adempimenti fiscali e dalle autorità competenti quando previsto dalla legge. Alcuni fornitori, come GitHub e Google, possono trattare i dati negli Stati Uniti, sulla base delle garanzie previste dal GDPR (per esempio l’EU-US Data Privacy Framework o le clausole contrattuali standard).</p>
-<h2>6. Per quanto tempo conserviamo i dati</h2>
-<p>I messaggi di contatto sono conservati per il tempo necessario a rispondere e a gestire l’eventuale soggiorno. I dati legati alla prenotazione sono conservati per il periodo richiesto dagli obblighi di legge, in particolare fiscali (di norma 10 anni). I dati tecnici di navigazione sono gestiti dal fornitore di hosting secondo le sue politiche.</p>
-<h2>7. I tuoi diritti</h2>
-<p>Puoi chiedere in qualsiasi momento l’accesso ai tuoi dati, la rettifica, la cancellazione, la limitazione del trattamento, la portabilità e opporti al trattamento basato sul legittimo interesse, scrivendo a <a href="mailto:{EMAIL}">{EMAIL}</a>. Hai anche il diritto di presentare reclamo al Garante per la protezione dei dati personali (<a href="https://www.garanteprivacy.it" target="_blank" rel="noopener">www.garanteprivacy.it</a>).</p>
-<h2>8. Modifiche</h2>
-<p>Questa informativa può essere aggiornata. La versione in vigore è sempre quella pubblicata su questa pagina.</p>'''
+        body = f'''<h2>Privacy e cookie policy Casa Vacanze Vatican Glamorous – Passeggiata del Gelsomino</h2>
+<p>La presente informativa viene resa ai sensi del Reg. (UE) 2016/679 del 27/04/2016 relativo alla protezione delle persone fisiche con riguardo al trattamento dei dati personali (GDPR), e contiene informazioni sul trattamento dei dati personali che vengono raccolti dalla Casa Vacanze Passeggiata del Gelsomino e ne descrive le modalità di utilizzo.</p>
+<p>In ogni caso tutti i dati acquisiti verranno trattati nel rispetto del GDPR, nonché secondo i canoni di riservatezza connaturati allo svolgimento dell’attività.</p>
+<p>I dati personali potranno essere messi a disposizione dell’Autorità Giudiziaria e/o delle Forze di Polizia, dietro loro specifica richiesta, per ottemperare a requisiti legali o normativi ovvero ai fini dell’individuazione degli autori di eventuali fatti illeciti commessi a danno della Casa Vacanze.</p>
+<p>Il trattamento sarà svolto preferibilmente in via elettronica con l’ausilio di strumenti informatici. In particolare, potrà essere inviato un messaggio di testo sul proprio cellulare per poter riempire in autonomia un modulo informatizzato, che sarà automaticamente inviato alle Forze di Polizia dopo il controllo di correttezza dei dati, con la finalità di registrare la vostra presenza; oppure gli stessi dati personali potranno essere raccolti attraverso cellulare al momento dell’arrivo da parte di personale dedicato, oppure potranno essere raccolti su un modulo cartaceo.</p>
+<h2>Natura dei dati personali, finalità e destinatari del trattamento</h2>
+<p>I dati personali raccolti presso l’interessato saranno trattati per la sola comunicazione alle Autorità di Polizia (portale AlloggiatiWEB) circa la propria presenza in loco, oppure per l’invio delle credenziali di accesso alle serrature elettroniche della Casa Vacanze. Gli stessi dati non saranno trattenuti o registrati per altri motivi. I dati personali non saranno oggetto di diffusione, se non imposta da norme di legge oppure espressamente autorizzata.</p>
+<h2>Conservazione dei dati</h2>
+<p>Tenuto conto degli scopi per cui sono stati raccolti, dell’adempimento degli obblighi di legge ovvero della tutela dei diritti del titolare, tali dati saranno conservati per un periodo non superiore a quello necessario e comunque per un periodo in linea con il termine consentito dalla legge vigente.</p>
+<p>Con specifico riferimento all’attività di videosorveglianza, la informiamo che le immagini personali raccolte saranno conservate per non più di 24 ore, e che le stesse non potranno essere diffuse o comunicate a terzi salvo che per esigenze di polizia o di giustizia.</p>
+<h2>Sito web e cookie</h2>
+<p>Questo sito non utilizza cookie di profilazione né strumenti di statistica o pubblicità. Le prenotazioni si completano su piattaforme esterne (Direct-book, Airbnb, Booking.com), che applicano le proprie informative.</p>
+<h2>Titolare del trattamento</h2>
+<p>Per qualsiasi ulteriore informazione potrà rivolgersi al Titolare del trattamento, Casa Vacanze Passeggiata del Gelsomino (Via S. Telesforo, Roma – CIN {CIN}), tramite email: <a href="mailto:{PM}">{PM}</a>. Ad esso potrà rivolgersi per far valere i suoi diritti e in particolare per accedere ai suoi dati personali, per richiederne la rettifica, la cancellazione o la portabilità, la limitazione del trattamento o per opporsi ad esso. Nel contattare il Titolare del trattamento, dovrà accertarsi di includere il proprio nome, indirizzo email, indirizzo postale e numero di telefono, per essere sicuro che la sua richiesta possa essere gestita correttamente. Resta salvo il diritto di proporre reclamo al Garante per la protezione dei dati personali.</p>
+<h2>Accettazione</h2>
+<p>Visitando il sito web di Vatican Glamorous – Passeggiata del Gelsomino lei conferma di avere letto e compreso la presente informativa.</p>'''
     else:
-        body = f'''<p class="cv-legal-updated">Last updated: September 2026</p>
-<p>This notice is provided under Articles 13 and 14 of Regulation (EU) 2016/679 (GDPR) to visitors of www.vaticanglamorous.com and to anyone who contacts Vatican Glamorous through the site.</p>
-<h2>1. Data controller</h2>
-<p>The data controller is the operator of the Vatican Glamorous – Passeggiata del Gelsomino holiday home, Via S. Telesforo, Rome, Italy. CIN {CIN}. For any privacy request: <a href="mailto:{EMAIL}">{EMAIL}</a>, phone <a href="tel:{PHONE}">{PHONE_TXT}</a>.</p>
-<h2>2. What data we process</h2>
-<ul><li><strong>Browsing data.</strong> The site is hosted on GitHub Pages (GitHub Inc.). As with any website, the server logs technical data such as IP address, date and time of the request and browser type, to keep the service running and secure.</li><li><strong>Data you send us.</strong> If you contact us by email, phone or WhatsApp, we process the data you provide (name, contact details, stay dates, number of guests, message content) to reply.</li><li><strong>Booking data.</strong> The "Find your perfect dates" form stores nothing on our site: the dates and number of guests you enter are passed to the official Direct-Book booking engine (direct-book.com), where the booking is completed. Bookings via Airbnb or Booking.com take place on their respective sites.</li></ul>
-<h2>3. Purposes and legal basis</h2>
-<ul><li>Replying to your requests and informing you about your stay: pre-contractual measures at your request (Art. 6.1.b GDPR).</li><li>Managing the booking and stay: performance of the contract (Art. 6.1.b) and legal obligations, such as reporting guests to the public security authorities and tax and tourist-tax requirements (Art. 6.1.c).</li><li>Keeping the site running and secure: legitimate interest (Art. 6.1.f).</li></ul>
-<h2>4. Cookies and third-party content</h2>
-<p>The site uses no profiling cookies and no analytics or advertising tools. Some pages load third-party content:</p>
-<ul><li><strong>Google Fonts</strong> (Google), for typefaces: your browser connects to Google’s servers, which receive your IP address.</li><li><strong>YouTube videos</strong>, embedded in privacy-enhanced mode (youtube-nocookie.com): YouTube may store information on your device only when you start playback.</li></ul>
-<p>Links to external sites (Direct-Book, Airbnb, Booking.com, WhatsApp, Google Maps) lead to services with their own privacy policies, which we invite you to read.</p>
-<h2>5. Recipients and transfers outside the EU</h2>
-<p>Data may be processed by the providers listed above (hosting, email, messaging, booking platforms), by our accountant for tax purposes and by the competent authorities where required by law. Some providers, such as GitHub and Google, may process data in the United States under the safeguards provided by the GDPR (for example the EU-US Data Privacy Framework or standard contractual clauses).</p>
-<h2>6. How long we keep data</h2>
-<p>Contact messages are kept for as long as needed to reply and manage any stay. Booking-related data is kept for the period required by law, in particular tax law (usually 10 years). Technical browsing data is handled by the hosting provider according to its policies.</p>
-<h2>7. Your rights</h2>
-<p>You may at any time request access to your data, rectification, erasure, restriction of processing and portability, and object to processing based on legitimate interest, by writing to <a href="mailto:{EMAIL}">{EMAIL}</a>. You also have the right to lodge a complaint with the Italian Data Protection Authority (<a href="https://www.garanteprivacy.it" target="_blank" rel="noopener">www.garanteprivacy.it</a>).</p>
-<h2>8. Changes</h2>
-<p>This notice may be updated. The version in force is always the one published on this page.</p>'''
+        body = f'''<h2>Privacy and cookie policy of the Vatican Glamorous – Passeggiata del Gelsomino Holiday Home</h2>
+<p>This information is provided pursuant to Reg. (EU) 2016/679 of 27/04/2016 on the protection of individuals with regard to the processing of personal data (GDPR) and contains information on the processing of personal data collected by the Passeggiata del Gelsomino Holiday Home, describing how it is used.</p>
+<p>In any case, all the data acquired will be processed in compliance with the GDPR, as well as according to the standards of confidentiality inherent in the performance of the activity.</p>
+<p>Personal data may be made available to the Judicial Authority and/or the Police Forces, upon their specific request, to comply with legal or regulatory requirements or for the purpose of identifying the authors of any unlawful acts committed to the detriment of the Holiday Home.</p>
+<p>Processing will preferably be carried out electronically with the help of IT tools. In particular, a text message may be sent to your mobile phone so that you can fill in a form yourself, which will be automatically sent to the police after the data has been checked, in order to record your presence; alternatively, the same personal data may be collected on a mobile phone upon arrival by dedicated staff, or on a paper form.</p>
+<h2>Nature of personal data, purposes and recipients of processing</h2>
+<p>The personal data collected from the data subject will be processed only for communication to the Police Authorities (AlloggiatiWEB portal) about your presence on site, or for sending access credentials to the electronic locks of the Holiday Home. The same data will not be retained or recorded for other reasons. Personal data will not be disseminated, unless required by law or expressly authorised.</p>
+<h2>Data retention</h2>
+<p>Considering the purposes for which they were collected, the fulfilment of legal obligations or the protection of the rights of the owner, such data will be kept for a period not exceeding that necessary and in any case for a period in line with the term allowed by current law.</p>
+<p>With specific reference to video surveillance, we inform you that the personal images collected will be kept for no more than 24 hours, and that they will not be disseminated or communicated to third parties except for police or justice needs.</p>
+<h2>Website and cookies</h2>
+<p>This website uses no profiling cookies and no analytics or advertising tools. Bookings are completed on external platforms (Direct-book, Airbnb, Booking.com), which apply their own privacy policies.</p>
+<h2>Data controller</h2>
+<p>For any further information you can contact the Data Controller, Passeggiata del Gelsomino Holiday Home (Via S. Telesforo, Rome – CIN {CIN}), by email: <a href="mailto:{PM}">{PM}</a>. You can contact the Data Controller to exercise your rights, in particular to access your personal data, to request its rectification, erasure or portability, restriction of processing, or to object to it. Please include your name, email address, postal address and telephone number so that your request can be properly handled. You also have the right to lodge a complaint with the Italian Data Protection Authority (Garante per la protezione dei dati personali).</p>
+<h2>Acceptance</h2>
+<p>By visiting the Vatican Glamorous – Passeggiata del Gelsomino website you confirm that you have read and understood this statement.</p>'''
     return head(title, desc) + header() + f'''
   <main>
-{page_hero('A5', T('Soggiorno di Vatican Glamorous', 'Vatican Glamorous living room'), T('Privacy · Dati personali · Cookie', 'Privacy · Personal data · Cookies'), T('Informativa privacy', 'Privacy policy'), T('Come trattiamo i dati di chi visita il sito e di chi ci contatta.', 'How we handle the data of site visitors and of anyone who contacts us.'))}
+{page_hero('A5', T('Soggiorno di Vatican Glamorous', 'Vatican Glamorous living room'), T('Privacy · Cookie', 'Privacy · Cookies'), 'Privacy', T('Privacy e cookie policy della Casa Vacanze.', 'Privacy and cookie policy of the Holiday Home.'))}
 <section class="cv-section cream"><div class="cv-wrap cv-legal-text">
 {body}
 </div></section>
   </main>
 
 ''' + footer()
+
 
 BUILD = {'home': home, 'apt': apt, 'rooms': rooms, 'rome': rome, 'gallery': gallery, 'exp': exp, 'info': info, 'book': book, 'privacy': privacy}
 
