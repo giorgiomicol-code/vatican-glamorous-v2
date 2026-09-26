@@ -16,7 +16,7 @@ GUIDE = 'https://guide.vaticanglamorous.com'
 MAPS = 'https://maps.google.com/?q=Via+San+Telesforo+Roma'
 CIN = 'IT058091C2ZV2HSZ96'
 YT = 'azY0RWKun1g'
-V = '3'  # versione cache CSS/JS
+V = '4'  # versione cache CSS/JS
 
 LANG = 'it'
 def T(it, en): return it if LANG == 'it' else en
@@ -408,7 +408,7 @@ def book():
 def privacy():
     title = T('Privacy e cookie policy | Vatican Glamorous · Passeggiata del Gelsomino', 'Privacy and cookie policy | Vatican Glamorous · Passeggiata del Gelsomino')
     desc = T('Privacy e cookie policy della Casa Vacanze Vatican Glamorous – Passeggiata del Gelsomino.', 'Privacy and cookie policy of the Vatican Glamorous – Passeggiata del Gelsomino Holiday Home.')
-    PM = 'passeggiatadelgelsomino.italy@gmail.com'
+    PM = EMAIL
     if LANG == 'it':
         body = f'''<h2>Privacy e cookie policy Casa Vacanze Vatican Glamorous – Passeggiata del Gelsomino</h2>
 <p>La presente informativa viene resa ai sensi del Reg. (UE) 2016/679 del 27/04/2016 relativo alla protezione delle persone fisiche con riguardo al trattamento dei dati personali (GDPR), e contiene informazioni sul trattamento dei dati personali che vengono raccolti dalla Casa Vacanze Passeggiata del Gelsomino e ne descrive le modalità di utilizzo.</p>
