@@ -94,3 +94,9 @@
 .elegance .cv-discover{padding:26px 0 30px}
 .elegance .cv-discover .cv-centered{margin-bottom:18px}
 .elegance .cv-discover .cv-heading{margin-bottom:0}
+
+/* Anteprime Zona notte: 2 schede affiancate, titoli/testi/etichette allineati sulla stessa riga */
+.elegance .cv-room-preview-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto auto auto;max-width:900px;margin-left:auto;margin-right:auto;column-gap:40px;row-gap:0}
+.elegance .cv-room-preview{display:grid;grid-row:span 3;grid-template-rows:subgrid;row-gap:0;align-content:start}
+.elegance .cv-room-preview .cv-detail-list{align-self:start}
+@media(max-width:760px){.elegance .cv-room-preview-grid{grid-template-columns:1fr;grid-template-rows:none;row-gap:22px}.elegance .cv-room-preview{grid-row:auto;grid-template-rows:none;display:flex}}
