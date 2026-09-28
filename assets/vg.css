@@ -33,3 +33,21 @@
 .vg-walk li b{color:var(--cv-navy);white-space:nowrap}
 .vg-note{margin-top:14px;font-size:.8rem;font-style:italic;opacity:.8}
 @media(max-width:480px){.vg-brand{gap:6px;min-width:0}.vg-brand img{width:26px}.vg-brand-text strong{font-size:.84rem;letter-spacing:.03em}.vg-brand-text small{font-size:.42rem;letter-spacing:.06em}}
+
+/* Barra di navigazione: la colonna del marchio si adatta alla sua larghezza (niente sovrapposizioni con "Home") */
+.elegance .cv-nav{grid-template-columns:auto minmax(0,1fr) auto;gap:22px}
+.elegance .cv-links{gap:clamp(12px,1.25vw,22px)}
+.elegance .cv-links a{font-size:.7rem}
+.vg-brand-text strong{font-size:1.12rem}
+.vg-brand img{width:40px}
+.cv-links a.vg-nav-retreat{color:#a8801f;font-style:italic}
+/* Sotto i 1260px il menu passa all'icona (come Villa Brando sotto i 1040px) */
+@media(max-width:1260px) and (min-width:761px){
+  .elegance .cv-nav{grid-template-columns:1fr auto;min-height:86px}
+  .elegance .cv-links{position:fixed;inset:0;z-index:45;flex-direction:column;justify-content:center;gap:21px;background:var(--cv-white);opacity:0;pointer-events:none;transform:translateY(-10px);transition:opacity .2s,transform .2s}
+  .elegance .cv-links.is-open{opacity:1;pointer-events:auto;transform:none}
+  .elegance .cv-links a{font-family:var(--cv-serif);font-size:2rem}
+  .elegance .cv-tools{position:relative;z-index:46}
+  .elegance .cv-menu{display:inline-flex}
+  .vg-brand-text strong{font-size:1.3rem}
+}

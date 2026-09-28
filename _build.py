@@ -16,7 +16,7 @@ GUIDE = 'https://guide.vaticanglamorous.com'
 MAPS = 'https://maps.google.com/?q=Via+San+Telesforo+Roma'
 CIN = 'IT058091C2ZV2HSZ96'
 YT = 'azY0RWKun1g'
-V = '4'  # versione cache CSS/JS
+V = '5'  # versione cache CSS/JS
 
 LANG = 'it'
 def T(it, en): return it if LANG == 'it' else en
@@ -123,6 +123,8 @@ def header():
     menu = ['home', 'apt', 'rooms', 'rome', 'gallery', 'exp', 'info']
     nav = ''.join(f'<a{" class=\"active\"" if k == CUR else ""} href="{link(k)}">{P[k][3] if LANG == "it" else P[k][4]}</a>' for k in menu)
     other = 'en' if LANG == 'it' else 'it'
+    vb = T('https://www.villabrando.com/it/', 'https://www.villabrando.com/en/')
+    nav += f'<a class="vg-nav-retreat" href="{vb}" target="_blank" rel="noopener">Our Coastal Retreat</a>'
     lang = (f'<strong>IT</strong><span>/</span><a href="{link(CUR, "en")}">EN</a>' if LANG == 'it'
             else f'<a href="{link(CUR, "it")}">IT</a><span>/</span><strong>EN</strong>')
     return f'''<body class="elegance">
