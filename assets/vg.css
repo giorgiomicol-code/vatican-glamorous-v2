@@ -61,3 +61,7 @@
 
 /* Barra informazioni sotto la hero: 6 voci (aggiunte le recensioni) */
 @media(min-width:1041px){.cv-benefit-grid{grid-template-columns:repeat(6,1fr)}}
+
+/* Hero Home (H1): taglio che privilegia la parte alta (quadro, divano, cuscini, mobile) con un po' di tavolino e tappeto */
+.elegance .cv-hero-bg img{object-position:58% 14%}
+@media(min-width:1500px){.elegance .cv-hero-bg img{object-position:58% 22%}}
