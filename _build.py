@@ -16,7 +16,7 @@ GUIDE = 'https://guide.vaticanglamorous.com'
 MAPS = 'https://maps.google.com/?q=Via+San+Telesforo+Roma'
 CIN = 'IT058091C2ZV2HSZ96'
 YT = 'azY0RWKun1g'
-V = '33'  # versione cache CSS/JS
+V = '34'  # versione cache CSS/JS
 
 LANG = 'it'
 def T(it, en): return it if LANG == 'it' else en
@@ -24,7 +24,7 @@ def T(it, en): return it if LANG == 'it' else en
 PAGES = [  # chiave, slug it, slug en, voce di menu it, en
     ('home', '', '', 'Home', 'Home'),
     ('apt', 'appartamento', 'apartment', "L’appartamento", 'The apartment'),
-    ('rooms', 'ambienti', 'spaces', 'Ambienti', 'Spaces'),
+    ('rooms', 'ambienti', 'spaces', 'Zona notte', 'Sleeping areas'),
     ('rome', 'roma-vaticano', 'rome-vatican', 'Roma &amp; Vaticano', 'Rome &amp; Vatican'),
     ('exp', 'esperienze', 'experiences', 'Esperienze', 'Experiences'),
     ('info', 'info', 'info', 'Info', 'Info'),
@@ -139,7 +139,7 @@ def header():
 def footer():
     return f'''  <footer class="cv-full-footer{' cv-home-footer' if CUR == 'home' else ''}" id="{T('contatti', 'contact')}"><div class="cv-wrap"><div class="cv-footer-grid">
     <div><div class="vg-footer-brand"><img src="{A('brand/emblem-light.png')}" alt="" data-no-lightbox><div><strong>Vatican Glamorous</strong><small>Passeggiata del Gelsomino</small></div></div><p>Via S. Telesforo, Roma<br>{T('A 200 m da San Pietro', '200 m from St. Peter’s')}</p></div>
-    <div><h3>{T('Esplora', 'Explore')}</h3><a href="{link('apt')}">{T('L’appartamento', 'The apartment')}</a><a href="{link('rooms')}">{T('Ambienti', 'Spaces')}</a><a href="{link('rome')}">{T('Roma &amp; Vaticano', 'Rome &amp; Vatican')}</a><a href="{link('exp')}">{T('Esperienze', 'Experiences')}</a></div>
+    <div><h3>{T('Esplora', 'Explore')}</h3><a href="{link('apt')}">{T('L’appartamento', 'The apartment')}</a><a href="{link('rooms')}">{T('Zona notte', 'Sleeping areas')}</a><a href="{link('rome')}">{T('Roma &amp; Vaticano', 'Rome &amp; Vatican')}</a><a href="{link('exp')}">{T('Esperienze', 'Experiences')}</a></div>
     <div><h3>{T('Contatti', 'Contact')}</h3><a href="tel:{PHONE}">{PHONE_TXT}</a><a href="mailto:{EMAIL}">{EMAIL}</a><a href="{WA}" target="_blank" rel="noopener">WhatsApp</a></div>
     <div><h3>{T('Informazioni', 'Information')}</h3><a href="{link('info')}">{T('Info e regole', 'Info &amp; house rules')}</a><a href="{MAPS}" target="_blank" rel="noopener">{T('Indicazioni', 'Directions')}</a><a href="{AIRBNB}" target="_blank" rel="noopener">{T('Prenota su Airbnb', 'Book on Airbnb')}</a><a href="{BOOKING}" target="_blank" rel="noopener">{T('Prenota su Booking.com', 'Book on Booking.com')}</a><a href="{link('privacy')}">Privacy</a></div>
   </div><div class="cv-legal">Vatican Glamorous · Passeggiata del Gelsomino · Via S. Telesforo, Roma · CIN {CIN}</div></div></footer>
@@ -275,7 +275,7 @@ def apt():
 ''' + footer()
 
 def rooms():
-    title = T('Ambienti | Vatican Glamorous · Passeggiata del Gelsomino', 'Spaces | Vatican Glamorous · Passeggiata del Gelsomino')
+    title = T('Zona notte | Vatican Glamorous · Passeggiata del Gelsomino', 'Sleeping areas | Vatican Glamorous · Passeggiata del Gelsomino')
     desc = T('Camera con letto king-size, divano letto king-size e bagno completo: Vatican Glamorous ospita fino a 4 persone vicino a San Pietro.', 'A king-size bedroom, a king-size sofa bed and a full bathroom: Vatican Glamorous sleeps up to 4 near St. Peter’s.')
     g1 = ('C01', T('Camera', 'Bedroom'), T('Camera matrimoniale', 'Double bedroom'))
     g2 = ('C02', T('Soggiorno', 'Living room'), T('Divano letto', 'Sofa bed'))
@@ -303,8 +303,8 @@ def rooms():
     prev = f'''<div class="cv-room-preview-grid"><div class="cv-room-preview"><h3>{g1[2]}</h3><p>{T('Un’ampia camera con letto king-size, testiera imbottita e arredi contemporanei.', 'A spacious bedroom with a king-size bed, upholstered headboard and contemporary furnishings.')}</p><div class="cv-detail-list"><span>{T('Letto king-size', 'King-size bed')}</span><span>Smart Monitor</span><span>{T('Aria condizionata', 'Air conditioning')}</span></div></div><div class="cv-room-preview"><h3>{g2[2]}</h3><p>{T('Nella zona giorno, un comodo divano letto king-size per altri due ospiti.', 'In the living area, a comfortable king-size sofa bed for two more guests.')}</p><div class="cv-detail-list"><span>{T('King-size', 'King-size')}</span><span>Smart TV</span><span>{T('Aria condizionata', 'Air conditioning')}</span></div></div></div>'''
     return head(title, desc, 'C01') + header() + f'''
   <main>
-{page_hero('C1', T('Camera con letto king-size', 'Bedroom with king-size bed'), T('Camera · Living · Bagno', 'Bedroom · Living · Bathroom'), T('Gli ambienti', 'The spaces'), T('Una camera matrimoniale king-size e un ampio living in stile loft con divano letto king-size: fino a 4 ospiti.', 'A king-size double bedroom and a wide loft-style living room with a king-size sofa bed: up to 4 guests.'))}
-<section class="cv-section" id="{T('foto-ambienti', 'space-photos')}"><div class="cv-wrap">{centered(T('Dove riposare', 'Where to rest'), T('Gli ambienti', 'The spaces'))}
+{page_hero('C1', T('Camera con letto king-size', 'Bedroom with king-size bed'), T('Zone notte e riposo', 'Sleeping and resting areas'), T('Gli ambienti', 'The spaces'), T('Una camera matrimoniale king-size e un ampio living in stile loft con divano letto king-size: fino a 4 ospiti.', 'A king-size double bedroom and a wide loft-style living room with a king-size sofa bed: up to 4 guests.'))}
+<section class="cv-section" id="{T('foto-ambienti', 'space-photos')}"><div class="cv-wrap">{centered(T('Zone riposo', 'Places to rest'), T('Gli ambienti', 'The spaces'))}
 {coverflow('rooms', f)}
 {prev}
 </div></section>
