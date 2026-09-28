@@ -51,3 +51,7 @@
   .elegance .cv-menu{display:inline-flex}
   .vg-brand-text strong{font-size:1.3rem}
 }
+
+/* Logo ufficiale (oro) al centro della sezione di presentazione della Home */
+.vg-logo-full{display:block;width:min(430px,82vw);height:auto;margin:0 auto 18px}
+@media(max-width:760px){.vg-logo-full{width:min(300px,78vw)}}
