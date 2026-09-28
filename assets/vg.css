@@ -54,3 +54,7 @@
 
 /* Logo ufficiale (oro) al centro della sezione di presentazione della Home */
 .vg-logo-full{display:block;width:min(260px,43vw);height:auto;margin:0 auto 18px}
+
+/* Codici foto (revisione): etichetta ben visibile in alto a sinistra */
+.cv-photocode-badge{position:absolute;z-index:30;top:10px;left:10px;padding:5px 10px;border-radius:6px;background:#ffd400;color:#111;font:800 15px/1 var(--cv-sans,Arial,sans-serif);letter-spacing:.04em;box-shadow:0 2px 8px rgba(0,0,0,.35);pointer-events:none}
+.cv-page-hero > .cv-photocode-badge,.cv-hero-bg > .cv-photocode-badge{top:auto;bottom:16px;left:16px;font-size:18px}

@@ -16,7 +16,7 @@ GUIDE = 'https://guide.vaticanglamorous.com'
 MAPS = 'https://maps.google.com/?q=Via+San+Telesforo+Roma'
 CIN = 'IT058091C2ZV2HSZ96'
 YT = 'azY0RWKun1g'
-V = '9'  # versione cache CSS/JS
+V = '10'  # versione cache CSS/JS
 
 LANG = 'it'
 def T(it, en): return it if LANG == 'it' else en
@@ -50,8 +50,8 @@ def img(code, alt, cls='', lazy=True, extra=''):
     l = ' loading="lazy"' if lazy else ' fetchpriority="high"'
     return f'<img{c} src="{A(f)}" alt="{alt}"{l} data-photo-code="{code}"{extra}>'
 
-def ph(text_it='Foto in arrivo', text_en='Photo coming soon'):
-    return f'<div class="vg-placeholder">{T(text_it, text_en)}</div>'
+def ph(code, text_it='Foto in arrivo', text_en='Photo coming soon'):
+    return f'<div class="vg-placeholder" data-photo-code="{code}">{T(text_it, text_en)}</div>'
 
 def fig(code, alt, cap=None, group=None):
     g = ''
@@ -205,8 +205,8 @@ def home():
     dest = [
         (img('H6', T('San Pietro e il Tevere', 'St. Peter’s and the Tiber')), T('San Pietro', 'St. Peter’s')),
         (img('H7', T('Mappa: dall’appartamento al Vaticano in 2 minuti a piedi', 'Map: from the apartment to the Vatican in 2 minutes on foot')), T('Musei Vaticani', 'Vatican Museums')),
-        (ph(), T('Castel Sant’Angelo', 'Castel Sant’Angelo')),
-        (ph(), T('Piazza Navona', 'Piazza Navona')),
+        (ph('H8'), T('Castel Sant’Angelo', 'Castel Sant’Angelo')),
+        (ph('H9'), T('Piazza Navona', 'Piazza Navona')),
     ]
     desthtml = '\n'.join(f'      <article class="cv-destination" data-reveal><div class="cv-destination-image">{i}</div><h3>{h}</h3></article>' for i, h in dest)
     adults = select('adults', f'cv-adulti-{L}', 4, 2)
@@ -331,7 +331,7 @@ def rome():
 {page_hero('R1', T('San Pietro illuminato al tramonto visto dal Tevere', 'St. Peter’s lit up at dusk seen from the Tiber'), T('Dintorni · San Pietro · Musei Vaticani', 'Surroundings · St. Peter’s · Vatican Museums'), T('Roma &amp; Vaticano', 'Rome &amp; Vatican'), T('Tutte le bellezze di Roma sono a pochi passi: il Vaticano è a 5 minuti a piedi.', 'All the beauty of Rome is just steps away: the Vatican is a 5-minute walk.'))}
 <section class="cv-section cream" id="{T('dintorni', 'surroundings')}"><div class="cv-wrap cv-editorial"><div class="cv-editorial-copy"><p class="cv-eyebrow left">{T('Dintorni', 'Surroundings')}</p><h2>{T('Una casa nel centro di Roma', 'A home in the centre of Rome')}</h2><p>{T('Il quartiere è servito da bar e ristoranti dove gustare la cucina italiana e romana, e da mezzi pubblici per raggiungere ogni angolo della città.', 'The area is full of bars and restaurants serving Italian and Roman cuisine, with public transport to every corner of the city.')}</p>{wl}</div><div class="cv-editorial-media">{img('R2', T('Mappa: Vaticano a 2 minuti a piedi dall’appartamento', 'Map: the Vatican 2 minutes on foot from the apartment'))}</div></div></section>
 <section class="cv-section" id="{T('san-pietro', 'st-peters')}"><div class="cv-wrap cv-editorial reverse"><div class="cv-editorial-copy"><p class="cv-script">{T('All’ombra del Cupolone', 'In the shadow of the great dome')}</p><h2>{T('San Pietro', 'St. Peter’s')}</h2><p>{T('La Basilica e Piazza San Pietro sono a circa 200 metri: ideale per pellegrini, udienze e celebrazioni, con la tranquillità di tornare a casa in pochi minuti. [testo segnaposto]', 'The Basilica and St. Peter’s Square are about 200 metres away: ideal for pilgrims, audiences and celebrations, with the peace of being back home in minutes. [placeholder text]')}</p></div><div class="cv-editorial-media">{img('R3', T('Cupola di San Pietro illuminata', 'St. Peter’s dome illuminated'))}</div></div></section>
-<section class="cv-section sky" id="{T('musei-vaticani', 'vatican-museums')}"><div class="cv-wrap cv-editorial"><div class="cv-editorial-copy"><p class="cv-eyebrow left">{T('Arte', 'Art')}</p><h2>{T('Musei Vaticani', 'Vatican Museums')}</h2><p>{T('Musei Vaticani e Cappella Sistina a pochi minuti a piedi. Consigliamo di prenotare in anticipo biglietti o visite guidate con ingresso prioritario. [testo segnaposto]', 'The Vatican Museums and Sistine Chapel are a few minutes’ walk away. We recommend booking tickets or guided tours with priority entry in advance. [placeholder text]')}</p><a class="cv-button" href="{link('exp')}">{T('Tour ed esperienze', 'Tours &amp; experiences')}</a></div><div class="cv-editorial-media">{ph()}</div></div></section>
+<section class="cv-section sky" id="{T('musei-vaticani', 'vatican-museums')}"><div class="cv-wrap cv-editorial"><div class="cv-editorial-copy"><p class="cv-eyebrow left">{T('Arte', 'Art')}</p><h2>{T('Musei Vaticani', 'Vatican Museums')}</h2><p>{T('Musei Vaticani e Cappella Sistina a pochi minuti a piedi. Consigliamo di prenotare in anticipo biglietti o visite guidate con ingresso prioritario. [testo segnaposto]', 'The Vatican Museums and Sistine Chapel are a few minutes’ walk away. We recommend booking tickets or guided tours with priority entry in advance. [placeholder text]')}</p><a class="cv-button" href="{link('exp')}">{T('Tour ed esperienze', 'Tours &amp; experiences')}</a></div><div class="cv-editorial-media">{ph('R4')}</div></div></section>
 <section class="cv-section cream" id="{T('come-muoversi', 'getting-around')}"><div class="cv-wrap">{centered(T('Mobilità', 'Getting around'), T('Come muoversi', 'How to get around'))}{hw}</div></section>
 {cta(T('La tua base a Roma', 'Your base in Rome'), '', T('Verifica le date', 'Check dates'))}
   </main>
@@ -343,16 +343,16 @@ def exp():
     desc = T('Tour, visite ed esperienze a Roma e in Vaticano per gli ospiti di Vatican Glamorous.', 'Tours, visits and experiences in Rome and the Vatican for Vatican Glamorous guests.')
     cards = [
         (img('E2', T('Cupola di San Pietro', 'St. Peter’s dome')), T('San Pietro', 'St. Peter’s'), T('Basilica e cupola', 'Basilica and dome')),
-        (ph(), T('Musei Vaticani', 'Vatican Museums'), T('Cappella Sistina', 'Sistine Chapel')),
-        (ph(), T('Roma antica', 'Ancient Rome'), T('Colosseo e Fori', 'Colosseum and Forums')),
-        (ph(), 'Trastevere', T('Sapori romani', 'Roman flavours')),
+        (ph('E3'), T('Musei Vaticani', 'Vatican Museums'), T('Cappella Sistina', 'Sistine Chapel')),
+        (ph('E4'), T('Roma antica', 'Ancient Rome'), T('Colosseo e Fori', 'Colosseum and Forums')),
+        (ph('E5'), 'Trastevere', T('Sapori romani', 'Roman flavours')),
     ]
     ch = ''.join(f'<article class="cv-card"><div class="cv-card-media">{i}</div><div class="cv-card-bottom"><div><h3>{h}</h3><small>{s}</small></div></div></article>' for i, h, s in cards)
     return head(title, desc, 'E01') + header() + f'''
   <main>
 {page_hero('E1', T('San Pietro al tramonto', 'St. Peter’s at dusk'), T('Vaticano · Roma · Esperienze', 'Vatican · Rome · Experiences'), T('Esperienze', 'Experiences'), T('Pagina in preparazione: qui arriveranno le pagine della guida ospiti di Vatican Glamorous. [testo segnaposto]', 'Page in progress: the Vatican Glamorous guest guide pages will be added here. [placeholder text]'))}
 <section class="cv-section"><div class="cv-wrap"><div class="cv-centered"><p class="cv-eyebrow">{T('Dintorni', 'Surroundings')}</p><h2 class="cv-heading">{T('Roma da vivere', 'Rome to experience')}</h2><p class="cv-script">{T('Il Vaticano sotto casa.', 'The Vatican on your doorstep.')}</p><p>{T('Visite guidate, ingressi prioritari ed esperienze scelte per i nostri ospiti. [testo segnaposto]', 'Guided visits, priority entry and experiences chosen for our guests. [placeholder text]')}</p></div><div class="cv-card-grid">{ch}</div></div></section>
-<section class="cv-section sky"><div class="cv-wrap cv-editorial reverse"><div class="cv-editorial-copy"><p class="cv-script">{T('Una guida da portare con te', 'A guide to take with you')}</p><h2>{T('Guida ospiti', 'Guest guide')}</h2><p>{T('Consulta la guida di Vatican Glamorous con consigli sul quartiere, trasporti e attrazioni. [testo segnaposto]', 'Browse the Vatican Glamorous guide with tips on the area, transport and sights. [placeholder text]')}</p><a class="cv-button" href="{GUIDE}" target="_blank" rel="noopener">{T('Apri la guida', 'Open the guide')}</a></div><div class="cv-editorial-media">{ph()}</div></div></section>
+<section class="cv-section sky"><div class="cv-wrap cv-editorial reverse"><div class="cv-editorial-copy"><p class="cv-script">{T('Una guida da portare con te', 'A guide to take with you')}</p><h2>{T('Guida ospiti', 'Guest guide')}</h2><p>{T('Consulta la guida di Vatican Glamorous con consigli sul quartiere, trasporti e attrazioni. [testo segnaposto]', 'Browse the Vatican Glamorous guide with tips on the area, transport and sights. [placeholder text]')}</p><a class="cv-button" href="{GUIDE}" target="_blank" rel="noopener">{T('Apri la guida', 'Open the guide')}</a></div><div class="cv-editorial-media">{ph('E6')}</div></div></section>
 {cta(T('La tua base in Vaticano', 'Your base at the Vatican'), '', T('Verifica le date', 'Check dates'))}
   </main>
 
@@ -361,9 +361,9 @@ def exp():
 def info():
     title = T('Info e regole | Vatican Glamorous · Passeggiata del Gelsomino', 'Info &amp; house rules | Vatican Glamorous · Passeggiata del Gelsomino')
     desc = T('Contatti, regole della casa e informazioni utili per il soggiorno a Vatican Glamorous, Via S. Telesforo, Roma.', 'Contacts, house rules and useful information for your stay at Vatican Glamorous, Via S. Telesforo, Rome.')
-    return head(title, desc, 'A05') + header() + f'''
+    return head(title, desc, 'I01') + header() + f'''
   <main>
-{page_hero('A5', T('Soggiorno luminoso di Vatican Glamorous', 'Bright living room at Vatican Glamorous'), T('Contatti · Regole · Collegamenti utili', 'Contacts · Rules · Useful links'), T('Informazioni', 'Information'), T('Tutto ciò che serve prima dell’arrivo e durante il soggiorno.', 'Everything you need before arrival and during your stay.'))}
+{page_hero('I1', T('Soggiorno luminoso di Vatican Glamorous', 'Bright living room at Vatican Glamorous'), T('Contatti · Regole · Collegamenti utili', 'Contacts · Rules · Useful links'), T('Informazioni', 'Information'), T('Tutto ciò che serve prima dell’arrivo e durante il soggiorno.', 'Everything you need before arrival and during your stay.'))}
 <section class="cv-section cream"><div class="cv-wrap">{centered('Vatican Glamorous', T('Contatti e risorse', 'Contacts and resources'))}<div class="cv-info-grid">
 <article class="cv-info-card"><h3>{T('Contatti', 'Contact')}</h3><p>Via S. Telesforo, Roma</p><a href="tel:{PHONE}">{PHONE_TXT}</a><a href="mailto:{EMAIL}">{EMAIL}</a><a href="{WA}" target="_blank" rel="noopener">{T('Scrivi su WhatsApp', 'Message us on WhatsApp')}</a><a href="{MAPS}" target="_blank" rel="noopener">{T('Apri le indicazioni', 'Get directions')}</a></article>
 <article class="cv-info-card"><h3>{T('Documenti', 'Documents')}</h3><a href="{GUIDE}" target="_blank" rel="noopener">{T('Guida ospiti', 'Guest guide')}</a><p>Vatican Glamorous · Passeggiata del Gelsomino<br>CIN {CIN}</p></article>
@@ -426,7 +426,7 @@ def privacy():
 <p>By visiting the Vatican Glamorous – Passeggiata del Gelsomino website you confirm that you have read and understood this statement.</p>'''
     return head(title, desc) + header() + f'''
   <main>
-{page_hero('A5', T('Soggiorno di Vatican Glamorous', 'Vatican Glamorous living room'), T('Privacy · Cookie', 'Privacy · Cookies'), 'Privacy', T('Privacy e cookie policy della Casa Vacanze.', 'Privacy and cookie policy of the Holiday Home.'))}
+{page_hero('P1', T('Soggiorno di Vatican Glamorous', 'Vatican Glamorous living room'), T('Privacy · Cookie', 'Privacy · Cookies'), 'Privacy', T('Privacy e cookie policy della Casa Vacanze.', 'Privacy and cookie policy of the Holiday Home.'))}
 <section class="cv-section cream"><div class="cv-wrap cv-legal-text">
 {body}
 </div></section>

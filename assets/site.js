@@ -427,16 +427,17 @@ document.querySelectorAll('[data-jump-to-group]').forEach((btn) => {
   });
 });
 
-// Overlay dei codici foto (H1, V2, C9...) — visibile solo con ?codici=1 nell'URL, per riferimento interno
-if (new URLSearchParams(location.search).has('codici')) {
-  document.querySelectorAll('img[data-photo-code]').forEach((img) => {
-    const parent = img.parentElement;
-    if (parent && getComputedStyle(parent).position === 'static') {
-      parent.style.position = 'relative';
-    }
+// Overlay dei codici foto (H1, A2, C3...) — TEMPORANEO: visibile sempre durante la revisione.
+// Per nasconderli di nuovo (visibili solo con ?codici=1) impostare SHOW_PHOTO_CODES = false.
+const SHOW_PHOTO_CODES = true;
+if (SHOW_PHOTO_CODES || new URLSearchParams(location.search).has('codici')) {
+  document.querySelectorAll('[data-photo-code]').forEach((el) => {
+    const host = el.tagName === 'IMG' ? el.parentElement : el;
+    if (!host || host.querySelector(':scope > .cv-photocode-badge')) return;
+    if (getComputedStyle(host).position === 'static') host.style.position = 'relative';
     const badge = document.createElement('span');
     badge.className = 'cv-photocode-badge';
-    badge.textContent = img.dataset.photoCode;
-    parent.appendChild(badge);
+    badge.textContent = el.dataset.photoCode;
+    host.appendChild(badge);
   });
 }
