@@ -16,7 +16,7 @@ GUIDE = 'https://guide.vaticanglamorous.com'
 MAPS = 'https://maps.google.com/?q=Via+San+Telesforo+Roma'
 CIN = 'IT058091C2ZV2HSZ96'
 YT = 'azY0RWKun1g'
-V = '20'  # versione cache CSS/JS
+V = '21'  # versione cache CSS/JS
 
 LANG = 'it'
 def T(it, en): return it if LANG == 'it' else en
@@ -200,6 +200,7 @@ def home():
         ('<svg viewBox="0 0 32 32"><rect x="5" y="5" width="22" height="22" rx="3"/><path d="M13 23V9h5a4 4 0 0 1 0 8h-5"/></svg>', T('Posto auto gratuito', 'Free parking'), T('Proprio sotto il palazzo', 'Right below the building')),
         ('<svg viewBox="0 0 32 32"><path d="M5 27h22M7 27V15h18v12M7 19h18M11 19v8M16 19v8M21 19v8"/><path d="M11 15V7h10v8"/></svg>', T('2 balconi', '2 balconies'), T('Colazione all’aperto', 'Breakfast outdoors')),
         ('<svg viewBox="0 0 32 32"><rect x="8" y="4" width="16" height="24" rx="2"/><path d="m12 12 4-4 4 4M12 20l4 4 4-4"/></svg>', T('5° piano con ascensore', '5th floor with lift'), T('Palazzo d’epoca', 'Period building')),
+        ('<svg viewBox="0 0 32 32"><path d="m16 4 3.6 7.4 8.1 1.2-5.9 5.7 1.4 8.1L16 22.6l-7.2 3.8 1.4-8.1-5.9-5.7 8.1-1.2Z"/></svg>', T('4.95 su Airbnb', '4.95 on Airbnb'), T('9.8 su Booking.com', '9.8 on Booking.com')),
     ]
     b = ''.join(f'<div class="cv-benefit"><span class="cv-benefit-icon">{s}</span><span><strong>{t}</strong><span>{u}</span></span></div>' for s, t, u in benefits)
     cardhtml = '\n'.join(f'''      <a class="cv-card" href="{link(k.split('#')[0]) + ('#' + k.split('#')[1] if '#' in k else '')}" data-reveal><div class="cv-card-media">{img(c, alt, extra=' data-no-lightbox')}</div><div class="cv-card-bottom"><div><h3>{h}</h3><small>{s}</small></div><span class="cv-card-arrow">→</span></div></a>''' for k, c, h, s, alt in cards)
