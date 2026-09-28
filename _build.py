@@ -16,7 +16,7 @@ GUIDE = 'https://guide.vaticanglamorous.com'
 MAPS = 'https://maps.google.com/?q=Via+San+Telesforo+Roma'
 CIN = 'IT058091C2ZV2HSZ96'
 YT = 'azY0RWKun1g'
-V = '5'  # versione cache CSS/JS
+V = '6'  # versione cache CSS/JS
 
 LANG = 'it'
 def T(it, en): return it if LANG == 'it' else en
@@ -26,7 +26,6 @@ PAGES = [  # chiave, slug it, slug en, voce di menu it, en
     ('apt', 'appartamento', 'apartment', "L’appartamento", 'The apartment'),
     ('rooms', 'camere', 'rooms', 'Camere', 'Rooms'),
     ('rome', 'roma-vaticano', 'rome-vatican', 'Roma &amp; Vaticano', 'Rome &amp; Vatican'),
-    ('gallery', 'gallery', 'gallery', 'Gallery', 'Gallery'),
     ('exp', 'esperienze', 'experiences', 'Esperienze', 'Experiences'),
     ('info', 'info', 'info', 'Info', 'Info'),
     ('book', 'prenota', 'book', 'Prenota', 'Book'),
@@ -120,7 +119,7 @@ def brand(cls='vg-brand'):
             f'<span class="vg-brand-text"><strong>Vatican Glamorous</strong><small>Passeggiata del Gelsomino</small></span></a>')
 
 def header():
-    menu = ['home', 'apt', 'rooms', 'rome', 'gallery', 'exp', 'info']
+    menu = ['home', 'apt', 'rooms', 'rome', 'exp', 'info']
     nav = ''.join(f'<a{" class=\"active\"" if k == CUR else ""} href="{link(k)}">{P[k][3] if LANG == "it" else P[k][4]}</a>' for k in menu)
     other = 'en' if LANG == 'it' else 'it'
     vb = T('https://www.villabrando.com/it/', 'https://www.villabrando.com/en/')
@@ -140,7 +139,7 @@ def header():
 def footer():
     return f'''  <footer class="cv-full-footer{' cv-home-footer' if CUR == 'home' else ''}" id="{T('contatti', 'contact')}"><div class="cv-wrap"><div class="cv-footer-grid">
     <div><div class="vg-footer-brand"><img src="{A('brand/emblem-light.png')}" alt="" data-no-lightbox><div><strong>Vatican Glamorous</strong><small>Passeggiata del Gelsomino</small></div></div><p>Via S. Telesforo, Roma<br>{T('A 200 m da San Pietro', '200 m from St. Peter’s')}</p></div>
-    <div><h3>{T('Esplora', 'Explore')}</h3><a href="{link('apt')}">{T('L’appartamento', 'The apartment')}</a><a href="{link('rooms')}">{T('Camere', 'Rooms')}</a><a href="{link('rome')}">{T('Roma &amp; Vaticano', 'Rome &amp; Vatican')}</a><a href="{link('gallery')}">Gallery</a></div>
+    <div><h3>{T('Esplora', 'Explore')}</h3><a href="{link('apt')}">{T('L’appartamento', 'The apartment')}</a><a href="{link('rooms')}">{T('Camere', 'Rooms')}</a><a href="{link('rome')}">{T('Roma &amp; Vaticano', 'Rome &amp; Vatican')}</a><a href="{link('exp')}">{T('Esperienze', 'Experiences')}</a></div>
     <div><h3>{T('Contatti', 'Contact')}</h3><a href="tel:{PHONE}">{PHONE_TXT}</a><a href="mailto:{EMAIL}">{EMAIL}</a><a href="{WA}" target="_blank" rel="noopener">WhatsApp</a></div>
     <div><h3>{T('Informazioni', 'Information')}</h3><a href="{link('info')}">{T('Info e regole', 'Info &amp; house rules')}</a><a href="{MAPS}" target="_blank" rel="noopener">{T('Indicazioni', 'Directions')}</a><a href="{AIRBNB}" target="_blank" rel="noopener">{T('Prenota su Airbnb', 'Book on Airbnb')}</a><a href="{BOOKING}" target="_blank" rel="noopener">{T('Prenota su Booking.com', 'Book on Booking.com')}</a><a href="{link('privacy')}">Privacy</a></div>
   </div><div class="cv-legal">Vatican Glamorous · Passeggiata del Gelsomino · Via S. Telesforo, Roma · CIN {CIN}</div></div></footer>
@@ -192,7 +191,7 @@ def home():
         ('apt', 'H2', T('L’appartamento', 'The apartment'), T('Loft, cucina e balconi', 'Loft, kitchen and balconies'), T('Zona giorno di Vatican Glamorous', 'Vatican Glamorous living area')),
         ('rooms', 'H3', T('Le camere', 'The rooms'), T('Fino a 4 ospiti', 'Up to 4 guests'), T('Camera con letto king-size', 'Bedroom with king-size bed')),
         ('rome', 'H4', T('Roma &amp; Vaticano', 'Rome &amp; Vatican'), T('San Pietro a 200 m', 'St. Peter’s 200 m away'), T('La cupola di San Pietro al tramonto', 'St. Peter’s dome at dusk')),
-        ('gallery', 'H5', 'Gallery', T('Foto e video', 'Photos and video'), T('Corridoio e zona giorno', 'Hallway and living area')),
+        ('apt#' + T('balconi', 'balconies'), 'H5', T('I balconi', 'The balconies'), T('Colazione all’aperto', 'Breakfast outdoors'), T('Balcone con tavolino e sedute', 'Balcony with table and seating')),
     ]
     benefits = [
         ('<svg viewBox="0 0 32 32"><path d="M4 15 16 5l12 10v12H9V15"/><path d="M13 27v-8h6v8"/></svg>', T('Fino a 4 ospiti', 'Up to 4 guests'), T('1 camera · divano letto · 1 bagno', '1 bedroom · sofa bed · 1 bathroom')),
@@ -202,7 +201,7 @@ def home():
         ('<svg viewBox="0 0 32 32"><rect x="8" y="4" width="16" height="24" rx="2"/><path d="m12 12 4-4 4 4M12 20l4 4 4-4"/></svg>', T('5° piano con ascensore', '5th floor with lift'), T('Palazzo d’epoca', 'Period building')),
     ]
     b = ''.join(f'<div class="cv-benefit"><span class="cv-benefit-icon">{s}</span><span><strong>{t}</strong><span>{u}</span></span></div>' for s, t, u in benefits)
-    cardhtml = '\n'.join(f'''      <a class="cv-card" href="{link(k)}" data-reveal><div class="cv-card-media">{img(c, alt, extra=' data-no-lightbox')}</div><div class="cv-card-bottom"><div><h3>{h}</h3><small>{s}</small></div><span class="cv-card-arrow">→</span></div></a>''' for k, c, h, s, alt in cards)
+    cardhtml = '\n'.join(f'''      <a class="cv-card" href="{link(k.split('#')[0]) + ('#' + k.split('#')[1] if '#' in k else '')}" data-reveal><div class="cv-card-media">{img(c, alt, extra=' data-no-lightbox')}</div><div class="cv-card-bottom"><div><h3>{h}</h3><small>{s}</small></div><span class="cv-card-arrow">→</span></div></a>''' for k, c, h, s, alt in cards)
     dest = [
         (img('H6', T('San Pietro e il Tevere', 'St. Peter’s and the Tiber')), T('San Pietro', 'St. Peter’s')),
         (img('H7', T('Mappa: dall’appartamento al Vaticano in 2 minuti a piedi', 'Map: from the apartment to the Vatican in 2 minutes on foot')), T('Musei Vaticani', 'Vatican Museums')),
@@ -264,6 +263,7 @@ def apt():
 <section class="cv-section cream cv-villa-living" id="{T('cucina', 'kitchen')}"><div class="cv-wrap"><h2 class="cv-living-title">{T('Zona giorno e cucina', 'Living area &amp; kitchen')}</h2><div class="cv-editorial reverse"><div class="cv-editorial-copy"><p class="cv-script">{T('Spazi autentici.<br>Soggiorni indimenticabili.', 'Authentic spaces.<br>Unforgettable stays.')}</p><p>{T('Un ampio soggiorno in stile loft con divano letto king-size e una cucina completa di tutti gli elettrodomestici.', 'A spacious loft-style living room with a king-size sofa bed and a kitchen complete with all appliances.')}</p>{amen([T('Cucina completa', 'Full kitchen'), T('Lavastoviglie', 'Dishwasher'), T('Lavasciuga', 'Washer-dryer'), 'Wi‑Fi', T('Smart Monitor con Netflix e app streaming', 'Smart monitors with Netflix and streaming apps'), 'Amazon Alexa', T('Aria condizionata automatica', 'Automatic air conditioning'), T('Scrivania per smart-working', 'Desk for smart-working')])}</div><div class="cv-editorial-media">{img('A12', T('Cucina attrezzata con elettrodomestici in acciaio', 'Equipped kitchen with stainless-steel appliances'))}</div></div></div></section>
 <section class="cv-section" id="{T('balconi', 'balconies')}"><div class="cv-wrap"><div class="cv-centered"><p class="cv-eyebrow">{T('All’aperto', 'Outdoors')}</p><h2 class="cv-heading">{T('I due balconi', 'The two balconies')}</h2></div><div class="cv-editorial"><div class="cv-editorial-copy"><p class="cv-script">{T('Colazione all’aria aperta', 'Breakfast in the open air')}</p><p>{T('L’appartamento dispone di due balconi, uno attrezzato con tavolino e sedute per la colazione o un aperitivo al tramonto, con vista sui tetti del quartiere.', 'The apartment has two balconies, one set up with a small table and seating for breakfast or a sunset aperitivo, overlooking the neighbourhood rooftops.')}</p>{amen([T('Tavolo per la colazione', 'Breakfast table'), T('Sedute da esterno', 'Outdoor seating'), T('Luce naturale tutto il giorno', 'Natural light all day'), T('Affaccio sul quartiere', 'Views over the neighbourhood')])}</div><div class="cv-editorial-media">{img('A13', T('Balcone con tavolino, sedie e sgabelli', 'Balcony with small table, chairs and stools'))}</div></div></div></section>
 <section class="cv-section cream" id="{T('caratteristiche', 'features')}"><div class="cv-wrap">{centered(T('Dettagli', 'Details'), T('Caratteristiche della casa', 'Property features'))}{amen([T('5° piano con ascensore', '5th floor with lift'), T('Palazzo d’epoca', 'Period building'), T('Posto auto gratuito sotto il palazzo', 'Free parking below the building'), T('1 camera matrimoniale king-size', '1 king-size double bedroom'), T('Divano letto queen-size', 'Queen-size sofa bed'), T('1 bagno completo', '1 full bathroom'), T('Cabina armadio', 'Walk-in closet'), T('2 balconi', '2 balconies'), T('Culla e passeggino', 'Cot and stroller'), T('Animali di piccola taglia ammessi', 'Small pets welcome'), T('Biancheria, asciugamani e kit bagno inclusi', 'Bed linen, towels and toiletries included'), T('Vietato fumare in casa', 'No smoking indoors')])}</div></section>
+<section class="cv-section" id="video"><div class="cv-wrap">{centered(T('Filmato originale', 'Original footage'), T('Vatican Glamorous in video', 'Vatican Glamorous on video'))}<div class="cv-video-grid"><div class="cv-video-embed"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/{YT}" title="Video Vatican Glamorous" allowfullscreen></iframe></div></div></div></section>
 {cta(T('Vivi Vatican Glamorous', 'Stay at Vatican Glamorous'), T('Verifica le date nel motore di prenotazione ufficiale.', 'Check dates in the official booking engine.'), T('Scopri la disponibilità', 'Check availability'))}
   </main>
 
@@ -334,27 +334,6 @@ def rome():
 <section class="cv-section sky" id="{T('musei-vaticani', 'vatican-museums')}"><div class="cv-wrap cv-editorial"><div class="cv-editorial-copy"><p class="cv-eyebrow left">{T('Arte', 'Art')}</p><h2>{T('Musei Vaticani', 'Vatican Museums')}</h2><p>{T('Musei Vaticani e Cappella Sistina a pochi minuti a piedi. Consigliamo di prenotare in anticipo biglietti o visite guidate con ingresso prioritario. [testo segnaposto]', 'The Vatican Museums and Sistine Chapel are a few minutes’ walk away. We recommend booking tickets or guided tours with priority entry in advance. [placeholder text]')}</p><a class="cv-button" href="{link('exp')}">{T('Tour ed esperienze', 'Tours &amp; experiences')}</a></div><div class="cv-editorial-media">{ph()}</div></div></section>
 <section class="cv-section cream" id="{T('come-muoversi', 'getting-around')}"><div class="cv-wrap">{centered(T('Mobilità', 'Getting around'), T('Come muoversi', 'How to get around'))}{hw}</div></section>
 {cta(T('La tua base a Roma', 'Your base in Rome'), '', T('Verifica le date', 'Check dates'))}
-  </main>
-
-''' + footer()
-
-def gallery():
-    title = T('Gallery | Vatican Glamorous · Passeggiata del Gelsomino', 'Gallery | Vatican Glamorous · Passeggiata del Gelsomino')
-    desc = T('Foto e video di Vatican Glamorous, loft vicino a San Pietro a Roma.', 'Photos and video of Vatican Glamorous, a loft near St. Peter’s in Rome.')
-    caps = [T('Zona giorno', 'Living area'), T('Soggiorno', 'Living room'), T('Zona giorno', 'Living area'), T('Cucina', 'Kitchen'), T('Ingresso', 'Entrance'),
-            T('Soggiorno', 'Living room'), T('Benvenuti', 'Welcome'), T('Dettagli', 'Details'), T('Angolo TV', 'TV corner'),
-            T('Camera', 'Bedroom'), T('Camera', 'Bedroom'), T('Camera', 'Bedroom'), T('Camera', 'Bedroom'), T('Camera', 'Bedroom'), T('Camera', 'Bedroom'), T('Camera', 'Bedroom'),
-            T('Divano letto', 'Sofa bed'), T('Divano letto', 'Sofa bed'), T('Divano letto', 'Sofa bed'), T('Arte alle pareti', 'Art on the walls'), T('Cabina armadio', 'Walk-in closet'), T('Balcone', 'Balcony'),
-            T('Bagno', 'Bathroom'), T('Bagno', 'Bathroom'), T('Bagno', 'Bathroom'), T('Bagno', 'Bathroom'), T('Bagno', 'Bathroom'), T('Bagno', 'Bathroom'), 'Vatican Glamorous']
-    f = [fig(f'G{i}', f'{c} · Vatican Glamorous', c) for i, c in enumerate(caps, 2)]
-    return head(title, desc, 'G01') + header() + f'''
-  <main>
-{page_hero('G1', T('Zona giorno in stile loft', 'Loft-style living area'), T('Foto · Video', 'Photos · Video'), 'Gallery', T('Tutti gli ambienti di Vatican Glamorous in un’unica galleria.', 'Every space at Vatican Glamorous in a single gallery.'))}
-<section class="cv-section sky" id="{T('foto', 'photos')}"><div class="cv-wrap">{centered(T('Fotografie', 'Photos'), T('L’appartamento in immagini', 'The apartment in pictures'), '<p>' + T('Scorri le fotografie di tutti gli ambienti.', 'Browse photos of every room.') + '</p>')}
-{coverflow('leisure', f)}
-</div></section>
-<section class="cv-section cream" id="video"><div class="cv-wrap">{centered(T('Filmato originale', 'Original footage'), T('Vatican Glamorous in video', 'Vatican Glamorous on video'))}<div class="cv-video-grid"><div class="cv-video-embed"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/{YT}" title="Video Vatican Glamorous" allowfullscreen></iframe></div></div></div></section>
-{cta(T('Ti immagini già qui?', 'Can you picture yourself here?'), '', T('Prenota direttamente', 'Book direct'))}
   </main>
 
 ''' + footer()
@@ -456,7 +435,7 @@ def privacy():
 ''' + footer()
 
 
-BUILD = {'home': home, 'apt': apt, 'rooms': rooms, 'rome': rome, 'gallery': gallery, 'exp': exp, 'info': info, 'book': book, 'privacy': privacy}
+BUILD = {'home': home, 'apt': apt, 'rooms': rooms, 'rome': rome, 'exp': exp, 'info': info, 'book': book, 'privacy': privacy}
 
 for LANG in ('it', 'en'):
     for key in BUILD:
