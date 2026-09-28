@@ -76,3 +76,11 @@
 .vg-form-phone a::before{content:"✆ ";color:#a8801f}
 .elegance .vg-best-band p.vg-best-band-script{max-width:none;margin:6px 0 22px;color:#f1d27c;font-family:var(--cv-script);font-size:clamp(1.6rem,3.2vw,2.3rem);line-height:1.1}
 .vg-best-band .cv-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}.vg-best-band h2{margin:0}
+
+/* Freccia "scorri" per le fasce che scorrono di lato (principio generale del sito) */
+.vg-scroll-wrap{position:relative}
+.vg-scroll-hint{position:absolute;top:0;right:0;bottom:0;z-index:5;display:none;width:54px;align-items:center;justify-content:flex-end;padding:0 8px 0 0;border:0;background:linear-gradient(90deg,transparent,var(--vg-hint-bg,#fff) 62%);cursor:pointer}
+.vg-scroll-hint span{display:flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:50%;background:var(--cv-navy);color:#fff;font:600 22px/1 var(--cv-sans,Arial,sans-serif);box-shadow:0 3px 10px rgba(0,0,0,.18);animation:vgNudge 1.6s ease-in-out infinite}
+.vg-scroll-wrap.has-more .vg-scroll-hint{display:flex}
+@keyframes vgNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
+@media(prefers-reduced-motion:reduce){.vg-scroll-hint span{animation:none}}
