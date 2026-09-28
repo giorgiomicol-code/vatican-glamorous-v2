@@ -16,7 +16,7 @@ GUIDE = 'https://guide.vaticanglamorous.com'
 MAPS = 'https://maps.google.com/?q=Via+San+Telesforo+Roma'
 CIN = 'IT058091C2ZV2HSZ96'
 YT = 'azY0RWKun1g'
-V = '17'  # versione cache CSS/JS
+V = '18'  # versione cache CSS/JS
 
 LANG = 'it'
 def T(it, en): return it if LANG == 'it' else en
@@ -187,7 +187,6 @@ def home():
         ('H21', T('Cabina armadio', 'Walk-in closet')),
         ('H22', T('Camera con scrivania', 'Bedroom with desk')),
         ('H23', T('Dettagli della camera', 'Bedroom details')),
-        ('H24', T('Vatican Glamorous in un colpo d’occhio', 'Vatican Glamorous at a glance')),
     ]
     cards = [
         ('apt', 'H2', T('L’appartamento', 'The apartment'), T('Loft, cucina e balconi', 'Loft, kitchen and balconies'), T('Zona giorno di Vatican Glamorous', 'Vatican Glamorous living area')),
