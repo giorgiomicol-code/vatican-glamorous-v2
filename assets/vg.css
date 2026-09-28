@@ -84,3 +84,8 @@
 .vg-scroll-wrap.has-more .vg-scroll-hint{display:flex}
 @keyframes vgNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
 @media(prefers-reduced-motion:reduce){.vg-scroll-hint span{animation:none}}
+
+/* Fascia informazioni: titoli in grassetto allineati in alto (niente effetto "a scaletta") */
+.elegance .cv-benefit-grid{align-items:start}
+.elegance .cv-benefit{align-items:start}
+.elegance .cv-benefit-icon{margin-top:-2px}
