@@ -89,3 +89,8 @@
 .elegance .cv-benefit-grid{align-items:start}
 .elegance .cv-benefit{align-items:start}
 .elegance .cv-benefit-icon{margin-top:-2px}
+
+/* Sezione "Scopri" (fascia beige) ridotta al minimo in altezza */
+.elegance .cv-discover{padding:26px 0 30px}
+.elegance .cv-discover .cv-centered{margin-bottom:18px}
+.elegance .cv-discover .cv-heading{margin-bottom:0}

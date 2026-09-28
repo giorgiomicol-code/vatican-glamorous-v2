@@ -16,7 +16,7 @@ GUIDE = 'https://guide.vaticanglamorous.com'
 MAPS = 'https://maps.google.com/?q=Via+San+Telesforo+Roma'
 CIN = 'IT058091C2ZV2HSZ96'
 YT = 'azY0RWKun1g'
-V = '30'  # versione cache CSS/JS
+V = '31'  # versione cache CSS/JS
 
 LANG = 'it'
 def T(it, en): return it if LANG == 'it' else en
@@ -232,14 +232,14 @@ def home():
 {cardhtml}
     </div></div></section>
 
-    <section class="cv-cta-band vg-best-band"><div class="cv-wrap"><h2>{T('Prenota direttamente con noi', 'Book directly with us')}</h2><p class="vg-best-band-script">{T('e ottieni il miglior prezzo garantito!', 'and get the best guaranteed price!')}</p><a class="cv-button" href="{link('book')}">{T('Prenota direttamente', 'Book direct')}</a></div></section>
-
     <section class="cv-ribbon"><div class="cv-wrap cv-ribbon-grid"><div class="cv-award" data-reveal><strong>{T('Le vostre splendide recensioni', 'Your wonderful reviews')}</strong><div class="vg-scores"><span>★ 4.95 Airbnb</span><span>9.8/10 Booking.com</span></div><span>Booking.com · Traveller Review Award 2026</span></div><div class="cv-film" data-reveal><p>{T('Cerchi una location per un servizio fotografico?<br>Contattaci per un’offerta dedicata.', 'Looking for a location for a photo shoot?<br>Contact us for a tailored offer.')}</p><a class="cv-button outline" href="{WA}" target="_blank" rel="noopener">{T('Scrivici', 'Contact us')}</a></div></div></section>
 
     <section class="cv-experiences" id="{T('esperienze', 'experiences')}"><div class="cv-wrap"><div class="cv-centered" data-reveal><p class="cv-eyebrow">{T('Esplora', 'Explore')}</p><h2 class="cv-heading">{T('Roma a piedi, dal Vaticano al centro', 'Rome on foot, from the Vatican to the centre')}</h2><p>{T('San Pietro a 6 minuti, Castel Sant’Angelo a 12, Piazza Navona a 15 e il Pantheon a 20: qui ogni meta si raggiunge a piedi.', 'St. Peter’s in 6 minutes, Castel Sant’Angelo in 12, Piazza Navona in 15 and the Pantheon in 20: here everything is within walking distance.')}</p></div><div class="cv-destination-row">
 {desthtml}
     </div><p class="cv-ulisse-tagline">{T('Dormire all’ombra del Cupolone', 'Sleep in the shadow of the great dome')}</p><a class="cv-button outline" href="{link('rome')}">{T('Roma &amp; Vaticano', 'Rome &amp; Vatican')}</a>
     </div></section>
+
+    <section class="cv-cta-band vg-best-band"><div class="cv-wrap"><h2>{T('Prenota direttamente con noi', 'Book directly with us')}</h2><p class="vg-best-band-script">{T('e ottieni il miglior prezzo garantito!', 'and get the best guaranteed price!')}</p><a class="cv-button" href="{link('book')}">{T('Prenota direttamente', 'Book direct')}</a></div></section>
   </main>
 
 ''' + footer()
