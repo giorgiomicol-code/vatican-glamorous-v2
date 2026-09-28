@@ -16,7 +16,7 @@ GUIDE = 'https://guide.vaticanglamorous.com'
 MAPS = 'https://maps.google.com/?q=Via+San+Telesforo+Roma'
 CIN = 'IT058091C2ZV2HSZ96'
 YT = 'azY0RWKun1g'
-V = '37'  # versione cache CSS/JS
+V = '38'  # versione cache CSS/JS
 
 LANG = 'it'
 def T(it, en): return it if LANG == 'it' else en
@@ -44,11 +44,21 @@ def root():  # prefisso relativo verso la radice del sito
 def link(key, lang=None): return root() + slug(key, lang)
 def A(path): return root() + 'assets/' + path
 
+from PIL import Image as _Im
+_SIZES = {}
+def _size(f):
+    if f not in _SIZES:
+        try:
+            with _Im.open(os.path.join(OUT, 'assets', f)) as im: _SIZES[f] = im.size
+        except Exception: _SIZES[f] = None
+    return _SIZES[f]
+
 def img(code, alt, cls='', lazy=True, extra=''):
     f = f'photos/{code[0]}{int(code[1:]):02d}.webp'
+    wh = _size(f); dim = f' width="{wh[0]}" height="{wh[1]}"' if wh else ''
     c = f' class="{cls}"' if cls else ''
     l = ' loading="lazy"' if lazy else ' fetchpriority="high"'
-    return f'<img{c} src="{A(f)}" alt="{alt}"{l} data-photo-code="{code}"{extra}>'
+    return f'<img{c} src="{A(f)}" alt="{alt}"{dim}{l} decoding="async" data-photo-code="{code}"{extra}>'
 
 def ph(code, text_it='Foto in arrivo', text_en='Photo coming soon'):
     return f'<div class="vg-placeholder" data-photo-code="{code}">{T(text_it, text_en)}</div>'
@@ -67,23 +77,73 @@ def coverflow(kind, figs, extra_cls=''):
 def amen(items): return '<ul class="cv-amenities">' + ''.join(f'<li>{i}</li>' for i in items) + '</ul>'
 
 # ---------------------------------------------------------------- HEAD / HEADER / FOOTER
+SEO = {  # titolo (max ~65 caratteri) e descrizione (max ~160) per Google, pagina per pagina (IT, EN)
+ 'home': (('Vatican Glamorous · Loft vicino al Vaticano con parcheggio gratuito',
+           'Vatican Glamorous (Passeggiata del Gelsomino): casa vacanze di lusso a 200 m da San Pietro. 4 ospiti, posto auto gratuito, 2 balconi. Miglior prezzo diretto.'),
+          ('Vatican Glamorous · Luxury Loft near the Vatican, Free Parking',
+           'Vatican Glamorous (Passeggiata del Gelsomino): luxury holiday home 200 m from St. Peter’s, Rome. Sleeps 4, free parking, 2 balconies. Best price when you book direct.')),
+ 'apt':  (('L’appartamento · Loft contemporaneo vicino a San Pietro',
+           'Loft contemporaneo di Vatican Glamorous – Passeggiata del Gelsomino: cucina completa, 2 balconi, Wi‑Fi, aria condizionata, 5° piano con ascensore, zona Vaticano.'),
+          ('The Apartment · Contemporary Loft near St. Peter’s, Rome',
+           'The Vatican Glamorous – Passeggiata del Gelsomino loft: full kitchen, 2 balconies, Wi‑Fi, air conditioning, 5th floor with lift in Rome’s Vatican area.')),
+ 'rooms':(('Zona notte · Camera king-size e divano letto | Vatican Glamorous',
+           'Camera matrimoniale king-size e ampio living in stile loft con divano letto king-size: Vatican Glamorous ospita comodamente fino a 4 persone vicino al Vaticano.'),
+          ('Sleeping Areas · King-size Bedroom & Sofa Bed | Vatican Glamorous',
+           'King-size double bedroom and a wide loft-style living room with king-size sofa bed: Vatican Glamorous comfortably sleeps up to 4 guests near the Vatican.')),
+ 'rome': (('Roma & Vaticano · Alloggio per pellegrini vicino a San Pietro',
+           'Casa vacanze per pellegrini a 2 minuti a piedi da San Pietro: Musei Vaticani, Castel Sant’Angelo, stazione Roma San Pietro e posto auto gratuito.'),
+          ('Rome & Vatican · Pilgrim Stay near St. Peter’s | Vatican Glamorous',
+           'Holiday home for pilgrims, a 2-minute walk from St. Peter’s: Vatican Museums, Castel Sant’Angelo, Roma San Pietro station and free parking.')),
+ 'exp':  (('Esperienze · Tour e visite a Roma e in Vaticano | Vatican Glamorous',
+           'Tour, visite guidate e ingressi prioritari a Roma e in Vaticano per gli ospiti di Vatican Glamorous – Passeggiata del Gelsomino, vicino a San Pietro.'),
+          ('Experiences · Tours in Rome and the Vatican | Vatican Glamorous',
+           'Tours, guided visits and priority entry in Rome and the Vatican for guests of Vatican Glamorous – Passeggiata del Gelsomino, near St. Peter’s.')),
+ 'info': (('Info e regole della casa · Vatican Glamorous – Passeggiata del Gelsomino',
+           'Contatti, regole della casa e servizi inclusi a Vatican Glamorous – Passeggiata del Gelsomino, Via S. Telesforo, Roma. CIN IT058091C2ZV2HSZ96.'),
+          ('Info & House Rules · Vatican Glamorous – Passeggiata del Gelsomino',
+           'Contacts, house rules and included services at Vatican Glamorous – Passeggiata del Gelsomino, Via S. Telesforo, Rome. CIN IT058091C2ZV2HSZ96.')),
+ 'book': (('Prenota direttamente · Miglior prezzo garantito | Vatican Glamorous',
+           'Prenota Vatican Glamorous – Passeggiata del Gelsomino al miglior prezzo garantito: loft vicino al Vaticano con parcheggio gratuito, fino a 4 ospiti.'),
+          ('Book Direct · Best Price Guaranteed | Vatican Glamorous',
+           'Book Vatican Glamorous – Passeggiata del Gelsomino at the best guaranteed price: loft near the Vatican with free parking, sleeps up to 4.')),
+ 'privacy':(('Privacy e cookie policy | Vatican Glamorous – Passeggiata del Gelsomino',
+           'Privacy e cookie policy della Casa Vacanze Vatican Glamorous – Passeggiata del Gelsomino, Roma.'),
+          ('Privacy and Cookie Policy | Vatican Glamorous – Passeggiata del Gelsomino',
+           'Privacy and cookie policy of the Vatican Glamorous – Passeggiata del Gelsomino Holiday Home, Rome.')),
+}
+
 def head(title, desc, image='H01'):
+    t, d = SEO[CUR][0 if LANG == 'it' else 1]
+    title, desc = t.replace('&', '&amp;').replace('&amp;amp;', '&amp;'), d
     url_it = DOMAIN + '/' + slug(CUR, 'it'); url_en = DOMAIN + '/' + slug(CUR, 'en')
     url = url_it if LANG == 'it' else url_en
-    kw = T('Vatican Glamorous, Passeggiata del Gelsomino, casa vacanze vicino al Vaticano, appartamento vacanze San Pietro, affitto breve Roma Vaticano, loft Roma con parcheggio gratuito, alloggio Giubileo Roma',
-           'Vatican Glamorous, Passeggiata del Gelsomino, holiday home near Vatican City, apartment near St. Peter’s Basilica, Rome short stay Vatican, loft in Rome with free parking, Rome accommodation near Vatican')
-    ld = ''
+    kw = T('Vatican Glamorous, Passeggiata del Gelsomino, casa vacanze vicino al Vaticano, loft di lusso Roma, appartamento vacanze San Pietro, alloggio pellegrini Roma, casa vacanze Roma con parcheggio gratuito, affitto breve Roma Vaticano',
+           'Vatican Glamorous, Passeggiata del Gelsomino, holiday home near the Vatican, luxury loft Rome, apartment near St. Peter’s Basilica, pilgrim stay Rome, holiday home Rome free parking, Rome short stay Vatican')
+    home_url = DOMAIN + '/' + slug('home')
+    graph = [{'@type': 'WebSite', '@id': DOMAIN + '/#website', 'name': 'Vatican Glamorous', 'alternateName': ['Passeggiata del Gelsomino', 'Vatican Glamorous – Passeggiata del Gelsomino'], 'url': DOMAIN + '/', 'inLanguage': ['it', 'en']}]
     if CUR == 'home':
-        ld = json.dumps({
-            '@context': 'https://schema.org', '@type': 'VacationRental',
+        graph.append({
+            '@type': 'VacationRental', '@id': DOMAIN + '/#vacationrental',
             'name': 'Vatican Glamorous', 'alternateName': 'Passeggiata del Gelsomino',
-            'description': desc, 'url': url, 'image': f'{DOMAIN}/assets/photos/H01.webp',
-            'telephone': PHONE, 'email': EMAIL,
+            'description': desc, 'url': url,
+            'image': [f'{DOMAIN}/assets/photos/{c}.webp' for c in ('H01', 'H13', 'H26', 'H10', 'H16', 'H17')],
+            'telephone': PHONE, 'email': EMAIL, 'identifier': CIN,
             'address': {'@type': 'PostalAddress', 'streetAddress': 'Via San Telesforo', 'addressLocality': 'Roma', 'addressRegion': 'RM', 'addressCountry': 'IT'},
-            'containsPlace': {'@type': 'Accommodation', 'occupancy': {'@type': 'QuantitativeValue', 'maxValue': 4}},
+            'petsAllowed': True, 'numberOfRooms': 2, 'numberOfBedrooms': 1, 'numberOfBathroomsTotal': 1,
+            'containsPlace': {'@type': 'Accommodation', 'additionalType': 'EntirePlace', 'occupancy': {'@type': 'QuantitativeValue', 'maxValue': 4},
+                'bed': [{'@type': 'BedDetails', 'numberOfBeds': 1, 'typeOfBed': 'King'}, {'@type': 'BedDetails', 'numberOfBeds': 1, 'typeOfBed': 'Sofa bed (king-size)'}],
+                'amenityFeature': [{'@type': 'LocationFeatureSpecification', 'name': n, 'value': True} for n in ('Free parking', 'Wi-Fi', 'Kitchen', 'Dishwasher', 'Washer dryer', 'Air conditioning', 'Elevator', 'Balcony', 'Crib', 'Smart TV', 'Workspace', 'Bed linen and towels')]},
             'sameAs': [AIRBNB, BOOKING],
-        }, ensure_ascii=False)
-        ld = f'\n  <script type="application/ld+json">{ld}</script>'
+        })
+    else:
+        name = P[CUR][3] if LANG == 'it' else P[CUR][4]
+        graph.append({'@type': 'BreadcrumbList', 'itemListElement': [
+            {'@type': 'ListItem', 'position': 1, 'name': 'Vatican Glamorous', 'item': home_url},
+            {'@type': 'ListItem', 'position': 2, 'name': name.replace('&amp;', '&'), 'item': url}]})
+    ld = json.dumps({'@context': 'https://schema.org', '@graph': graph}, ensure_ascii=False)
+    ld = f'\n  <script type="application/ld+json">{ld}</script>'
+    pre = f'\n  <link rel="preload" as="image" href="{A("photos/H01.webp")}" fetchpriority="high">' if CUR == 'home' else ''
+    ld = pre + ld
     return f'''<!doctype html>
 <html lang="{LANG}">
 <head>
@@ -462,10 +522,25 @@ open(os.path.join(OUT, 'index.html'), 'w').write('''<!doctype html>
 <meta http-equiv="refresh" content="1; url=it/">
 </head><body><p><a href="it/">Italiano</a> · <a href="en/">English</a></p></body></html>
 ''')
-urls = []
+import datetime
+today = datetime.date.today().isoformat()
+sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">']
 for key in BUILD:
-    for lg in ('it', 'en'): urls.append(f'{DOMAIN}/{slug(key, lg)}')
-open(os.path.join(OUT, 'sitemap.xml'), 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(f'  <url><loc>{u}</loc></url>\n' for u in urls) + '</urlset>\n')
+    for lg in ('it', 'en'):
+        alts = ''.join(f'<xhtml:link rel="alternate" hreflang="{a}" href="{DOMAIN}/{slug(key, a)}"/>' for a in ('it', 'en')) + f'<xhtml:link rel="alternate" hreflang="x-default" href="{DOMAIN}/{slug(key, "en")}"/>'
+        pr = '1.0' if key == 'home' else ('0.3' if key == 'privacy' else '0.8')
+        sm.append(f'  <url><loc>{DOMAIN}/{slug(key, lg)}</loc><lastmod>{today}</lastmod><priority>{pr}</priority>{alts}</url>')
+sm.append('</urlset>')
+open(os.path.join(OUT, 'sitemap.xml'), 'w').write('\n'.join(sm) + '\n')
+# vecchi indirizzi del Google Site: rimandano alla pagina nuova corrispondente
+OLD = {'eng': 'en/', 'book-your-stay': 'en/book/', 'pilgrim-stay': 'en/rome-vatican/#pilgrims', 'holiday-home-vatican-pilgrims': 'en/rome-vatican/#pilgrims', 'tours-events': 'en/experiences/', 'welcomebook': GUIDE}
+for old, new in OLD.items():
+    os.makedirs(os.path.join(OUT, old), exist_ok=True)
+    target = new if new.startswith('http') else '../' + new
+    canon = new if new.startswith('http') else f'{DOMAIN}/{new.split("#")[0]}'
+    open(os.path.join(OUT, old, 'index.html'), 'w').write(f'<!doctype html><html><head><meta charset="utf-8"><title>Vatican Glamorous · Passeggiata del Gelsomino</title><meta name="robots" content="noindex"><link rel="canonical" href="{canon}"><meta http-equiv="refresh" content="0; url={target}"></head><body><a href="{target}">Vatican Glamorous</a></body></html>')
+# pagina 404
+open(os.path.join(OUT, '404.html'), 'w').write('''<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pagina non trovata · Vatican Glamorous</title><meta name="robots" content="noindex"><style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fbf8f0;color:#123e5b;font-family:Georgia,serif;text-align:center;padding:24px}a{color:#a8801f;font-family:Arial,sans-serif;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem;margin:0 10px}</style></head><body><div><h1>Vatican Glamorous</h1><p>Pagina non trovata · Page not found</p><p><a href="/vatican-glamorous-v2/it/">Italiano</a><a href="/vatican-glamorous-v2/en/">English</a></p></div></body></html>''')
 open(os.path.join(OUT, 'robots.txt'), 'w').write(f'User-agent: *\nAllow: /\nSitemap: {DOMAIN}/sitemap.xml\n')
 open(os.path.join(OUT, '.nojekyll'), 'w').write('')
 print('ok')

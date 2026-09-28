@@ -101,3 +101,4 @@
 .elegance .cv-room-preview .cv-detail-list{align-self:start}
 @media(max-width:760px){.elegance .cv-room-preview-grid{grid-template-columns:1fr;grid-template-rows:none;row-gap:22px}.elegance .cv-room-preview{grid-row:auto;grid-template-rows:none;display:flex}}
 .elegance .cv-centered p.vg-why{margin:22px 0 4px;color:#a8801f;font-family:var(--cv-script);font-size:clamp(1.6rem,2.8vw,2.2rem);line-height:1.1}
+:where(img[width][height]){height:auto}
