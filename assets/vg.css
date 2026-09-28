@@ -63,7 +63,7 @@
 @media(min-width:1041px){.cv-benefit-grid{grid-template-columns:repeat(6,1fr)}}
 
 /* Hero Home (H1): taglio che privilegia la parte alta (quadro, divano, cuscini, mobile) con un po' di tavolino e tappeto */
-.elegance .cv-hero-bg img{object-position:58% 14%}
-@media(min-width:1500px){.elegance .cv-hero-bg img{object-position:58% 22%}}
+.elegance .cv-hero-bg img{object-position:58% 32%}
+@media(min-width:1500px){.elegance .cv-hero-bg img{object-position:58% 42%}}
 /* Prova hero H27 (camera con logo): taglio centrato su logo e testiera */
 .elegance .cv-hero-bg img[data-photo-code="H27"]{object-position:50% 30%}
