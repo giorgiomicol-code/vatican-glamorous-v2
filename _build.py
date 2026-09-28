@@ -16,7 +16,7 @@ GUIDE = 'https://guide.vaticanglamorous.com'
 MAPS = 'https://maps.google.com/?q=Via+San+Telesforo+Roma'
 CIN = 'IT058091C2ZV2HSZ96'
 YT = 'azY0RWKun1g'
-V = '23'  # versione cache CSS/JS
+V = '24'  # versione cache CSS/JS
 
 LANG = 'it'
 def T(it, en): return it if LANG == 'it' else en
@@ -216,7 +216,7 @@ def home():
     return head(title, desc) + header() + f'''
   <main id="{T('inizio', 'top')}">
     <section class="cv-hero">
-      <div class="cv-hero-bg">{img('H27', T('Camera di Vatican Glamorous con testiera blu e logo', 'Vatican Glamorous bedroom with blue headboard and logo'), lazy=False)}</div>
+      <div class="cv-hero-bg">{img('H1', T('Zona giorno luminosa di Vatican Glamorous', 'Bright living area at Vatican Glamorous'), lazy=False)}</div>
       <div class="cv-wrap cv-hero-inner">
         <div class="cv-hero-copy" data-reveal><p class="cv-kicker">{T('Casa vacanze a Roma · zona Vaticano', 'Holiday home in Rome · Vatican area')}</p><h1 class="cv-title">Vatican Glamorous</h1><p class="cv-script">{T('Parcheggia l’auto ed entra in Vaticano a piedi', 'Park your car and walk into the Vatican')}</p><p class="cv-locations">{T('San Pietro · Musei Vaticani · Centro storico', 'St. Peter’s · Vatican Museums · Historic centre')}</p><a class="cv-button" href="{link('book')}">{T('Prenota direttamente', 'Book direct')}</a><p class="cv-unique"><b>★</b> {T('4.95 su Airbnb · 9.8 su Booking.com', '4.95 on Airbnb · 9.8 on Booking.com')}</p></div>
         <form class="cv-booking" data-booking-form data-booking-url="{link('book')}" data-locale="{L}" aria-label="{T('Ricerca disponibilità', 'Availability search')}" data-reveal><h2>{T('Trova la data perfetta', 'Find your perfect dates')}</h2><div class="cv-date-row"><div class="cv-field"><label for="cv-arrivo-{L}">{T('Arrivo', 'Check-in')}</label><input id="cv-arrivo-{L}" name="checkin" type="date" required></div><div class="cv-field"><label for="cv-partenza-{L}">{T('Partenza', 'Check-out')}</label><input id="cv-partenza-{L}" name="checkout" type="date" required></div><div class="cv-field"><label for="cv-adulti-{L}">{T('Adulti', 'Adults')}</label>{adults}</div><div class="cv-field"><label for="cv-bambini-{L}">{T('Bambini', 'Children')}</label>{kids}</div></div><button class="cv-button" type="submit">{T('Cerca', 'Search')}</button><p class="cv-note">{T('Date e numero di ospiti saranno già compilati nel motore ufficiale.', 'Dates and guests will be pre-filled in the official booking engine.')}</p><p class="cv-minimum">{T('Soggiorno minimo: 2 notti', 'Minimum stay: 2 nights')}</p><p class="cv-pet">🐾 {T('animali di piccola taglia ammessi', 'small pets welcome')}</p><div class="cv-hero-platforms"><span>{T('Prenota anche su', 'Also book on')}</span><div class="cv-platform-badges"><a href="{AIRBNB}" target="_blank" rel="noopener" aria-label="{T('Prenota su Airbnb', 'Book on Airbnb')}"><img src="{A('icons/airbnb.svg')}" alt="Airbnb" data-no-lightbox></a><a href="{BOOKING}" target="_blank" rel="noopener" aria-label="{T('Prenota su Booking.com', 'Book on Booking.com')}"><img src="{A('icons/booking.svg')}" alt="Booking.com" data-no-lightbox></a></div></div></form>
