@@ -16,7 +16,7 @@ GUIDE = 'https://guide.vaticanglamorous.com'
 MAPS = 'https://maps.google.com/?q=Via+San+Telesforo+Roma'
 CIN = 'IT058091C2ZV2HSZ96'
 YT = 'azY0RWKun1g'
-V = '18'  # versione cache CSS/JS
+V = '19'  # versione cache CSS/JS
 
 LANG = 'it'
 def T(it, en): return it if LANG == 'it' else en
@@ -283,6 +283,7 @@ def rooms():
         fig('C6', T('Camera con scrivania e finestra', 'Bedroom with desk and window'), g1[2], g1),
         fig('C7', T('Comodino con lampada e sveglia', 'Bedside table with lamp and clock'), g1[2], g1),
         fig('C8', T('Camera con pannelli in legno e luci calde', 'Bedroom with wood panelling and warm lights'), g1[2], g1),
+        fig('C19', T('Camera con scrivania, TV e accesso al corridoio', 'Bedroom with desk, TV and door to the hallway'), g1[2], g1),
         fig('C9', T('Divano letto preparato con asciugamani', 'Sofa bed made up with towels'), g2[2], g2),
         fig('C10', T('Divano letto sotto il quadro in stile Art Déco', 'Sofa bed below the Art Deco-style painting'), g2[2], g2),
         fig('C11', T('Dettaglio del divano letto', 'Sofa bed detail'), g2[2], g2),
