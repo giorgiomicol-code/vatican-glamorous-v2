@@ -102,3 +102,11 @@
 @media(max-width:760px){.elegance .cv-room-preview-grid{grid-template-columns:1fr;grid-template-rows:none;row-gap:22px}.elegance .cv-room-preview{grid-row:auto;grid-template-rows:none;display:flex}}
 .elegance .cv-centered p.vg-why{margin:22px 0 4px;color:#a8801f;font-family:var(--cv-script);font-size:clamp(1.6rem,2.8vw,2.2rem);line-height:1.1}
 :where(img[width][height]){height:auto}
+
+/* Riga "Contattaci" nel modulo di prenotazione (come Villa Brando) */
+.elegance .vg-contact-row{margin-top:12px;padding-top:0;border-top:0}
+.vg-contact-icons{display:flex;gap:12px}
+.vg-contact-icons a{display:flex;width:44px;height:44px;align-items:center;justify-content:center;border:1px solid #e6dcc4;border-radius:50%;background:#fff;color:var(--cv-navy);transition:transform .15s}
+.vg-contact-icons a:hover{transform:translateY(-2px)}
+.vg-contact-icons a.is-primary{border-color:#b98a2a;background:#b98a2a;color:#fff}
+.vg-contact-icons svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
