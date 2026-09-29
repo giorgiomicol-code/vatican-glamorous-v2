@@ -179,3 +179,16 @@ html{touch-action:manipulation}
   .elegance .cv-film{justify-content:center;gap:32px}
   .elegance .cv-film p{white-space:nowrap;font-size:1.35rem}
 }
+
+/* Roma & Vaticano: mappa R2 con bordo basso in linea con l'ultima meta (Isola Tiberina) */
+@media(min-width:1041px){
+  .elegance .vg-surround .cv-editorial{align-items:end}
+  .elegance .vg-surround .cv-editorial-media{min-height:0}
+  /* San Pietro: testo in linea con il bordo alto della foto, meno spazio sotto */
+  .elegance .vg-stpeter .cv-editorial{align-items:start}
+  .elegance .vg-stpeter .cv-editorial-media{min-height:0}
+  .elegance .vg-stpeter .cv-editorial-copy .cv-script{margin-top:0}
+}
+.elegance .vg-stpeter{padding-bottom:40px}
+/* Esperienze: le card mostrano bene le immagini con scritte */
+.elegance .cv-card-media img[data-photo-code="E3"],.elegance .cv-card-media img[data-photo-code="E5"]{object-position:center}
