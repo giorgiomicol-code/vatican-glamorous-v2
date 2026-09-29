@@ -274,3 +274,11 @@ html{touch-action:manipulation}
 .elegance .cv-date-row,.elegance .cv-book-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
 .elegance .cv-date-row .cv-field,.elegance .cv-book-grid>div{min-width:0}
 .elegance .cv-date-row input,.elegance .cv-date-row select,.elegance .cv-book-grid input,.elegance .cv-book-grid select{min-width:0;width:100%;max-width:100%;box-sizing:border-box}
+
+/* Barra WhatsApp / Prenota su telefono: altezza minima, più sito visibile (specie in orizzontale) */
+.elegance .cv-mobile-bar a{min-height:36px;padding:0;font-size:.66rem;letter-spacing:.06em;line-height:1}
+.elegance .cv-mobile-bar{padding-bottom:env(safe-area-inset-bottom)}
+@media(orientation:landscape) and (max-height:520px){
+  .elegance .cv-mobile-bar a{min-height:28px;font-size:.6rem}
+  .elegance .cv-mobile-bar{padding-bottom:0}
+}
