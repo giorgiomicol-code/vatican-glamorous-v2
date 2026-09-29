@@ -16,7 +16,7 @@ GUIDE = 'https://guide.vaticanglamorous.com'
 MAPS = 'https://maps.google.com/?q=Via+San+Telesforo+Roma'
 CIN = 'IT058091C2ZV2HSZ96'
 YT = 'azY0RWKun1g'
-V = '70'  # versione cache CSS/JS
+V = '71'  # versione cache CSS/JS
 
 LANG = 'it'
 def T(it, en): return it if LANG == 'it' else en
@@ -77,6 +77,25 @@ def coverflow(kind, figs, extra_cls=''):
 def amen(items): return '<ul class="cv-amenities">' + ''.join(f'<li>{i}</li>' for i in items) + '</ul>'
 
 # ---------------------------------------------------------------- HEAD / HEADER / FOOTER
+OG_ANCHOR = {'H13': 0.30}   # posizione verticale del ritaglio (0 = in alto, 1 = in basso)
+def og_image(code):
+    """Crea assets/og/<codice>.jpg (1200x630) dalla foto e ne restituisce l'URL assoluto."""
+    from PIL import Image as _I
+    dst = os.path.join(OUT, 'assets', 'og', f'{code}.jpg')
+    if not os.path.exists(dst):
+        os.makedirs(os.path.dirname(dst), exist_ok=True)
+        im = _I.open(os.path.join(OUT, 'assets', f'photos/{code[0]}{int(code[1:]):02d}.webp')).convert('RGB')
+        W, H = im.size; tw, th = 1200, 630
+        ch = min(H, int(W * th / tw)); cw = int(ch * tw / th)
+        left = (W - cw) // 2; top = int((H - ch) * OG_ANCHOR.get(code, 0.4))
+        im = im.crop((left, top, left + cw, top + ch)).resize((tw, th), _I.LANCZOS)
+        q = 84
+        while True:
+            im.save(dst, 'JPEG', quality=q, optimize=True, progressive=True)
+            if os.path.getsize(dst) < 280_000 or q <= 60: break
+            q -= 4
+    return f'{DOMAIN}/assets/og/{code}.jpg'
+
 SEO = {  # titolo (max ~65 caratteri) e descrizione (max ~160) per Google, pagina per pagina (IT, EN)
  'home': (('Vatican Glamorous · Loft vicino al Vaticano con parcheggio gratuito',
            'Vatican Glamorous (Passeggiata del Gelsomino): casa vacanze di lusso a 200 m da San Pietro. 4 ospiti, posto auto gratuito, 2 balconi. Miglior prezzo diretto.'),
@@ -113,6 +132,8 @@ SEO = {  # titolo (max ~65 caratteri) e descrizione (max ~160) per Google, pagin
 }
 
 def head(title, desc, image='H01'):
+    if CUR in ('home', 'book', 'privacy') or image == 'H01': image = 'H13'
+    ogimg = og_image(image)
     t, d = SEO[CUR][0 if LANG == 'it' else 1]
     title, desc = t.replace('&', '&amp;').replace('&amp;amp;', '&amp;'), d
     url_it = DOMAIN + '/' + slug(CUR, 'it'); url_en = DOMAIN + '/' + slug(CUR, 'en')
@@ -157,11 +178,16 @@ def head(title, desc, image='H01'):
   <meta property="og:site_name" content="Vatican Glamorous · Passeggiata del Gelsomino">
   <meta property="og:title" content="{title}">
   <meta property="og:description" content="{desc}">
-  <meta property="og:image" content="{DOMAIN}/assets/photos/{image[0]}{int(image[1:]):02d}.webp">
+  <meta property="og:image" content="{ogimg}">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Vatican Glamorous – Passeggiata del Gelsomino">
   <meta property="og:url" content="{url}">
   <meta property="og:locale" content="{T('it_IT', 'en_GB')}">
   <meta property="og:locale:alternate" content="{T('en_GB', 'it_IT')}">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{ogimg}">
   <link rel="canonical" href="{url}">
   <link rel="alternate" hreflang="it" href="{url_it}">
   <link rel="alternate" hreflang="en" href="{url_en}">
@@ -511,6 +537,14 @@ open(os.path.join(OUT, 'index.html'), 'w').write('''<!doctype html>
 <html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Vatican Glamorous · Passeggiata del Gelsomino</title>
 <meta name="description" content="Vatican Glamorous (Passeggiata del Gelsomino): casa vacanze a 200 m da San Pietro, Roma. Holiday home 200 m from St. Peter’s, Rome.">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Vatican Glamorous · Passeggiata del Gelsomino">
+<meta property="og:title" content="Vatican Glamorous · Passeggiata del Gelsomino">
+<meta property="og:description" content="Casa vacanze di lusso a 200 m da San Pietro, Roma · Luxury holiday home 200 m from St. Peter’s, Rome.">
+<meta property="og:url" content="https://www.vaticanglamorous.com/">
+<meta property="og:image" content="'''+og_image('H13')+'''">
+<meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Vatican Glamorous – Passeggiata del Gelsomino">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="'''+og_image('H13')+'''">
 <link rel="canonical" href="https://www.vaticanglamorous.com/it/">
 <link rel="alternate" hreflang="it" href="https://www.vaticanglamorous.com/it/"><link rel="alternate" hreflang="en" href="https://www.vaticanglamorous.com/en/">
 <script>location.replace(((navigator.language||'it').toLowerCase().indexOf('it')===0?'it/':'en/')+location.search);</script>
