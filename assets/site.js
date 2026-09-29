@@ -486,3 +486,29 @@ if (SHOW_PHOTO_CODES || new URLSearchParams(location.search).has('codici')) {
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
   let t; window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(setup, 200); });
 })();
+
+// Hero Home: "Passeggiata del Gelsomino" bianca, allargata esattamente quanto la parola GLAMOROUS
+(() => {
+  const fit = () => {
+    const glam = document.querySelector('.cv-title .vg-glam');
+    const sub = document.querySelector('.vg-hero-sub');
+    if (!glam || !sub) return;
+    sub.style.letterSpacing = '0px';
+    sub.style.marginRight = '0px';
+    sub.style.display = 'inline-block';
+    const target = glam.getBoundingClientRect().width;
+    const natural = sub.getBoundingClientRect().width;
+    const n = [...sub.textContent].length;
+    if (n < 2 || target <= natural) return;
+    const ls = (target - natural) / (n - 1);
+    sub.style.letterSpacing = ls + 'px';
+    sub.style.marginRight = -ls + 'px';
+    const off = glam.getBoundingClientRect().left - sub.parentElement.getBoundingClientRect().left;
+    sub.style.marginLeft = Math.max(0, off) + 'px';
+  };
+  const run = () => requestAnimationFrame(fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(run);
+  window.addEventListener('load', run);
+  window.addEventListener('resize', run);
+  run();
+})();

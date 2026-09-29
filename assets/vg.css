@@ -227,3 +227,4 @@ html{touch-action:manipulation}
 /* Modulo Home: soggiorno minimo e animali in corsivo, come prima */
 .elegance .vg-booking-foot .vg-rule-min{margin:0;color:var(--cv-navy);font-family:var(--cv-script);font-size:1.45rem;line-height:1.1;text-align:center}
 .elegance .vg-booking-foot .vg-rule-pet{margin:2px 0 10px;color:#a3452f;font-family:var(--cv-script);font-size:1.3rem;line-height:1.1;text-align:center}
+.vg-hero-sub{color:#fff!important;letter-spacing:.3em;white-space:nowrap}
