@@ -170,3 +170,12 @@ html{touch-action:manipulation}
 .elegance .vg-outdoor .cv-editorial > .cv-editorial-copy{grid-column:1;grid-row:2}
 .elegance .vg-outdoor .cv-editorial > .cv-editorial-media{grid-column:2;grid-row:2}
 @media(max-width:1040px){.elegance .vg-outdoor .cv-editorial > *{grid-column:auto!important;grid-row:auto!important}}
+
+/* Mete in Home allineate in alto */
+.elegance .cv-destination-row{align-items:start}
+/* Fascia recensioni: riquadro premio più corto, più spazio al fondo beige; testo location su due righe */
+@media(min-width:1041px){
+  .elegance .cv-ribbon-grid{grid-template-columns:minmax(0,380px) 1fr;gap:0}
+  .elegance .cv-film{justify-content:center;gap:32px}
+  .elegance .cv-film p{white-space:nowrap;font-size:1.35rem}
+}

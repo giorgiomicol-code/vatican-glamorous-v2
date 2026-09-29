@@ -16,7 +16,7 @@ GUIDE = 'https://guide.vaticanglamorous.com'
 MAPS = 'https://maps.google.com/?q=Via+San+Telesforo+Roma'
 CIN = 'IT058091C2ZV2HSZ96'
 YT = 'azY0RWKun1g'
-V = '50'  # versione cache CSS/JS
+V = '51'  # versione cache CSS/JS
 
 LANG = 'it'
 def T(it, en): return it if LANG == 'it' else en
@@ -268,7 +268,7 @@ def home():
     NL = ' data-no-lightbox'
     dest = [
         (img('H7', T('Mappa: San Pietro a pochi minuti a piedi dall’appartamento', 'Map: St. Peter’s a few minutes’ walk from the apartment'), extra=NL), T('San Pietro', 'St. Peter’s'), 6),
-        (img('R4', T('Musei Vaticani e Cappella Sistina', 'Vatican Museums and Sistine Chapel'), extra=NL, file=T('photos/R04.webp', 'photos/R04-en.webp')), T('Musei Vaticani', 'Vatican Museums'), None),
+        (img('R4', T('Musei Vaticani e Cappella Sistina', 'Vatican Museums and Sistine Chapel'), extra=NL, file=T('photos/R04.webp', 'photos/R04-en.webp')), T('Musei Vaticani', 'Vatican Museums'), 20),
         (img('H8', T('Castel Sant’Angelo e Ponte Sant’Angelo al tramonto', 'Castel Sant’Angelo and Ponte Sant’Angelo at sunset'), extra=NL), 'Castel Sant’Angelo', 12),
         (img('H9', T('Piazza Navona con la Fontana dei Quattro Fiumi', 'Piazza Navona with the Fountain of the Four Rivers'), extra=NL), 'Piazza Navona', 15),
     ]
