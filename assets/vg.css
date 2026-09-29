@@ -211,3 +211,4 @@ html{touch-action:manipulation}
 .vg-feat-guide strong{display:block;font-size:.76rem}
 .vg-feat-guide small{display:block;font-size:.6rem;font-weight:400;opacity:.85}
 @media(max-width:760px){.vg-feat-list{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}.vg-feat-list::-webkit-scrollbar{display:none}}
+.elegance .cv-booking > h2{margin-bottom:12px}
