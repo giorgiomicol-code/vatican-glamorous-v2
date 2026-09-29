@@ -16,7 +16,7 @@ GUIDE = 'https://guide.vaticanglamorous.com'
 MAPS = 'https://maps.google.com/?q=Via+San+Telesforo+Roma'
 CIN = 'IT058091C2ZV2HSZ96'
 YT = 'azY0RWKun1g'
-V = '45'  # versione cache CSS/JS
+V = '48'  # versione cache CSS/JS
 
 LANG = 'it'
 def T(it, en): return it if LANG == 'it' else en
@@ -265,13 +265,15 @@ def home():
     ]
     b = ''.join(f'<div class="cv-benefit"><span class="cv-benefit-icon">{s}</span><span><strong>{t}</strong><span>{u}</span></span></div>' for s, t, u in benefits)
     cardhtml = '\n'.join(f'''      <a class="cv-card" href="{link(k.split('#')[0]) + ('#' + k.split('#')[1] if '#' in k else '')}" data-reveal><div class="cv-card-media">{img(c, alt, extra=' data-no-lightbox')}</div><div class="cv-card-bottom"><div><h3>{h}</h3><small>{s}</small></div><span class="cv-card-arrow">→</span></div></a>''' for k, c, h, s, alt in cards)
+    NL = ' data-no-lightbox'
     dest = [
-        (img('H6', T('San Pietro e il Tevere', 'St. Peter’s and the Tiber')), T('San Pietro', 'St. Peter’s')),
-        (img('H7', T('Mappa: dall’appartamento al Vaticano in 2 minuti a piedi', 'Map: from the apartment to the Vatican in 2 minutes on foot')), T('Musei Vaticani', 'Vatican Museums')),
-        (ph('H8'), T('Castel Sant’Angelo', 'Castel Sant’Angelo')),
-        (ph('H9'), T('Piazza Navona', 'Piazza Navona')),
+        (img('H7', T('Mappa: San Pietro a pochi minuti a piedi dall’appartamento', 'Map: St. Peter’s a few minutes’ walk from the apartment'), extra=NL), T('San Pietro', 'St. Peter’s'), 6),
+        (img('R4', T('Musei Vaticani e Cappella Sistina', 'Vatican Museums and Sistine Chapel'), extra=NL, file=T('photos/R04.webp', 'photos/R04-en.webp')), T('Musei Vaticani', 'Vatican Museums'), None),
+        (img('H8', T('Castel Sant’Angelo e Ponte Sant’Angelo al tramonto', 'Castel Sant’Angelo and Ponte Sant’Angelo at sunset'), extra=NL), 'Castel Sant’Angelo', 12),
+        (img('H9', T('Piazza Navona con la Fontana dei Quattro Fiumi', 'Piazza Navona with the Fountain of the Four Rivers'), extra=NL), 'Piazza Navona', 15),
     ]
-    desthtml = '\n'.join(f'      <article class="cv-destination" data-reveal><div class="cv-destination-image">{i}</div><h3>{h}</h3></article>' for i, h in dest)
+    walk = lambda m: f'<p class="vg-dest-time">{m} min {T("a piedi", "on foot")}</p>' if m else ''
+    desthtml = '\n'.join(f'      <article class="cv-destination" data-reveal><div class="cv-destination-image">{i}</div><h3>{h}</h3>{walk(m)}</article>' for i, h, m in dest)
     adults = select('adults', f'cv-adulti-{L}', 4, 2)
     kids = select('children', f'cv-bambini-{L}', 3, 0)
     return head(title, desc) + header() + f'''
@@ -294,7 +296,7 @@ def home():
 
     <section class="cv-ribbon"><div class="cv-wrap cv-ribbon-grid"><div class="cv-award" data-reveal><strong>{T('Le vostre splendide recensioni', 'Your wonderful reviews')}</strong><div class="vg-scores"><span>★ 4.95 Airbnb</span><span>9.8/10 Booking.com</span></div><span>Booking.com · Traveller Review Award 2026</span></div><div class="cv-film" data-reveal><p>{T('Cerchi una location per un servizio fotografico?<br>Contattaci per un’offerta dedicata.', 'Looking for a location for a photo shoot?<br>Contact us for a tailored offer.')}</p><a class="cv-button outline" href="{WA}" target="_blank" rel="noopener">{T('Scrivici', 'Contact us')}</a></div></div></section>
 
-    <section class="cv-experiences" id="{T('esperienze', 'experiences')}"><div class="cv-wrap"><div class="cv-centered" data-reveal><p class="cv-eyebrow">{T('Esplora', 'Explore')}</p><h2 class="cv-heading">{T('Roma a piedi, dal Vaticano al centro', 'Rome on foot, from the Vatican to the centre')}</h2><p>{T('San Pietro a 6 minuti, Castel Sant’Angelo a 12, Piazza Navona a 15 e il Pantheon a 20: qui ogni meta si raggiunge a piedi.', 'St. Peter’s in 6 minutes, Castel Sant’Angelo in 12, Piazza Navona in 15 and the Pantheon in 20: here everything is within walking distance.')}</p></div><div class="cv-destination-row">
+    <section class="cv-experiences" id="{T('esperienze', 'experiences')}"><div class="cv-wrap"><div class="cv-centered" data-reveal><p class="cv-eyebrow">{T('Esplora', 'Explore')}</p><h2 class="cv-heading">{T('Roma a piedi, dal Vaticano al centro', 'Rome on foot, from the Vatican to the centre')}</h2><p class="vg-walk-intro">{T('Tempi a piedi dall’appartamento', 'Walking times from the apartment')}</p><p class="vg-walk-sub">{T('Le principali mete si raggiungono a piedi: anche il Pantheon è a soli 20 minuti.', 'The main sights are within walking distance: even the Pantheon is only 20 minutes away.')}</p></div><div class="cv-destination-row">
 {desthtml}
     </div><p class="cv-ulisse-tagline">{T('Dormire all’ombra del Cupolone', 'Sleep in the shadow of the great dome')}</p><a class="cv-button outline" href="{link('rome')}">{T('Roma &amp; Vaticano', 'Rome &amp; Vatican')}</a>
     </div></section>

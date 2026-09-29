@@ -25,13 +25,13 @@ const addInfantsField = (form) => {
   const wrapper = document.createElement('div');
   const id = `${form.matches('[data-direct-book]') ? 'book' : 'cv'}-infants-${isItalian ? 'it' : 'en'}`;
   const label = isItalian ? 'Infanti' : 'Infants';
-  const age = isItalian ? 'meno di 2 anni' : 'under 2';
+  const age = isItalian ? '(meno di 2 anni)' : '(under 2)';
   wrapper.className = form.matches('[data-direct-book]') ? '' : 'cv-field';
   wrapper.innerHTML = `<label for="${id}">${label}<small>${age}</small></label><select id="${id}" name="infants"><option selected>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>`;
   grid.appendChild(wrapper);
   const childrenLabel = form.querySelector('label[for*="children"], label[for*="bambini"]');
   if (childrenLabel && !childrenLabel.querySelector('small')) {
-    childrenLabel.insertAdjacentHTML('beforeend', `<small>${isItalian ? '2–12 anni' : 'ages 2–12'}</small>`);
+    childrenLabel.insertAdjacentHTML('beforeend', `<small>${isItalian ? '(2–12 anni)' : '(ages 2–12)'}</small>`);
   }
 };
 

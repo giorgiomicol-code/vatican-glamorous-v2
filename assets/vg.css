@@ -122,3 +122,29 @@ html{touch-action:manipulation}
 .cv-coverflow-controls .cv-coverflow-button{position:relative}
 .cv-coverflow-controls .cv-coverflow-button::before{content:"";position:absolute;inset:-14px}
 @media(max-width:760px){.cv-coverflow-navigation{gap:26px}}
+
+/* Modulo di prenotazione: etichette allineate a sinistra, età tra parentesi accanto (righe più compatte) */
+.elegance .cv-booking .cv-field label,.elegance .cv-book-grid label{text-align:left;white-space:nowrap}
+.elegance .cv-booking .cv-field label small,.elegance .cv-book-grid label small{display:inline;margin:0 0 0 4px;font-size:.6rem}
+.elegance .cv-booking .cv-date-row{row-gap:10px}
+
+/* Home "Roma a piedi": intro più leggibile e tempi a piedi sotto ogni meta */
+.vg-walk-intro{margin:14px 0 4px!important;color:var(--cv-navy)!important;font-family:var(--cv-serif);font-size:1.35rem!important;font-weight:600;letter-spacing:.01em}
+.vg-walk-sub{margin:0 auto 6px!important;max-width:560px;color:#4f6570!important;font-size:.9rem!important;line-height:1.6}
+.vg-dest-time{margin:4px 0 0;color:#a8801f;font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.vg-dest-time::before{content:"⟶ ";letter-spacing:0}
+.cv-destination h3{margin-bottom:0}
+
+/* Pulsanti "Scopri la disponibilità" e "Roma & Vaticano" centrati e allineati tra loro */
+.elegance .cv-home-teaser-footer .cv-button{display:flex;width:max-content;margin:0 auto}
+.elegance .cv-experiences .cv-ulisse-tagline{text-align:center}
+.elegance .cv-experiences .cv-wrap > .cv-button{display:flex;width:max-content;margin:14px auto 0}
+
+/* Fascia recensioni: riquadro Booking più compatto, allineato alle righe del riquadro accanto */
+.elegance .cv-ribbon-grid{align-items:stretch}
+.elegance .cv-award{display:flex;flex-direction:column;justify-content:center;padding:18px 30px}
+.elegance .cv-award strong{font-size:.92rem}
+.elegance .cv-award .vg-scores{margin-top:6px}
+.elegance .cv-award .vg-scores span{font-size:1.15rem;margin-top:0}
+.elegance .cv-award > span{margin-top:6px;font-size:.6rem;opacity:.85}
+.elegance .cv-destination-image{aspect-ratio:16/9;overflow:hidden}.elegance .cv-destination-image img{width:100%;height:100%;object-fit:cover;object-position:center}
