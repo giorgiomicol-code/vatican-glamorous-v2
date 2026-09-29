@@ -162,3 +162,11 @@ html{touch-action:manipulation}
 .vg-booking-foot .vg-contact-icons{gap:8px}
 .vg-booking-foot .vg-contact-icons a{width:34px;height:34px}
 .vg-booking-foot .vg-contact-icons svg{width:16px;height:16px}
+
+/* Pagina Appartamento – "Lo spazio all'aperto": titolo sopra la foto (dal suo angolo sinistro),
+   "Colazione all'aria aperta" allineata al bordo alto della foto, riquadri al bordo basso */
+.elegance .vg-outdoor .cv-editorial{row-gap:30px}
+.elegance .vg-outdoor .cv-editorial > .cv-living-title{grid-column:2;grid-row:1;margin:0}
+.elegance .vg-outdoor .cv-editorial > .cv-editorial-copy{grid-column:1;grid-row:2}
+.elegance .vg-outdoor .cv-editorial > .cv-editorial-media{grid-column:2;grid-row:2}
+@media(max-width:1040px){.elegance .vg-outdoor .cv-editorial > *{grid-column:auto!important;grid-row:auto!important}}
