@@ -192,3 +192,22 @@ html{touch-action:manipulation}
 .elegance .vg-stpeter{padding-bottom:40px}
 /* Esperienze: le card mostrano bene le immagini con scritte */
 .elegance .cv-card-media img[data-photo-code="E3"],.elegance .cv-card-media img[data-photo-code="E5"]{object-position:center}
+
+/* Home: più respiro tra i tempi a piedi, "Dormire all'ombra del Cupolone" e il pulsante */
+.elegance .cv-experiences .cv-ulisse-tagline{margin-top:52px!important}
+.elegance .cv-experiences .cv-wrap > .cv-button{margin-top:20px}
+
+/* Esperienze – Guida ospiti: testo in linea con il bordo alto della foto (ora orizzontale) */
+@media(min-width:1041px){.elegance .vg-guide .cv-editorial{align-items:start}.elegance .vg-guide .cv-editorial-media{min-height:0}.elegance .vg-guide .cv-editorial-copy .cv-script{margin-top:0}}
+
+/* Appartamento: fascia orizzontale delle dotazioni sotto la foto grande */
+.vg-featbar{padding:16px 0;background:#fff;border-bottom:1px solid var(--cv-line)}
+.vg-feat-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 10px}
+.vg-feat-list li{display:flex;align-items:center;gap:7px;padding:7px 12px;border:1px solid #e6dcc4;border-radius:999px;background:#fffdf8;color:var(--cv-navy);font-size:.74rem;font-weight:600;white-space:nowrap}
+.vg-feat-list svg{width:18px;height:18px;flex:none;fill:none;stroke:#a8801f;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.vg-feat-list li.vg-feat-guide{padding:0;border-color:#b98a2a;background:#123e5b}
+.vg-feat-guide a{display:flex;align-items:center;gap:8px;padding:6px 14px;color:#fff;text-decoration:none}
+.vg-feat-guide svg{stroke:#f1d27c}
+.vg-feat-guide strong{display:block;font-size:.76rem}
+.vg-feat-guide small{display:block;font-size:.6rem;font-weight:400;opacity:.85}
+@media(max-width:760px){.vg-feat-list{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}.vg-feat-list::-webkit-scrollbar{display:none}}
