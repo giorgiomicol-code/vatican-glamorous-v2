@@ -16,7 +16,7 @@ GUIDE = 'https://guide.vaticanglamorous.com'
 MAPS = 'https://maps.google.com/?q=Via+San+Telesforo+Roma'
 CIN = 'IT058091C2ZV2HSZ96'
 YT = 'azY0RWKun1g'
-V = '51'  # versione cache CSS/JS
+V = '52'  # versione cache CSS/JS
 
 LANG = 'it'
 def T(it, en): return it if LANG == 'it' else en
@@ -358,7 +358,7 @@ def rooms():
         T('Doccia e mobile contenitore', 'Shower and storage unit'),
         T('Doccia con porta-finestra', 'Shower and French window'),
         T('Vista dall’ingresso del bagno', 'View from the bathroom door')])]
-    prev = f'''<div class="cv-room-preview-grid"><div class="cv-room-preview"><h3>{g1[2]}</h3><p>{T('Un’ampia camera con letto king-size, testiera imbottita e arredi contemporanei.', 'A spacious bedroom with a king-size bed, upholstered headboard and contemporary furnishings.')}</p><div class="cv-detail-list"><span>{T('Letto king-size', 'King-size bed')}</span><span>Smart Monitor</span><span>{T('Aria condizionata', 'Air conditioning')}</span></div></div><div class="cv-room-preview"><h3>{g2[2]}</h3><p>{T('Nella zona giorno, un comodo divano letto king-size per altri due ospiti.', 'In the living area, a comfortable king-size sofa bed for two more guests.')}</p><div class="cv-detail-list"><span>{T('King-size', 'King-size')}</span><span>Smart TV</span><span>{T('Aria condizionata', 'Air conditioning')}</span></div></div></div>'''
+    prev = f'''<div class="cv-room-preview-grid"><div class="cv-room-preview"><h3>{g1[2]}</h3><p>{T('Un’ampia camera con letto king-size, testiera imbottita e arredi contemporanei.', 'A spacious bedroom with a king-size bed, upholstered headboard and contemporary furnishings.')}</p><div class="cv-detail-list"><span>{T('Letto king-size', 'King-size bed')}</span><span>Smart Monitor</span><span>{T('Aria condizionata', 'Air conditioning')}</span><span>Wi‑Fi</span><span>Amazon Alexa</span></div></div><div class="cv-room-preview"><h3>{g2[2]}</h3><p>{T('Nella zona giorno, un comodo divano letto king-size per altri due ospiti.', 'In the living area, a comfortable king-size sofa bed for two more guests.')}</p><div class="cv-detail-list"><span>{T('King-size', 'King-size')}</span><span>Smart TV</span><span>{T('Aria condizionata', 'Air conditioning')}</span><span>Wi‑Fi</span><span>Amazon Alexa</span></div></div></div>'''
     return head(title, desc, 'C01') + header() + f'''
   <main>
 {page_hero('C1', T('Camera con letto king-size', 'Bedroom with king-size bed'), T('Zone notte e riposo', 'Sleeping and resting areas'), T('Gli ambienti', 'The spaces'), T('Una camera matrimoniale king-size e un ampio living in stile loft con divano letto king-size: ospita comodamente fino a 4 persone.', 'A king-size double bedroom and a wide loft-style living room with a king-size sofa bed: comfortably sleeps up to 4 guests.'))}
@@ -366,7 +366,7 @@ def rooms():
 {coverflow('rooms', f)}
 {prev}
 </div></section>
-<section class="cv-section cream" id="{T('dotazioni', 'amenities')}"><div class="cv-wrap">{centered('Comfort', T('Dotazioni della zona notte', 'Sleeping area amenities'))}{amen([T('1 letto king-size', '1 king-size bed'), T('1 divano letto king-size', '1 king-size sofa bed'), T('Culla', 'Cot'), T('Cabina armadio', 'Walk-in closet'), T('Scrivania', 'Desk'), T('Aria condizionata', 'Air conditioning'), T('Biancheria inclusa', 'Bed linen included'), T('Asciugamani e kit bagno', 'Towels and toiletries')])}</div></section>
+<section class="cv-section cream" id="{T('dotazioni', 'amenities')}"><div class="cv-wrap">{centered('Comfort', T('Dotazioni della zona notte', 'Sleeping area amenities'))}{amen([T('1 letto king-size', '1 king-size bed'), T('1 divano letto king-size', '1 king-size sofa bed'), T('Culla', 'Cot'), T('Cabina armadio', 'Walk-in closet'), T('Scrivania', 'Desk'), T('Aria condizionata', 'Air conditioning'), 'Wi‑Fi', T('Biancheria inclusa', 'Bed linen included'), T('Asciugamani e kit bagno', 'Towels and toiletries')])}</div></section>
 <section class="cv-section" id="{T('bagno', 'bathroom')}"><div class="cv-wrap">{centered(T('Comfort e funzionalità', 'Comfort and practicality'), T('Il bagno', 'The bathroom'), '<p>' + T('Scorri le fotografie del bagno completo con doccia.', 'Browse the photos of the full bathroom with shower.') + '</p>')}
 {coverflow('bathrooms', bath, 'cv-bathroom-coverflow')}
 </div></section>
