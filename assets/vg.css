@@ -218,3 +218,8 @@ html{touch-action:manipulation}
 .elegance .cv-booking > h2{margin-top:0}
 .elegance .cv-booking > .cv-button[type="submit"]{margin-top:31px}
 .vg-contact-icons a.is-primary{border-color:#e6dcc4;background:#fff;color:var(--cv-navy)}
+
+/* Hero Home: "Passeggiata del Gelsomino" sotto il titolo, stesso carattere del marchio in alto */
+.vg-hero-sub{margin:-2px 0 10px!important;color:#e7c46a;font-family:var(--cv-sans);font-size:.78rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;text-shadow:0 1px 8px rgba(0,0,0,.45)}
+@media(max-width:760px){.vg-hero-sub{font-size:.62rem;letter-spacing:.18em}}
+.elegance .cv-about{padding-top:0}.elegance .cv-about .vg-logo-full{margin-top:35px}@media(max-width:760px){.elegance .cv-about .vg-logo-full{margin-top:21px}}
