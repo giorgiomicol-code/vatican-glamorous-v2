@@ -16,7 +16,7 @@ GUIDE = 'https://guide.vaticanglamorous.com'
 MAPS = 'https://maps.google.com/?q=Via+San+Telesforo+Roma'
 CIN = 'IT058091C2ZV2HSZ96'
 YT = 'azY0RWKun1g'
-V = '43'  # versione cache CSS/JS
+V = '44'  # versione cache CSS/JS
 
 LANG = 'it'
 def T(it, en): return it if LANG == 'it' else en
@@ -57,8 +57,8 @@ def img(code, alt, cls='', lazy=True, extra='', file=None):
     f = file or f'photos/{code[0]}{int(code[1:]):02d}.webp'
     wh = _size(f); dim = f' width="{wh[0]}" height="{wh[1]}"' if wh else ''
     c = f' class="{cls}"' if cls else ''
-    l = ' loading="lazy"' if lazy else ' fetchpriority="high"'
-    return f'<img{c} src="{A(f)}" alt="{alt}"{dim}{l} decoding="async" data-photo-code="{code}"{extra}>'
+    l = ' loading="lazy"' if lazy else ('' if lazy is None else ' fetchpriority="high"')
+    return f'<img{c} src="{A(f)}" alt="{alt}"{dim}{l}{' decoding="async"' if lazy else ''} data-photo-code="{code}"{extra}>'
 
 def ph(code, text_it='Foto in arrivo', text_en='Photo coming soon'):
     return f'<div class="vg-placeholder" data-photo-code="{code}">{T(text_it, text_en)}</div>'
@@ -68,7 +68,7 @@ def fig(code, alt, cap=None, group=None):
     if group: g = f' data-coverflow-group="{group[0]}" data-group-label="{group[1]}" data-group-name="{group[2]}"'
     cap = alt if cap is None else cap
     fc = f'<figcaption class="cv-photo-caption">{cap}</figcaption>' if cap else ''
-    return f'<figure class="cv-photo"{g}>{img(code, alt)}{fc}</figure>'
+    return f'<figure class="cv-photo"{g}>{img(code, alt, lazy=None)}{fc}</figure>'
 
 def coverflow(kind, figs, extra_cls=''):
     c = 'cv-photo-grid' + (' ' + extra_cls if extra_cls else '')
