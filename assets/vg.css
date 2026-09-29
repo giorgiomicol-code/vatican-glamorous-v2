@@ -282,3 +282,9 @@ html{touch-action:manipulation}
   .elegance .cv-mobile-bar a{min-height:28px;font-size:.6rem}
   .elegance .cv-mobile-bar{padding-bottom:0}
 }
+
+/* iPhone/Safari: i campi data hanno una larghezza propria e sbordano dalla colonna → forzati dentro il riquadro */
+.elegance .cv-date-row input[type="date"],.elegance .cv-book-grid input[type="date"]{-webkit-appearance:none;appearance:none;display:block;width:100%;min-width:0;max-width:100%;box-sizing:border-box;overflow:hidden;text-align:left;line-height:1.2}
+.elegance .cv-date-row input[type="date"]::-webkit-date-and-time-value,.elegance .cv-book-grid input[type="date"]::-webkit-date-and-time-value{text-align:left;min-width:0;margin:0}
+.elegance .cv-date-row .cv-field,.elegance .cv-book-grid>div{overflow:hidden}
+.elegance .cv-booking,.elegance .cv-book-widget{overflow:hidden}
