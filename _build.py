@@ -237,7 +237,7 @@ def home():
         ('H11', T('Soggiorno con libreria e Smart TV', 'Living room with bookcase and Smart TV')),
         ('H12', T('Cucina attrezzata', 'Fully equipped kitchen')),
         ('H25', T('Ingresso con vista sulla zona pranzo e la cucina', 'Entrance with view of the dining area and kitchen')),
-        ('H14', T('Letto pronto all’arrivo', 'Bed made up for your arrival')),
+        ('H14', T('Camera con scrivania, TV e accesso al corridoio', 'Bedroom with desk, TV and door to the hallway')),
         ('H15', T('Divano letto king-size', 'King-size sofa bed')),
         ('H16', T('Balcone con tavolo per la colazione', 'Balcony with breakfast table')),
         ('H17', T('Bagno completo', 'Full bathroom')),
