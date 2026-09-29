@@ -37,7 +37,7 @@
 /* Barra di navigazione: la colonna del marchio si adatta alla sua larghezza (niente sovrapposizioni con "Home") */
 .elegance .cv-nav{grid-template-columns:auto minmax(0,1fr) auto;gap:22px}
 .elegance .cv-links{gap:clamp(12px,1.25vw,22px)}
-.elegance .cv-links a{font-size:.7rem}
+@media(min-width:1261px){.elegance .cv-links a{font-size:.7rem}}
 .vg-brand-text strong{font-size:1.12rem}
 .vg-brand img{width:40px}
 .cv-links a.vg-nav-retreat{color:#a8801f;font-style:italic}
@@ -111,3 +111,6 @@
 .vg-contact-icons a.is-primary{border-color:#b98a2a;background:#b98a2a;color:#fff}
 .vg-contact-icons svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .elegance .cv-card-media img[data-photo-code="H4"]{object-position:44% 60%}
+
+/* Menu su telefono: voci più grandi e leggibili */
+@media(max-width:760px){.elegance .cv-links a{font-size:1.25rem;padding:12px 4px}}
