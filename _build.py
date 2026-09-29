@@ -340,8 +340,8 @@ def rooms():
     g1 = ('C01', T('Camera', 'Bedroom'), T('Camera matrimoniale', 'Double bedroom'))
     g2 = ('C02', T('Soggiorno', 'Living room'), T('Divano letto', 'Sofa bed'))
     f = [
-        fig('C2', T('Letto king-size con cuscini blu e asciugamani', 'King-size bed with blue cushions and towels'), g1[2], g1),
         fig('C4', T('Letto con opere d’arte alle pareti', 'Bed with artworks on the walls'), g1[2], g1),
+        fig('C2', T('Letto king-size con cuscini blu e asciugamani', 'King-size bed with blue cushions and towels'), g1[2], g1),
         fig('C5', T('Dettaglio della testiera e dei cuscini', 'Headboard and cushions detail'), g1[2], g1),
         fig('C6', T('Camera con scrivania e finestra', 'Bedroom with desk and window'), g1[2], g1),
         fig('C7', T('Comodino con lampada e sveglia', 'Bedside table with lamp and clock'), g1[2], g1),
