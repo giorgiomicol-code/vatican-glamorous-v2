@@ -16,7 +16,7 @@ GUIDE = 'https://guide.vaticanglamorous.com'
 MAPS = 'https://maps.google.com/?q=Via+San+Telesforo+Roma'
 CIN = 'IT058091C2ZV2HSZ96'
 YT = 'azY0RWKun1g'
-V = '62'  # versione cache CSS/JS
+V = '63'  # versione cache CSS/JS
 
 LANG = 'it'
 def T(it, en): return it if LANG == 'it' else en
@@ -233,20 +233,16 @@ def home():
     teaser = [
         ('H13', T('Camera con letto king-size', 'Bedroom with king-size bed')),
         ('H26', T('Salotto con divano letto, tappeto e opera d’arte', 'Living room with sofa bed, rug and artwork')),
-        ('H10', T('Zona giorno in stile loft', 'Loft-style living area')),
         ('H11', T('Soggiorno con libreria e Smart TV', 'Living room with bookcase and Smart TV')),
         ('H12', T('Cucina attrezzata', 'Fully equipped kitchen')),
-        ('H25', T('Ingresso con vista sulla zona pranzo e la cucina', 'Entrance with view of the dining area and kitchen')),
         ('H14', T('Camera con scrivania, TV e accesso al corridoio', 'Bedroom with desk, TV and door to the hallway')),
         ('H15', T('Divano letto king-size', 'King-size sofa bed')),
         ('H16', T('Balcone con tavolo per la colazione', 'Balcony with breakfast table')),
         ('H17', T('Bagno completo', 'Full bathroom')),
         ('H18', T('Luce naturale in soggiorno', 'Natural light in the living room')),
         ('H19', T('Ingresso e corridoio', 'Entrance and hallway')),
-        ('H20', T('Arte contemporanea alle pareti', 'Contemporary art on the walls')),
         ('H21', T('Cabina armadio', 'Walk-in closet')),
         ('H22', T('Camera con scrivania', 'Bedroom with desk')),
-        ('H23', T('Dettagli della camera', 'Bedroom details')),
     ]
     cards = [
         ('apt', 'H2', T('L’appartamento', 'The apartment'), T('Loft, cucina e spazio all’aperto', 'Loft, kitchen and outdoor space'), T('Zona giorno di Vatican Glamorous', 'Vatican Glamorous living area')),
@@ -309,13 +305,14 @@ def apt():
     title = T('L’appartamento | Vatican Glamorous · Passeggiata del Gelsomino', 'The apartment | Vatican Glamorous · Passeggiata del Gelsomino')
     desc = T('Il loft di Vatican Glamorous: zona giorno contemporanea, cucina completa, 2 balconi, 5° piano con ascensore a 200 m da San Pietro.', 'The Vatican Glamorous loft: contemporary living area, full kitchen, 2 balconies, 5th floor with lift 200 m from St. Peter’s.')
     f = [
-        fig('A3', T('Zona giorno in stile loft con poltrona e libreria', 'Loft-style living area with armchair and bookcase'), T('Zona giorno', 'Living area')),
-        fig('A4', T('Corridoio con panca blu e vista sulla sala da pranzo', 'Hallway with blue bench and view of the dining area'), T('Ingresso', 'Entrance')),
+        fig('A3', T('Sala in stile loft con poltrona, libreria e vista sulla zona pranzo', 'Loft-style living room with armchair, bookcase and view of the dining area'), T('Zona giorno', 'Living area')),
+        fig('A4', T('Ingresso con panca blu e vista sulla zona pranzo e la cucina', 'Entrance with blue bench and view of the dining area and kitchen'), T('Ingresso', 'Entrance')),
         fig('A5', T('Soggiorno luminoso con porta-finestra sul balcone', 'Bright living room with French window to the balcony'), T('Soggiorno', 'Living room')),
         fig('A6', T('Tavolino in vetro con guida di benvenuto', 'Glass coffee table with welcome guide'), T('Benvenuti', 'Welcome')),
         fig('A9', T('Panca imbottita e opera d’arte contemporanea', 'Upholstered bench and contemporary artwork'), T('Arte alle pareti', 'Art on the walls')),
         fig('A10', T('Cabina armadio con ripiani rossi', 'Walk-in closet with red shelves'), T('Cabina armadio', 'Walk-in closet')),
         fig('A11', T('Composizione fotografica dell’appartamento', 'Photo collage of the apartment'), 'Vatican Glamorous'),
+        fig('A14', T('Dettagli della camera: comodino, lampada e testiera', 'Bedroom details: bedside table, lamp and headboard'), T('Camera', 'Bedroom')),
     ]
     return head(title, desc, 'A01') + header() + f'''
   <main>
