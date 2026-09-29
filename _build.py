@@ -16,7 +16,7 @@ GUIDE = 'https://guide.vaticanglamorous.com'
 MAPS = 'https://maps.google.com/?q=Via+San+Telesforo+Roma'
 CIN = 'IT058091C2ZV2HSZ96'
 YT = 'azY0RWKun1g'
-V = '65'  # versione cache CSS/JS
+V = '66'  # versione cache CSS/JS
 
 LANG = 'it'
 def T(it, en): return it if LANG == 'it' else en
@@ -260,7 +260,7 @@ def home():
     ]
     b = ''.join(f'<div class="cv-benefit"><span class="cv-benefit-icon">{s}</span><span><strong>{t}</strong>{f'<span>{u}</span>' if u else ''}</span></div>' for s, t, u in benefits)
     cardhtml = '\n'.join(f'''      <a class="cv-card" href="{link(k.split('#')[0]) + ('#' + k.split('#')[1] if '#' in k else '')}" data-reveal><div class="cv-card-media">{img(c, alt, extra=' data-no-lightbox')}</div><div class="cv-card-bottom"><div><h3>{h}</h3><small>{s}</small></div><span class="cv-card-arrow">→</span></div></a>''' for k, c, h, s, alt in cards)
-    NL = ' data-no-lightbox'
+    NL = ' data-lightbox-single'
     dest = [
         (img('H7', T('Mappa: San Pietro a pochi minuti a piedi dall’appartamento', 'Map: St. Peter’s a few minutes’ walk from the apartment'), extra=NL), T('San Pietro', 'St. Peter’s'), 6),
         (img('R4', T('Musei Vaticani e Cappella Sistina', 'Vatican Museums and Sistine Chapel'), extra=NL, file=T('photos/R04.webp', 'photos/R04-en.webp')), T('Musei Vaticani', 'Vatican Museums'), 20),

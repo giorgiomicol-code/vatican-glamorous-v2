@@ -198,8 +198,20 @@ if (lightboxPhotos.length) {
     lightboxCaption.hidden = !code && !photo.alt;
   };
 
+  // Foto "singole" (data-lightbox-single): si ingrandiscono ma non si scorre verso le altre
+  let singleMode = false;
+  const isSingle = (i) => lightboxPhotos[(i + lightboxPhotos.length) % lightboxPhotos.length].hasAttribute('data-lightbox-single');
+  const step = (dir) => {
+    if (singleMode) return;
+    let i = activeIndex;
+    for (let k = 0; k < lightboxPhotos.length; k += 1) { i += dir; if (!isSingle(i)) break; }
+    showPhoto(i);
+  };
+
   const openLightbox = (index) => {
     window.clearTimeout(hideTimer);
+    singleMode = isSingle(index);
+    lightbox.classList.toggle('is-single', singleMode);
     showPhoto(index);
     lightbox.hidden = false;
     document.body.classList.add('lightbox-open');
@@ -236,8 +248,8 @@ if (lightboxPhotos.length) {
   });
 
   closeButton.addEventListener('click', closeLightbox);
-  lightbox.querySelector('.cv-lightbox-prev').addEventListener('click', () => showPhoto(activeIndex - 1));
-  lightbox.querySelector('.cv-lightbox-next').addEventListener('click', () => showPhoto(activeIndex + 1));
+  lightbox.querySelector('.cv-lightbox-prev').addEventListener('click', () => step(-1));
+  lightbox.querySelector('.cv-lightbox-next').addEventListener('click', () => step(1));
   lightbox.addEventListener('click', (event) => {
     if (!event.target.closest('.cv-lightbox-image, .cv-lightbox-close, .cv-lightbox-nav')) closeLightbox();
   });
@@ -251,14 +263,14 @@ if (lightboxPhotos.length) {
     const distanceX = touch.clientX - touchStartX;
     const distanceY = touch.clientY - touchStartY;
     if (Math.abs(distanceX) > 48 && Math.abs(distanceX) > Math.abs(distanceY)) {
-      showPhoto(activeIndex + (distanceX < 0 ? 1 : -1));
+      step(distanceX < 0 ? 1 : -1);
     }
   }, { passive: true });
   document.addEventListener('keydown', (event) => {
     if (lightbox.hidden) return;
     if (event.key === 'Escape') closeLightbox();
-    if (event.key === 'ArrowLeft') showPhoto(activeIndex - 1);
-    if (event.key === 'ArrowRight') showPhoto(activeIndex + 1);
+    if (event.key === 'ArrowLeft') step(-1);
+    if (event.key === 'ArrowRight') step(1);
   });
 }
 

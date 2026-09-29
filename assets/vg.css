@@ -247,3 +247,4 @@ html{touch-action:manipulation}
 .elegance .vg-best-band p.vg-best-band-script{margin:0;font-size:clamp(1.25rem,1.8vw,1.55rem)}
 .elegance .vg-best-band .cv-button{align-self:center;margin:0 0 0 10px}
 @media(max-width:760px){.elegance .vg-best-band{padding:24px 0}.elegance .vg-best-band .cv-wrap{flex-direction:column;align-items:center;gap:6px}.elegance .vg-best-band .cv-button{margin:8px 0 0}}
+.cv-lightbox.is-single .cv-lightbox-nav{display:none!important}
