@@ -251,7 +251,7 @@ def home():
     cards = [
         ('apt', 'H2', T('L’appartamento', 'The apartment'), T('Loft, cucina e balconi', 'Loft, kitchen and balconies'), T('Zona giorno di Vatican Glamorous', 'Vatican Glamorous living area')),
         ('rooms', 'H3', T('Gli ambienti', 'The spaces'), T('Camera e living in stile loft', 'Bedroom and loft-style living'), T('Camera con letto king-size', 'Bedroom with king-size bed')),
-        ('rome', 'H4', T('Roma &amp; Vaticano', 'Rome &amp; Vatican'), T('San Pietro a 200 m', 'St. Peter’s 200 m away'), T('La cupola di San Pietro al tramonto', 'St. Peter’s dome at dusk')),
+        ('rome', 'H4', T('Roma &amp; Vaticano', 'Rome &amp; Vatican'), T('San Pietro a 200 m', 'St. Peter’s 200 m away'), T('Piazza San Pietro al tramonto', 'St. Peter’s Square at sunset')),
         ('apt#' + T('balconi', 'balconies'), 'H5', T('I balconi', 'The balconies'), T('Colazione all’aperto', 'Breakfast outdoors'), T('Balcone con tavolino e sedute', 'Balcony with table and seating')),
     ]
     benefits = [
