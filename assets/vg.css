@@ -114,3 +114,11 @@
 
 /* Menu su telefono: voci più grandi e leggibili */
 @media(max-width:760px){.elegance .cv-links a{font-size:1.25rem;padding:12px 4px}}
+
+/* Telefono: niente ingrandimento con il doppio tocco (resta possibile lo zoom con due dita)
+   e area di tocco più ampia intorno alle frecce dei Cover Flow */
+html{touch-action:manipulation}
+.cv-coverflow,.cv-coverflow *,.cv-coverflow-controls,.cv-coverflow-controls *{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.cv-coverflow-controls .cv-coverflow-button{position:relative}
+.cv-coverflow-controls .cv-coverflow-button::before{content:"";position:absolute;inset:-14px}
+@media(max-width:760px){.cv-coverflow-navigation{gap:26px}}
