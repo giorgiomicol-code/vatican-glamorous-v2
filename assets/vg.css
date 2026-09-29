@@ -228,3 +228,14 @@ html{touch-action:manipulation}
 .elegance .vg-booking-foot .vg-rule-min{margin:0;color:var(--cv-navy);font-family:var(--cv-script);font-size:1.45rem;line-height:1.1;text-align:center}
 .elegance .vg-booking-foot .vg-rule-pet{margin:2px 0 10px;color:#a3452f;font-family:var(--cv-script);font-size:1.3rem;line-height:1.1;text-align:center}
 .vg-hero-sub{color:#fff!important;letter-spacing:.3em;white-space:nowrap}
+
+/* Punteggi subito sotto la fascia informazioni, sopra il logo */
+.elegance .cv-about .vg-scores-line{justify-content:center;margin:14px 0 0;color:var(--cv-navy);font-weight:600}
+.elegance .cv-about .vg-scores-line + .cv-centered .vg-logo-full,.elegance .cv-about .vg-scores-line ~ * .vg-logo-full{margin-top:22px}
+/* Hero Home (desktop): frase, località e pulsante più vicini al bordo basso della foto */
+@media(min-width:1041px){
+  .elegance .cv-hero-inner{align-items:stretch}
+  .elegance .cv-hero-copy{display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start}
+  .elegance .cv-hero-copy .cv-script{margin-top:auto}
+  .elegance .cv-hero-copy > .cv-button{margin-bottom:6px}
+}
