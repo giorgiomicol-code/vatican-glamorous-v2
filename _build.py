@@ -126,7 +126,7 @@ def head(title, desc, image='H01'):
             '@type': 'VacationRental', '@id': DOMAIN + '/#vacationrental',
             'name': 'Vatican Glamorous', 'alternateName': 'Passeggiata del Gelsomino',
             'description': desc, 'url': url,
-            'image': [f'{DOMAIN}/assets/photos/{c}.webp' for c in ('H01', 'H13', 'H26', 'H10', 'H16', 'H17')],
+            'image': [f'{DOMAIN}/assets/photos/{c}.webp' for c in ('H01', 'H13', 'H26', 'H11', 'H16', 'H17')],
             'telephone': PHONE, 'email': EMAIL, 'identifier': CIN,
             'address': {'@type': 'PostalAddress', 'streetAddress': 'Via San Telesforo', 'addressLocality': 'Roma', 'addressRegion': 'RM', 'addressCountry': 'IT'},
             'petsAllowed': True, 'numberOfRooms': 2, 'numberOfBedrooms': 1, 'numberOfBathroomsTotal': 1,
