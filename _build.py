@@ -16,7 +16,7 @@ GUIDE = 'https://guide.vaticanglamorous.com'
 MAPS = 'https://maps.google.com/?q=Via+San+Telesforo+Roma'
 CIN = 'IT058091C2ZV2HSZ96'
 YT = 'azY0RWKun1g'
-V = '59'  # versione cache CSS/JS
+V = '60'  # versione cache CSS/JS
 
 LANG = 'it'
 def T(it, en): return it if LANG == 'it' else en
@@ -538,7 +538,7 @@ for old, new in OLD.items():
     canon = new if new.startswith('http') else f'{DOMAIN}/{new.split("#")[0]}'
     open(os.path.join(OUT, old, 'index.html'), 'w').write(f'<!doctype html><html><head><meta charset="utf-8"><title>Vatican Glamorous · Passeggiata del Gelsomino</title><meta name="robots" content="noindex"><link rel="canonical" href="{canon}"><meta http-equiv="refresh" content="0; url={target}"></head><body><a href="{target}">Vatican Glamorous</a></body></html>')
 # pagina 404
-open(os.path.join(OUT, '404.html'), 'w').write('''<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pagina non trovata · Vatican Glamorous</title><meta name="robots" content="noindex"><style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fbf8f0;color:#123e5b;font-family:Georgia,serif;text-align:center;padding:24px}a{color:#a8801f;font-family:Arial,sans-serif;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem;margin:0 10px}</style></head><body><div><h1>Vatican Glamorous</h1><p>Pagina non trovata · Page not found</p><p><a href="/vatican-glamorous-v2/it/">Italiano</a><a href="/vatican-glamorous-v2/en/">English</a></p></div></body></html>''')
+open(os.path.join(OUT, '404.html'), 'w').write('''<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pagina non trovata · Vatican Glamorous</title><meta name="robots" content="noindex"><style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fbf8f0;color:#123e5b;font-family:Georgia,serif;text-align:center;padding:24px}a{color:#a8801f;font-family:Arial,sans-serif;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem;margin:0 10px}</style></head><body><div><h1>Vatican Glamorous</h1><p>Pagina non trovata · Page not found</p><p><a href="/it/">Italiano</a><a href="/en/">English</a></p></div></body></html>''')
 open(os.path.join(OUT, 'robots.txt'), 'w').write(f'User-agent: *\nAllow: /\nSitemap: {DOMAIN}/sitemap.xml\n')
 open(os.path.join(OUT, '.nojekyll'), 'w').write('')
 print('ok')

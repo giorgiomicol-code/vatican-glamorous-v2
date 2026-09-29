@@ -429,7 +429,7 @@ document.querySelectorAll('[data-jump-to-group]').forEach((btn) => {
 
 // Overlay dei codici foto (H1, A2, C3...) — TEMPORANEO: visibile sempre durante la revisione.
 // Per nasconderli di nuovo (visibili solo con ?codici=1) impostare SHOW_PHOTO_CODES = false.
-const SHOW_PHOTO_CODES = true;
+const SHOW_PHOTO_CODES = false;
 if (SHOW_PHOTO_CODES || new URLSearchParams(location.search).has('codici')) {
   document.querySelectorAll('[data-photo-code]').forEach((el) => {
     const host = el.tagName === 'IMG' ? el.parentElement : el;
