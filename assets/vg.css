@@ -60,8 +60,8 @@
 .cv-page-hero > .cv-photocode-badge,.cv-hero-bg > .cv-photocode-badge{top:auto;bottom:16px;left:16px;font-size:18px}
 
 /* Barra informazioni sotto la hero: 6 voci (aggiunte le recensioni) */
-@media(min-width:1041px){.cv-benefit-grid{grid-template-columns:repeat(7,1fr)}.cv-benefit{padding:18px 8px;gap:9px;grid-template-columns:40px 1fr}}
-@media(min-width:761px) and (max-width:1040px){.cv-benefit-grid{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:1041px){.cv-benefit-grid{grid-template-columns:repeat(6,1fr)}.cv-benefit{padding:18px 8px;gap:9px;grid-template-columns:40px 1fr}}
+@media(min-width:761px) and (max-width:1040px){.cv-benefit-grid{grid-template-columns:repeat(3,1fr)}}
 
 /* Hero Home (H1): taglio che privilegia la parte alta (quadro, divano, cuscini, mobile) con un po' di tavolino e tappeto */
 .elegance .cv-hero-bg img{object-position:58% 32%}
@@ -212,3 +212,9 @@ html{touch-action:manipulation}
 .vg-feat-guide small{display:block;font-size:.6rem;font-weight:400;opacity:.85}
 @media(max-width:760px){.vg-feat-list{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}.vg-feat-list::-webkit-scrollbar{display:none}}
 .elegance .cv-booking > h2{margin-bottom:12px}
+
+/* Modulo Home: titolo più vicino al bordo, pulsante Cerca distanziato come le righe dei campi */
+.elegance .cv-booking{padding-top:12px}
+.elegance .cv-booking > h2{margin-top:0}
+.elegance .cv-booking > .cv-button[type="submit"]{margin-top:31px}
+.vg-contact-icons a.is-primary{border-color:#e6dcc4;background:#fff;color:var(--cv-navy)}
