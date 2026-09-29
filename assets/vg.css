@@ -248,3 +248,29 @@ html{touch-action:manipulation}
 .elegance .vg-best-band .cv-button{align-self:center;margin:0 0 0 10px}
 @media(max-width:760px){.elegance .vg-best-band{padding:24px 0}.elegance .vg-best-band .cv-wrap{flex-direction:column;align-items:center;gap:6px}.elegance .vg-best-band .cv-button{margin:8px 0 0}}
 .cv-lightbox.is-single .cv-lightbox-nav{display:none!important}
+
+/* ——— Correzioni vista telefono (iPhone 320–430 px): niente contenuti tagliati ai lati ——— */
+.elegance .cv-hero-inner > *{min-width:0}
+@media(max-width:760px){
+  .elegance .cv-title{font-size:min(3.4rem,12.4vw);line-height:.95;overflow-wrap:normal}
+  .vg-hero-sub{white-space:nowrap}
+  .vg-booking-foot{margin:18px -16px -16px;padding:12px 12px 14px}
+  .elegance .cv-footer-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .elegance .cv-footer-grid a{overflow-wrap:anywhere}
+}
+@media(max-width:420px){
+  .elegance .cv-nav{gap:8px}
+  .vg-brand{gap:5px;min-width:0}
+  .vg-brand img{width:22px}
+  .vg-brand-text strong{font-size:.76rem;letter-spacing:.02em}
+  .vg-brand-text small{font-size:.38rem;letter-spacing:.05em}
+  .elegance .cv-tools{gap:6px}
+  .elegance .cv-lang{font-size:.66rem}
+  .elegance .cv-footer-grid{grid-template-columns:1fr}
+}
+@media(max-width:340px){.vg-brand-text small{display:none}}
+
+/* Campi del modulo: mai più larghi della propria colonna (date native su iPhone) */
+.elegance .cv-date-row,.elegance .cv-book-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.elegance .cv-date-row .cv-field,.elegance .cv-book-grid>div{min-width:0}
+.elegance .cv-date-row input,.elegance .cv-date-row select,.elegance .cv-book-grid input,.elegance .cv-book-grid select{min-width:0;width:100%;max-width:100%;box-sizing:border-box}
