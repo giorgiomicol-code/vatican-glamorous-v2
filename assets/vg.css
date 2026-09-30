@@ -288,3 +288,8 @@ html{touch-action:manipulation}
 .elegance .cv-date-row input[type="date"]::-webkit-date-and-time-value,.elegance .cv-book-grid input[type="date"]::-webkit-date-and-time-value{text-align:left;min-width:0;margin:0}
 .elegance .cv-date-row .cv-field,.elegance .cv-book-grid>div{overflow:hidden}
 .elegance .cv-booking,.elegance .cv-book-widget{overflow:hidden}
+
+/* Esperienze: link GetYourGuide sotto ogni card */
+.elegance .cv-card .vg-gyg{display:flex;align-items:center;justify-content:center;gap:8px;margin:0;padding:12px 14px;border-top:1px solid #eadfc6;background:#fffaf0;color:#8a6516;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:background .15s,color .15s}
+.elegance .cv-card .vg-gyg:hover{background:#b98a2a;color:#fff}
+.vg-gyg-note{margin:16px auto 0;max-width:640px;color:#6a7a82;font-size:.72rem;text-align:center}

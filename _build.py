@@ -16,8 +16,16 @@ GUIDE = 'https://guide.vaticanglamorous.com'
 MAPS = 'https://maps.google.com/?q=Via+San+Telesforo+Roma'
 CIN = 'IT058091C2ZV2HSZ96'
 YT = 'azY0RWKun1g'
-V = '71'  # versione cache CSS/JS
+V = '72'  # versione cache CSS/JS
 
+GYG_PID = 'OPQQF64'
+GYG = {  # stessi link della guida ospiti (Best of Rome); San Pietro: pagina attrazione GetYourGuide con il tuo codice
+ 'stpeter': 'https://www.getyourguide.com/st-peter-s-basilica-l2617/',
+ 'vatican': 'https://www.getyourguide.com/it-it/roma-l33/biglietto-di-ingresso-prioritario-per-i-musei-vaticani-e-la-cappella-sistina-t62214/',
+ 'colosseum': 'https://www.getyourguide.com/it-it/roma-l33/colosseo-foro-romano-e-palatino-tour-guidato-t195566/',
+ 'food': 'https://www.getyourguide.com/it-it/roma-l33/roma-tour-gastronomico-di-trastevere-e-campo-de-fiori-t460750/',
+}
+def gyg(key): return f'{GYG[key]}?partner_id={GYG_PID}&amp;cmp=vaticanglamorous_{key}'
 LANG = 'it'
 def T(it, en): return it if LANG == 'it' else en
 
@@ -435,11 +443,12 @@ def exp():
         (img('E4', T('Colosseo e Fori Imperiali al tramonto', 'Colosseum and Imperial Forums at sunset')), T('Roma antica', 'Ancient Rome'), T('Colosseo e Fori', 'Colosseum and Forums')),
         (img('E5', T('Food tour a Trastevere', 'Trastevere food tour')), 'Trastevere', T('Sapori romani', 'Roman flavours')),
     ]
-    ch = ''.join(f'<article class="cv-card"><div class="cv-card-media">{i}</div><div class="cv-card-bottom"><div><h3>{h}</h3><small>{s}</small></div></div></article>' for i, h, s in cards)
+    keys = ['stpeter', 'vatican', 'colosseum', 'food']
+    ch = ''.join(f'<article class="cv-card"><div class="cv-card-media">{i}</div><div class="cv-card-bottom"><div><h3>{h}</h3><small>{s}</small></div></div><a class="vg-gyg" href="{gyg(k)}" target="_blank" rel="noopener sponsored">{T("Prenota su GetYourGuide", "Book on GetYourGuide")} <span aria-hidden="true">→</span></a></article>' for (i, h, s), k in zip(cards, keys))
     return head(title, desc, 'E01') + header() + f'''
   <main>
 {page_hero('E1', T('San Pietro al tramonto', 'St. Peter’s at dusk'), T('Vaticano · Roma · Esperienze', 'Vatican · Rome · Experiences'), T('Esperienze', 'Experiences'), T('Pagina in preparazione: qui arriveranno le pagine della guida ospiti di Vatican Glamorous. [testo segnaposto]', 'Page in progress: the Vatican Glamorous guest guide pages will be added here. [placeholder text]'))}
-<section class="cv-section"><div class="cv-wrap"><div class="cv-centered"><p class="cv-eyebrow">{T('Dintorni', 'Surroundings')}</p><h2 class="cv-heading">{T('Roma da vivere', 'Rome to experience')}</h2><p class="cv-script">{T('Il Vaticano sotto casa.', 'The Vatican on your doorstep.')}</p><p>{T('Visite guidate, ingressi prioritari ed esperienze scelte per i nostri ospiti. [testo segnaposto]', 'Guided visits, priority entry and experiences chosen for our guests. [placeholder text]')}</p></div><div class="cv-card-grid">{ch}</div></div></section>
+<section class="cv-section"><div class="cv-wrap"><div class="cv-centered"><p class="cv-eyebrow">{T('Dintorni', 'Surroundings')}</p><h2 class="cv-heading">{T('Roma da vivere', 'Rome to experience')}</h2><p class="cv-script">{T('Il Vaticano sotto casa.', 'The Vatican on your doorstep.')}</p><p>{T('Visite guidate, ingressi prioritari ed esperienze scelte per i nostri ospiti. [testo segnaposto]', 'Guided visits, priority entry and experiences chosen for our guests. [placeholder text]')}</p></div><div class="cv-card-grid">{ch}</div><p class="vg-gyg-note">{T('Prenotando tramite GetYourGuide non paghi nulla in più: Vatican Glamorous può ricevere una piccola commissione.', 'Booking through GetYourGuide costs you nothing extra: Vatican Glamorous may receive a small commission.')}</p></div></section>
 <section class="cv-section sky vg-guide"><div class="cv-wrap cv-editorial reverse"><div class="cv-editorial-copy"><p class="cv-script">{T('Una guida da portare con te', 'A guide to take with you')}</p><h2>{T('Guida ospiti', 'Guest guide')}</h2><p>{T('Consulta la guida di Vatican Glamorous con consigli sul quartiere, trasporti e attrazioni. [testo segnaposto]', 'Browse the Vatican Glamorous guide with tips on the area, transport and sights. [placeholder text]')}</p><a class="cv-button" href="{GUIDE}" target="_blank" rel="noopener">{T('Apri la guida', 'Open the guide')}</a></div><div class="cv-editorial-media">{img('E6', T('La guida ospiti di Vatican Glamorous sullo smartphone', 'The Vatican Glamorous guest guide on a smartphone'))}</div></div></section>
 {cta(T('La tua base in Vaticano', 'Your base at the Vatican'), '', T('Verifica le date', 'Check dates'))}
   </main>
