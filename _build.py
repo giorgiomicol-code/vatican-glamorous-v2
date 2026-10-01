@@ -16,7 +16,7 @@ GUIDE = 'https://guide.vaticanglamorous.com'
 MAPS = 'https://maps.google.com/?q=Via+San+Telesforo+Roma'
 CIN = 'IT058091C2ZV2HSZ96'
 YT = 'azY0RWKun1g'
-V = '73'  # versione cache CSS/JS
+V = '74'  # versione cache CSS/JS
 
 GYG_PID = 'OPQQF64'
 GYG = {  # stessi link della guida ospiti (Best of Rome); San Pietro: pagina attrazione GetYourGuide con il tuo codice
@@ -104,6 +104,19 @@ def og_image(code):
             q -= 4
     return f'{DOMAIN}/assets/og/{code}.jpg'
 
+GA_ID, ADS_ID = 'G-QCBFQKLPD2', 'AW-16744634075'
+GA_HEAD = f"""
+  <script>
+  window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}}
+  gtag('consent','default',{{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500}});
+  gtag('set','ads_data_redaction',true);gtag('set','url_passthrough',true);
+  try{{var c=JSON.parse(localStorage.getItem('vg_consent_v1'));if(c&&c.granted)gtag('consent','update',{{ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'}})}}catch(e){{}}
+  gtag('js',new Date());
+  gtag('config','{GA_ID}',/[?&]ga_debug=1/.test(location.search)?{{debug_mode:true}}:{{}});
+  gtag('config','{ADS_ID}');
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>"""
+
 SEO = {  # titolo (max ~65 caratteri) e descrizione (max ~160) per Google, pagina per pagina (IT, EN)
  'home': (('Vatican Glamorous · Loft vicino al Vaticano con parcheggio gratuito',
            'Vatican Glamorous (Passeggiata del Gelsomino): casa vacanze di lusso a 200 m da San Pietro. 4 ospiti, posto auto gratuito, 2 balconi. Miglior prezzo diretto.'),
@@ -177,7 +190,7 @@ def head(title, desc, image='H01'):
 <html lang="{LANG}">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">{GA_HEAD}
   <title>{title}</title>
   <meta name="description" content="{desc}">
   <meta name="keywords" content="{kw}">
@@ -236,9 +249,10 @@ def footer():
     <div><h3>{T('Esplora', 'Explore')}</h3><a href="{link('apt')}">{T('L’appartamento', 'The apartment')}</a><a href="{link('rooms')}">{T('Zona notte', 'Sleeping areas')}</a><a href="{link('rome')}">{T('Roma &amp; Vaticano', 'Rome &amp; Vatican')}</a><a href="{link('exp')}">{T('Esperienze', 'Experiences')}</a></div>
     <div><h3>{T('Contatti', 'Contact')}</h3><a href="tel:{PHONE}">{PHONE_TXT}</a><a href="mailto:{EMAIL}">{EMAIL}</a><a href="{WA}" target="_blank" rel="noopener">WhatsApp</a></div>
     <div><h3>{T('Informazioni', 'Information')}</h3><a href="{link('info')}">{T('Info e regole', 'Info &amp; house rules')}</a><a href="{MAPS}" target="_blank" rel="noopener">{T('Indicazioni', 'Directions')}</a><a href="{AIRBNB}" target="_blank" rel="noopener">{T('Prenota su Airbnb', 'Book on Airbnb')}</a><a href="{BOOKING}" target="_blank" rel="noopener">{T('Prenota su Booking.com', 'Book on Booking.com')}</a><a href="{link('privacy')}">Privacy</a></div>
-  </div><div class="cv-legal">Vatican Glamorous · Passeggiata del Gelsomino · Via S. Telesforo, Roma · CIN {CIN}</div></div></footer>
+  </div><div class="cv-legal">Vatican Glamorous · Passeggiata del Gelsomino · Via S. Telesforo, Roma · CIN {CIN} · <a href="#" data-cookie-settings>{T('Preferenze cookie', 'Cookie preferences')}</a></div></div></footer>
   <div class="cv-mobile-bar"><a href="{WA}" target="_blank" rel="noopener">WhatsApp</a><a href="{link('book')}">{T('Prenota il soggiorno', 'Book your stay')}</a></div>
   <script src="{A('site.js')}?v={V}" defer></script>
+  <script src="{A('consent.js')}?v={V}" defer></script>
 </body>
 </html>
 '''
@@ -499,7 +513,7 @@ def privacy():
 <p>Tenuto conto degli scopi per cui sono stati raccolti, dell’adempimento degli obblighi di legge ovvero della tutela dei diritti del titolare, tali dati saranno conservati per un periodo non superiore a quello necessario e comunque per un periodo in linea con il termine consentito dalla legge vigente.</p>
 <p>Con specifico riferimento all’attività di videosorveglianza, la informiamo che le immagini personali raccolte saranno conservate per non più di 24 ore, e che le stesse non potranno essere diffuse o comunicate a terzi salvo che per esigenze di polizia o di giustizia.</p>
 <h2>Sito web e cookie</h2>
-<p>Questo sito non utilizza cookie di profilazione né strumenti di statistica o pubblicità. Le prenotazioni si completano su piattaforme esterne (Direct-book, Airbnb, Booking.com), che applicano le proprie informative.</p>
+<p>Solo se acconsenti, il sito utilizza Google Analytics (statistiche di visita) e Google Ads (misurazione delle campagne pubblicitarie), con cookie di Google. Senza il tuo consenso non viene installato alcun cookie di misurazione o pubblicità. Puoi cambiare scelta in qualsiasi momento da “Preferenze cookie” nel piè di pagina. Le prenotazioni si completano su piattaforme esterne (Direct-book, Airbnb, Booking.com), che applicano le proprie informative.</p>
 <h2>Titolare del trattamento</h2>
 <p>Per qualsiasi ulteriore informazione potrà rivolgersi al Titolare del trattamento, Casa Vacanze Passeggiata del Gelsomino (Via S. Telesforo, Roma – CIN {CIN}), tramite email: <a href="mailto:{PM}">{PM}</a>. Ad esso potrà rivolgersi per far valere i suoi diritti e in particolare per accedere ai suoi dati personali, per richiederne la rettifica, la cancellazione o la portabilità, la limitazione del trattamento o per opporsi ad esso. Nel contattare il Titolare del trattamento, dovrà accertarsi di includere il proprio nome, indirizzo email, indirizzo postale e numero di telefono, per essere sicuro che la sua richiesta possa essere gestita correttamente. Resta salvo il diritto di proporre reclamo al Garante per la protezione dei dati personali.</p>
 <h2>Accettazione</h2>
@@ -516,7 +530,7 @@ def privacy():
 <p>Considering the purposes for which they were collected, the fulfilment of legal obligations or the protection of the rights of the owner, such data will be kept for a period not exceeding that necessary and in any case for a period in line with the term allowed by current law.</p>
 <p>With specific reference to video surveillance, we inform you that the personal images collected will be kept for no more than 24 hours, and that they will not be disseminated or communicated to third parties except for police or justice needs.</p>
 <h2>Website and cookies</h2>
-<p>This website uses no profiling cookies and no analytics or advertising tools. Bookings are completed on external platforms (Direct-book, Airbnb, Booking.com), which apply their own privacy policies.</p>
+<p>Only if you consent, this website uses Google Analytics (visit statistics) and Google Ads (advertising campaign measurement), with Google cookies. Without your consent no measurement or advertising cookie is installed. You can change your choice at any time from “Cookie preferences” in the footer. Bookings are completed on external platforms (Direct-book, Airbnb, Booking.com), which apply their own privacy policies.</p>
 <h2>Data controller</h2>
 <p>For any further information you can contact the Data Controller, Passeggiata del Gelsomino Holiday Home (Via S. Telesforo, Rome – CIN {CIN}), by email: <a href="mailto:{PM}">{PM}</a>. You can contact the Data Controller to exercise your rights, in particular to access your personal data, to request its rectification, erasure or portability, restriction of processing, or to object to it. Please include your name, email address, postal address and telephone number so that your request can be properly handled. You also have the right to lodge a complaint with the Italian Data Protection Authority (Garante per la protezione dei dati personali).</p>
 <h2>Acceptance</h2>
