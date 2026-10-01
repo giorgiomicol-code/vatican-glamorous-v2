@@ -27,20 +27,18 @@
     banner.className = 'vg-consent';
     banner.setAttribute('role', 'dialog');
     banner.setAttribute('aria-label', IT ? 'Preferenze cookie' : 'Cookie preferences');
-    var txt = IT
-      ? 'Usiamo cookie di misurazione (Google Analytics) per capire come viene usato il sito e cookie di Google Ads per misurare le campagne. Puoi accettare o rifiutare: il sito funziona in ogni caso.'
-      : 'We use measurement cookies (Google Analytics) to understand how the site is used and Google Ads cookies to measure campaigns. You can accept or decline: the site works either way.';
     var p = document.createElement('p');
-    p.textContent = txt + ' ';
+    p.appendChild(document.createTextNode(IT ? 'Cookie? ' : 'Cookies? '));
     var a = document.createElement('a');
     a.href = base + (IT ? 'it/privacy/' : 'en/privacy/');
-    a.textContent = IT ? 'Informativa' : 'Privacy policy';
+    a.textContent = 'Info';
     p.appendChild(a);
     var btns = document.createElement('div');
     btns.className = 'vg-consent-btns';
-    [['reject', IT ? 'Rifiuta' : 'Decline', false], ['accept', IT ? 'Accetta' : 'Accept', true]].forEach(function (b) {
+    [['reject', 'No', false], ['accept', 'Ok', true]].forEach(function (b) {
       var el = document.createElement('button');
       el.type = 'button'; el.setAttribute('data-consent', b[0]); el.textContent = b[1];
+      el.setAttribute('aria-label', b[2] ? (IT ? 'Accetta i cookie' : 'Accept cookies') : (IT ? 'Rifiuta i cookie' : 'Decline cookies'));
       el.addEventListener('click', function () { save(b[2]); apply(b[2]); closeBanner(); });
       btns.appendChild(el);
     });

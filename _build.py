@@ -16,7 +16,7 @@ GUIDE = 'https://guide.vaticanglamorous.com'
 MAPS = 'https://maps.google.com/?q=Via+San+Telesforo+Roma'
 CIN = 'IT058091C2ZV2HSZ96'
 YT = 'azY0RWKun1g'
-V = '74'  # versione cache CSS/JS
+V = '75'  # versione cache CSS/JS
 
 GYG_PID = 'OPQQF64'
 GYG = {  # stessi link della guida ospiti (Best of Rome); San Pietro: pagina attrazione GetYourGuide con il tuo codice

@@ -289,11 +289,13 @@ html{touch-action:manipulation}
 .elegance .cv-date-row .cv-field,.elegance .cv-book-grid>div{overflow:hidden}
 .elegance .cv-booking,.elegance .cv-book-widget{overflow:hidden}
 
-/* Banner consenso cookie (Consent Mode v2) */
-.vg-consent{position:fixed;left:12px;right:12px;bottom:12px;z-index:90;display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;max-width:780px;margin:0 auto;padding:14px 18px;border:1px solid #e6dcc4;border-radius:12px;background:#fff;color:var(--cv-navy);box-shadow:0 14px 40px rgba(0,0,0,.3)}
-.vg-consent p{flex:1 1 300px;margin:0;font-size:.78rem;line-height:1.5}
-.vg-consent p a{color:#8a6516;font-weight:700;white-space:nowrap}
-.vg-consent-btns{display:flex;gap:10px}
-.vg-consent button{min-width:104px;min-height:42px;padding:0 20px;border:1px solid var(--cv-navy);border-radius:8px;background:#fff;color:var(--cv-navy);font:700 .74rem/1 var(--cv-sans,Arial,sans-serif);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
-.vg-consent button:hover{background:var(--cv-navy);color:#fff}
-@media(max-width:560px){.vg-consent{padding:12px 14px}.vg-consent-btns{width:100%}.vg-consent button{flex:1}}
+/* Banner consenso cookie (Consent Mode v2): il più piccolo e discreto possibile, come Villa Brando */
+.vg-consent{position:fixed;left:10px;bottom:10px;z-index:70;display:flex;align-items:center;gap:6px;padding:5px 6px 5px 10px;border-radius:20px;background:rgba(18,62,91,.92);color:#fff;box-shadow:0 4px 14px rgba(0,0,0,.22)}
+.vg-consent p{margin:0;font-size:.66rem;line-height:1;color:#fff;white-space:nowrap}
+.vg-consent p a{margin-left:4px;color:#cfe0ea;text-decoration:underline;font-weight:400}
+.vg-consent-btns{display:flex;gap:4px}
+.vg-consent button{min-width:0;min-height:0;padding:4px 9px;border:1px solid rgba(255,255,255,.35);border-radius:14px;background:transparent;color:#fff;font:600 .64rem/1 var(--cv-sans,Arial,sans-serif);letter-spacing:0;text-transform:none;cursor:pointer}
+.vg-consent button:hover{background:rgba(255,255,255,.14);color:#fff}
+.vg-consent button[data-consent="accept"]{border-color:#c79a2f;background:#c79a2f;color:#123e5b}
+@media(max-width:760px){.vg-consent{bottom:calc(40px + env(safe-area-inset-bottom))}}
+@media(max-width:480px){.vg-consent{left:8px;padding:5px 5px 5px 9px}.vg-consent p{font-size:.62rem}}
