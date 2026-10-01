@@ -61,6 +61,10 @@
       destination_url: dest || '',
       transport_type: 'beacon'
     });
+    /* Google Ads: conversione "Click Prenota" */
+    if (name === 'booking_click') {
+      gtag('event', 'conversion', { send_to: 'AW-16744634075/GPY5CLva6YwdENutu7A-', transport_type: 'beacon' });
+    }
   }
   function classify(a) {
     var raw = a.getAttribute('href') || '';
