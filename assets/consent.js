@@ -28,14 +28,14 @@
     banner.setAttribute('role', 'dialog');
     banner.setAttribute('aria-label', IT ? 'Preferenze cookie' : 'Cookie preferences');
     var p = document.createElement('p');
-    p.appendChild(document.createTextNode(IT ? 'Cookie? ' : 'Cookies? '));
+    p.appendChild(document.createTextNode(IT ? 'I cookie ci aiutano a capire se il sito ti piace e se la nostra pubblicità funziona. Accetti? ' : 'Cookies help us see if you like our site and whether our advertising works. Do you accept? '));
     var a = document.createElement('a');
     a.href = base + (IT ? 'it/privacy/' : 'en/privacy/');
     a.textContent = 'Info';
     p.appendChild(a);
     var btns = document.createElement('div');
     btns.className = 'vg-consent-btns';
-    [['reject', 'No', false], ['accept', 'Ok', true]].forEach(function (b) {
+    [['reject', IT ? 'Rifiuta' : 'Decline', false], ['accept', IT ? 'Accetta' : 'Accept', true]].forEach(function (b) {
       var el = document.createElement('button');
       el.type = 'button'; el.setAttribute('data-consent', b[0]); el.textContent = b[1];
       el.setAttribute('aria-label', b[2] ? (IT ? 'Accetta i cookie' : 'Accept cookies') : (IT ? 'Rifiuta i cookie' : 'Decline cookies'));
