@@ -566,7 +566,6 @@ if (SHOW_PHOTO_CODES || new URLSearchParams(location.search).has('codici')) {
 
   let active = null; // { form, t, minNights, inField, outField, inBtn, outBtn, mode, view, hover }
   let pop = null;
-  let backdrop = null;
   let lastWheel = 0;
 
   const get = (state, which) => fromIso((which === 'in' ? state.inField : state.outField).value);
@@ -593,23 +592,20 @@ if (SHOW_PHOTO_CODES || new URLSearchParams(location.search).has('codici')) {
     if (!pop) return;
     const state = active;
     pop.remove(); pop = null;
-    backdrop?.remove(); backdrop = null;
-    document.body.classList.remove('vg-cal-open');
     active = null;
     if (state) paintButtons(state);
   };
 
   const position = () => {
     if (!pop || !active) return;
-    if (!isWide()) { pop.classList.add('is-sheet'); pop.style.left = pop.style.top = ''; return; }
-    pop.classList.remove('is-sheet');
     const r = active.inBtn.getBoundingClientRect();
     const w = pop.offsetWidth, h = pop.offsetHeight;
     const vw = document.documentElement.clientWidth, vh = window.innerHeight;
-    let left = Math.min(Math.max(12, r.left), vw - w - 12);
+    let left = isWide() ? Math.min(Math.max(12, r.left), vw - w - 12) : Math.max(8, (vw - w) / 2);
     let top = r.bottom + 8;
     if (top + h > vh - 12) top = Math.max(12, r.top - h - 8);
     if (top + h > vh - 12) top = Math.max(12, vh - h - 12);
+    top = Math.max(8, top);
     pop.style.left = `${Math.round(left)}px`;
     pop.style.top = `${Math.round(top)}px`;
   };
@@ -692,10 +688,11 @@ if (SHOW_PHOTO_CODES || new URLSearchParams(location.search).has('codici')) {
     const base = get(state, 'in') || today();
     state.view = new Date(base.getFullYear(), base.getMonth(), 1);
     if (!isWide()) {
-      backdrop = document.createElement('div');
-      backdrop.className = 'vg-cal-backdrop';
-      document.body.appendChild(backdrop);
-      document.body.classList.add('vg-cal-open');
+      // su telefono porta i campi data in alto, così la scheda si apre subito sotto senza coprire tutto
+      const top = state.inBtn.getBoundingClientRect().top;
+      const header = document.querySelector('[data-header]');
+      const offset = Math.max(0, header ? header.getBoundingClientRect().bottom : 0) + 36;
+      if (Math.abs(top - offset) > 4) window.scrollBy({ top: top - offset, left: 0, behavior: 'instant' });
     }
     pop = document.createElement('div');
     pop.className = 'vg-cal';
