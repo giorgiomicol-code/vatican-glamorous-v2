@@ -524,3 +524,284 @@ if (SHOW_PHOTO_CODES || new URLSearchParams(location.search).has('codici')) {
   window.addEventListener('resize', run);
   run();
 })();
+
+// Calendario date del riquadro di prenotazione (Home e pagina Prenota, IT/EN).
+// Sostituisce il selettore nativo del browser: i campi checkin/checkout restano nascosti
+// con valore ISO YYYY-MM-DD; si usano solo date locali (nessuna conversione UTC).
+(() => {
+  const forms = [...document.querySelectorAll('[data-booking-form], [data-direct-book]')]
+    .filter((form) => form.querySelector('[data-vg-date-btn]'));
+  if (!forms.length) return;
+
+  const TXT = {
+    it: {
+      months: ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'],
+      days: ['Lu', 'Ma', 'Me', 'Gi', 'Ve', 'Sa', 'Do'],
+      placeholder: 'gg/mm/aaaa', pickIn: 'Scegli la data di arrivo', pickOut: 'Scegli la data di partenza',
+      night: 'notte', nights: 'notti', min: (n) => `Soggiorno minimo: ${n} notti`,
+      clear: 'Cancella date', close: 'Chiudi', prev: 'Mese precedente', next: 'Mese successivo', dialog: 'Calendario date'
+    },
+    en: {
+      months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      days: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+      placeholder: 'dd/mm/yyyy', pickIn: 'Select check-in date', pickOut: 'Select check-out date',
+      night: 'night', nights: 'nights', min: (n) => `Minimum stay: ${n} nights`,
+      clear: 'Clear dates', close: 'Close', prev: 'Previous month', next: 'Next month', dialog: 'Date picker'
+    }
+  };
+
+  const pad = (n) => String(n).padStart(2, '0');
+  const toIso = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  const fromIso = (s) => {
+    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || '');
+    if (!m) return null;
+    const d = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+    return d.getMonth() === Number(m[2]) - 1 ? d : null;
+  };
+  const addDays = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+  const nightsBetween = (a, b) => Math.round((Date.UTC(b.getFullYear(), b.getMonth(), b.getDate()) - Date.UTC(a.getFullYear(), a.getMonth(), a.getDate())) / 86400000);
+  const today = () => { const n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); };
+  const show = (d) => `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}`;
+  const isWide = () => window.matchMedia('(min-width: 720px)').matches;
+
+  let active = null; // { form, t, minNights, inField, outField, inBtn, outBtn, mode, view, hover }
+  let pop = null;
+  let backdrop = null;
+  let lastWheel = 0;
+
+  const get = (state, which) => fromIso((which === 'in' ? state.inField : state.outField).value);
+
+  const setField = (field, date) => {
+    const value = date ? toIso(date) : '';
+    if (field.value === value) return;
+    field.value = value;
+    field.dispatchEvent(new Event('input', { bubbles: true }));
+    field.dispatchEvent(new Event('change', { bubbles: true }));
+  };
+
+  const paintButtons = (state) => {
+    [['in', state.inBtn], ['out', state.outBtn]].forEach(([which, btn]) => {
+      const d = get(state, which);
+      const span = btn.querySelector('span') || btn;
+      span.textContent = d ? show(d) : state.t.placeholder;
+      btn.classList.toggle('has-value', Boolean(d));
+      btn.classList.toggle('is-active', Boolean(pop) && active === state && state.mode === which);
+    });
+  };
+
+  const close = () => {
+    if (!pop) return;
+    const state = active;
+    pop.remove(); pop = null;
+    backdrop?.remove(); backdrop = null;
+    document.body.classList.remove('vg-cal-open');
+    active = null;
+    if (state) paintButtons(state);
+  };
+
+  const position = () => {
+    if (!pop || !active) return;
+    if (!isWide()) { pop.classList.add('is-sheet'); pop.style.left = pop.style.top = ''; return; }
+    pop.classList.remove('is-sheet');
+    const r = active.inBtn.getBoundingClientRect();
+    const w = pop.offsetWidth, h = pop.offsetHeight;
+    const vw = document.documentElement.clientWidth, vh = window.innerHeight;
+    let left = Math.min(Math.max(12, r.left), vw - w - 12);
+    let top = r.bottom + 8;
+    if (top + h > vh - 12) top = Math.max(12, r.top - h - 8);
+    if (top + h > vh - 12) top = Math.max(12, vh - h - 12);
+    pop.style.left = `${Math.round(left)}px`;
+    pop.style.top = `${Math.round(top)}px`;
+  };
+
+  const monthHtml = (state, y, m) => {
+    const t = state.t;
+    const first = new Date(y, m, 1);
+    const lead = (first.getDay() + 6) % 7;
+    const count = new Date(y, m + 1, 0).getDate();
+    const min = today();
+    const cin = get(state, 'in');
+    let cells = '';
+    for (let i = 0; i < lead; i += 1) cells += '<span class="vg-cal-empty"></span>';
+    for (let day = 1; day <= count; day += 1) {
+      const d = new Date(y, m, day);
+      let disabled = d < min;
+      if (!disabled && state.mode === 'out' && cin && d > cin && nightsBetween(cin, d) < state.minNights) disabled = true;
+      const cls = ['vg-cal-day'];
+      if (+d === +min) cls.push('is-today');
+      cells += `<button type="button" class="${cls.join(' ')}" data-date="${toIso(d)}"${disabled ? ' disabled' : ''}>${day}</button>`;
+    }
+    return `<div class="vg-cal-month"><p class="vg-cal-title">${t.months[m]} ${y}</p><div class="vg-cal-week">${t.days.map((d) => `<span>${d}</span>`).join('')}</div><div class="vg-cal-grid">${cells}</div></div>`;
+  };
+
+  const render = () => {
+    if (!pop || !active) return;
+    const state = active;
+    const t = state.t;
+    const months = isWide() ? 2 : 1;
+    const v = state.view;
+    let html = '';
+    for (let i = 0; i < months; i += 1) {
+      const d = new Date(v.getFullYear(), v.getMonth() + i, 1);
+      html += monthHtml(state, d.getFullYear(), d.getMonth());
+    }
+    const now = today();
+    const atStart = v.getFullYear() === now.getFullYear() && v.getMonth() === now.getMonth();
+    pop.innerHTML = `<div class="vg-cal-head"><button type="button" class="vg-cal-nav" data-cal-prev aria-label="${t.prev}"${atStart ? ' disabled' : ''}>‹</button><button type="button" class="vg-cal-nav" data-cal-next aria-label="${t.next}">›</button></div><div class="vg-cal-months">${html}</div><div class="vg-cal-foot"><p class="vg-cal-status"></p><div class="vg-cal-actions"><button type="button" class="vg-cal-link" data-cal-clear>${t.clear}</button><button type="button" class="vg-cal-close" data-cal-close>${t.close}</button></div></div>`;
+    paint();
+    position();
+  };
+
+  // evidenzia arrivo, partenza e intervallo (anche al passaggio del mouse) senza ridisegnare
+  const paint = () => {
+    if (!pop || !active) return;
+    const state = active;
+    const t = state.t;
+    const cin = get(state, 'in');
+    const hover = state.mode === 'out' && cin && state.hover && state.hover > cin ? state.hover : null;
+    const end = state.mode === 'out' && hover ? hover : get(state, 'out');
+    pop.querySelectorAll('.vg-cal-day').forEach((btn) => {
+      const d = fromIso(btn.dataset.date);
+      btn.classList.toggle('is-single', Boolean(cin && !end && +d === +cin));
+      btn.classList.toggle('is-start', Boolean(cin && end && +d === +cin));
+      btn.classList.toggle('is-end', Boolean(cin && end && +d === +end));
+      btn.classList.toggle('is-range', Boolean(cin && end && d > cin && d < end));
+    });
+    const n = cin && end ? nightsBetween(cin, end) : 0;
+    const status = n ? `${n} ${n === 1 ? t.night : t.nights}` : (state.mode === 'out' && cin ? `${t.pickOut} · ${t.min(state.minNights)}` : t.pickIn);
+    const el = pop.querySelector('.vg-cal-status');
+    if (el) el.textContent = status;
+  };
+
+  const shiftMonth = (delta) => {
+    if (!active) return;
+    const v = active.view;
+    const next = new Date(v.getFullYear(), v.getMonth() + delta, 1);
+    const now = today();
+    if (next < new Date(now.getFullYear(), now.getMonth(), 1)) return;
+    active.view = next;
+    render();
+  };
+
+  const open = (state, mode) => {
+    if (pop && active === state) { state.mode = mode; render(); paintButtons(state); return; }
+    close();
+    active = state;
+    state.mode = mode === 'out' && !get(state, 'in') ? 'in' : mode;
+    state.hover = null;
+    const base = get(state, 'in') || today();
+    state.view = new Date(base.getFullYear(), base.getMonth(), 1);
+    if (!isWide()) {
+      backdrop = document.createElement('div');
+      backdrop.className = 'vg-cal-backdrop';
+      document.body.appendChild(backdrop);
+      document.body.classList.add('vg-cal-open');
+    }
+    pop = document.createElement('div');
+    pop.className = 'vg-cal';
+    pop.setAttribute('role', 'dialog');
+    pop.setAttribute('aria-label', state.t.dialog);
+    document.body.appendChild(pop);
+    pop.addEventListener('click', onPopClick);
+    pop.addEventListener('pointerover', onPopHover);
+    pop.addEventListener('mouseleave', () => { if (active && active.hover) { active.hover = null; paint(); } });
+    pop.addEventListener('wheel', onWheel, { passive: false });
+    render();
+    paintButtons(state);
+  };
+
+  function onWheel(e) {
+    if (!active) return;
+    e.preventDefault();
+    const delta = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+    if (!delta) return;
+    const now = Date.now();
+    if (now - lastWheel < 280) return;
+    lastWheel = now;
+    shiftMonth(delta > 0 ? 1 : -1);
+  }
+
+  function onPopHover(e) {
+    if (e.pointerType && e.pointerType !== 'mouse') return;
+    const btn = e.target.closest('.vg-cal-day');
+    if (!active || active.mode !== 'out' || !btn || btn.disabled) return;
+    const d = fromIso(btn.dataset.date);
+    if (active.hover && +active.hover === +d) return;
+    active.hover = d;
+    paint();
+  }
+
+  function onPopClick(e) {
+    e.stopPropagation();
+    if (!active) return;
+    const state = active;
+    if (e.target.closest('[data-cal-prev]')) return shiftMonth(-1);
+    if (e.target.closest('[data-cal-next]')) return shiftMonth(1);
+    if (e.target.closest('[data-cal-close]')) return close();
+    if (e.target.closest('[data-cal-clear]')) {
+      setField(state.inField, null); setField(state.outField, null);
+      state.mode = 'in'; state.hover = null; render(); paintButtons(state); return;
+    }
+    const btn = e.target.closest('.vg-cal-day');
+    if (!btn || btn.disabled) return;
+    const d = fromIso(btn.dataset.date);
+    const cin = get(state, 'in');
+    if (state.mode === 'in' || !cin || d <= cin) {
+      setField(state.inField, d);
+      const cout = get(state, 'out');
+      if (cout && nightsBetween(d, cout) < state.minNights) setField(state.outField, null);
+      state.mode = 'out'; state.hover = null;
+      render(); paintButtons(state);
+      return;
+    }
+    setField(state.outField, d);
+    state.hover = null;
+    paintButtons(state);
+    render();
+    close();
+  }
+
+  forms.forEach((form) => {
+    const lang = (form.dataset.locale || document.documentElement.lang || 'it').slice(0, 2) === 'it' ? 'it' : 'en';
+    const state = {
+      form,
+      t: TXT[lang],
+      minNights: Number(form.dataset.minNights) || 2,
+      inField: form.querySelector('[data-vg-date="in"]'),
+      outField: form.querySelector('[data-vg-date="out"]'),
+      inBtn: form.querySelector('[data-vg-date-btn="in"]'),
+      outBtn: form.querySelector('[data-vg-date-btn="out"]'),
+    };
+    if (!state.inField || !state.outField || !state.inBtn || !state.outBtn) return;
+    // date ricevute dall'URL (pagina Prenota): valide solo se future e nell'ordine giusto
+    const cin = get(state, 'in');
+    const cout = get(state, 'out');
+    if (!cin || cin < today()) { state.inField.value = ''; state.outField.value = ''; }
+    else if (!cout || nightsBetween(cin, cout) < state.minNights) state.outField.value = '';
+    state.inBtn.addEventListener('click', (e) => { e.stopPropagation(); open(state, 'in'); });
+    state.outBtn.addEventListener('click', (e) => { e.stopPropagation(); open(state, 'out'); });
+    form.vgCalendar = state;
+    paintButtons(state);
+  });
+
+  // "Cerca" senza date: apre il calendario invece di inviare (prima degli altri gestori di invio)
+  window.addEventListener('submit', (e) => {
+    const state = e.target && e.target.vgCalendar;
+    if (!state) return;
+    const cin = get(state, 'in');
+    const cout = get(state, 'out');
+    if (cin && cout) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    open(state, cin ? 'out' : 'in');
+  }, true);
+
+  document.addEventListener('click', (e) => {
+    if (!pop) return;
+    if (pop.contains(e.target) || e.target.closest('[data-vg-date-btn]')) return;
+    close();
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && pop) { const s = active; close(); s?.inBtn.focus(); } });
+  window.addEventListener('resize', () => { if (pop) render(); });
+  window.addEventListener('scroll', () => { if (pop) position(); }, { passive: true });
+})();

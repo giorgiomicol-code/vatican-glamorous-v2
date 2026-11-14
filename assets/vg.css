@@ -299,3 +299,51 @@ html{touch-action:manipulation}
 .vg-consent button[data-consent="accept"]{border-color:#c79a2f;background:#c79a2f;color:#123e5b}
 @media(max-width:760px){.vg-consent{bottom:calc(40px + env(safe-area-inset-bottom))}}
 @media(max-width:480px){.vg-consent{left:8px;right:8px;max-width:none;padding:8px 8px 8px 12px}.vg-consent p{font-size:.68rem}}
+
+/* Calendario date di prenotazione (sostituisce il selettore nativo) */
+.vg-date-btn{display:flex;align-items:center;width:100%;min-width:0;max-width:100%;box-sizing:border-box;margin:0;border:1px solid #cfd8dc;border-radius:3px;background:#fff;color:#8a9aa5;font:inherit;text-align:left;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;-webkit-appearance:none;appearance:none;-webkit-tap-highlight-color:transparent}
+.vg-date-btn span{overflow:hidden;text-overflow:ellipsis}
+.vg-date-btn.has-value{color:var(--cv-navy)}
+.vg-date-btn:hover,.vg-date-btn.is-active{border-color:var(--cv-gold-dark)}
+.vg-date-btn:focus-visible{outline:2px solid var(--cv-gold);outline-offset:1px}
+.cv-field .vg-date-btn{min-height:42px;padding:0 8px;font-size:.7rem}
+.elegance .cv-date-row .cv-field .vg-date-btn{margin-top:auto}
+.cv-book-grid .vg-date-btn{height:52px;padding:0 14px;font-size:1rem;border-radius:0}
+@media (max-width: 720px){
+  .elegance .cv-field .vg-date-btn{min-height:48px;padding:0 10px;font-size:16px}
+  .elegance .cv-book-grid .vg-date-btn{height:50px;font-size:16px}
+}
+.vg-cal{position:fixed;z-index:1000;box-sizing:border-box;width:min(640px,calc(100vw - 24px));padding:18px 20px 14px;background:#fff;color:var(--cv-navy);border:1px solid var(--cv-line);border-radius:6px;box-shadow:0 18px 50px rgba(18,62,91,.22);font-family:var(--cv-sans);overscroll-behavior:contain}
+.vg-cal-head{position:relative;height:0}
+.vg-cal-nav{position:absolute;top:-4px;width:34px;height:34px;border:1px solid var(--cv-line);border-radius:50%;background:#fff;color:var(--cv-navy);font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0 0 3px}
+.vg-cal-nav[data-cal-prev]{left:0}
+.vg-cal-nav[data-cal-next]{right:0}
+.vg-cal-nav:hover:not(:disabled){border-color:var(--cv-gold-dark);color:var(--cv-gold-dark)}
+.vg-cal-nav:disabled{opacity:.3;cursor:default}
+.vg-cal-months{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.vg-cal-title{margin:4px 0 12px;text-align:center;font-family:var(--cv-serif);font-size:1.3rem;font-weight:600;color:var(--cv-navy)}
+.vg-cal-week,.vg-cal-grid{display:grid;grid-template-columns:repeat(7,1fr)}
+.vg-cal-week span{padding:4px 0;text-align:center;font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#8a9aa5}
+.vg-cal-day{height:38px;margin:1px 0;border:0;border-radius:0;background:transparent;color:var(--cv-navy);font:inherit;font-size:.86rem;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.vg-cal-day:hover:not(:disabled):not(.is-start):not(.is-end):not(.is-single){background:var(--cv-cream);box-shadow:inset 0 0 0 1px var(--cv-gold)}
+.vg-cal-day:disabled{color:#c7cfd4;text-decoration:line-through;cursor:default}
+.vg-cal-day.is-today{font-weight:700}
+.vg-cal-day.is-range{background:#f6eccf}
+.vg-cal-day.is-start,.vg-cal-day.is-end,.vg-cal-day.is-single{background:var(--cv-navy);color:#fff;font-weight:600}
+.vg-cal-day.is-start{border-radius:19px 0 0 19px}
+.vg-cal-day.is-end{border-radius:0 19px 19px 0}
+.vg-cal-day.is-single{border-radius:19px}
+.vg-cal-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;padding-top:12px;border-top:1px solid var(--cv-line)}
+.vg-cal-status{flex:1 1 auto;min-width:0;margin:0;font-size:.8rem;line-height:1.35;min-height:2.7em;display:flex;align-items:center;color:var(--cv-text)}
+.vg-cal-actions{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.vg-cal-link{border:0;background:none;padding:6px 0;color:var(--cv-text);font:inherit;font-size:.78rem;text-decoration:underline;cursor:pointer}
+.vg-cal-close{border:0;border-radius:2px;background:var(--cv-navy);color:#fff;padding:9px 18px;font:inherit;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+.vg-cal-close:hover{background:var(--cv-gold-dark)}
+.vg-cal-backdrop{position:fixed;inset:0;z-index:999;background:rgba(18,62,91,.35)}
+.vg-cal.is-sheet{left:0;right:0;bottom:0;top:auto;width:100%;max-height:88vh;overflow:auto;border-radius:14px 14px 0 0;padding:18px 16px calc(14px + env(safe-area-inset-bottom))}
+.vg-cal.is-sheet .vg-cal-months{grid-template-columns:1fr}
+.vg-cal.is-sheet .vg-cal-day{height:44px;font-size:.95rem}
+.vg-cal.is-sheet .vg-cal-foot{flex-wrap:wrap}
+.vg-cal.is-sheet .vg-cal-status{flex-basis:100%}
+.vg-cal.is-sheet .vg-cal-actions{width:100%;justify-content:space-between}
+body.vg-cal-open{overflow:hidden}
