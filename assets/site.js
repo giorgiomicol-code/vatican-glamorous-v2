@@ -29,6 +29,14 @@ const addInfantsField = (form) => {
   wrapper.className = form.matches('[data-direct-book]') ? '' : 'cv-field';
   wrapper.innerHTML = `<label for="${id}">${label}<small>${age}</small></label><select id="${id}" name="infants"><option selected>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>`;
   grid.appendChild(wrapper);
+  if (form.matches('[data-direct-book]') && !grid.querySelector('.cv-fee-note')) {
+    const note = document.createElement('div');
+    note.className = 'cv-fee-note';
+    note.innerHTML = isItalian
+      ? '<p><span><strong>Pulizie professionali obbligatorie:</strong> 50 € da versare all\u2019arrivo.</span></p>'
+      : '<p><span><strong>Mandatory professional cleaning:</strong> €50 payable on arrival.</span></p>';
+    grid.appendChild(note);
+  }
   const childrenLabel = form.querySelector('label[for*="children"], label[for*="bambini"]');
   if (childrenLabel && !childrenLabel.querySelector('small')) {
     childrenLabel.insertAdjacentHTML('beforeend', `<small>${isItalian ? '(2–12 anni)' : '(ages 2–12)'}</small>`);
