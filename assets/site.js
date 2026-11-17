@@ -33,8 +33,8 @@ const addInfantsField = (form) => {
     const note = document.createElement('div');
     note.className = 'cv-fee-note';
     note.innerHTML = isItalian
-      ? '<p><span><strong>Pulizie professionali obbligatorie:</strong> 50 € da versare all\u2019arrivo.</span></p>'
-      : '<p><span><strong>Mandatory professional cleaning:</strong> €50 payable on arrival.</span></p>';
+      ? '<p><span><strong>Pulizie professionali obbligatorie:</strong> 50 € a soggiorno, da versare all\u2019arrivo.</span></p>'
+      : '<p><span><strong>Mandatory professional cleaning:</strong> €50 per stay, payable on arrival.</span></p>';
     grid.appendChild(note);
   }
   const childrenLabel = form.querySelector('label[for*="children"], label[for*="bambini"]');
